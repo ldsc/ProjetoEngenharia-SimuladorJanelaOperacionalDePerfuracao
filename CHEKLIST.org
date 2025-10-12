@@ -1,0 +1,228 @@
+#+TITLE: CHECKLIST de Modernização de Projeto Didático: Nome Software?
+
+* ETAPA Preparação: Clonagem do Repositório Modelo
+** [ ] Clonar o repositório Git padrão com nome do projeto.
+** [ ] Baixar a nova versão.
+** [ ] Mover arquivos antigos para o diretório temporário [[file:MaterialAuxiliar][MaterialAuxiliar]].
+** [ ] Mover arquivos externos (bibliotecas, referências) para [[file:MaterialExterno][MaterialExterno]].
+** [ ] Mover arquivos de imagens para [[file:Imagens][Imagens]].
+** [ ] Criar ou atualizar o arquivo [[file:README.org][README.org]].
+** [ ] Criar ou atualizar o arquivo [[file:LICENSE][LICENSE]].
+** [ ] Criar o arquivo [[file:CONTRIBUTING.md][CONTRIBUTING.md]] (se aplicável).
+** [ ] Criar ou atualizar o arquivo [[file:CHANGELOG.md][CHANGELOG.md]] (padrão em maiúsculas).
+** [ ] (Tarefa Prévia) Definir qual a versão mais antiga a ser mantida/modernizada (ex: v0.1).
+
+* ETAPA 0-PropostaDeDesafio-TituloDoDesafioTecnologico
+** [ ] Copiar os arquivos LyX (ex: Proposta.lyx) para dentro do diretório [[file:0-PropostaDeDesafio-TituloDoDesafioTecnologico][0-PropostaDeDesafio-TituloDoDesafioTecnologico]].
+** [ ] Revisar o texto (LyX) da proposta, seguindo o modelo de desafio tecnológico.
+** [ ] Gerar o PDF da proposta.
+** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]] (usado pelo git).
+** [ ] Criar a TAG de fim desta etapa (ex: Proposta-final).
+** [ ] Executar o commit para o servidor.
+
+* ETAPA 1-PreProjeto-IdentificacaoDaProposta
+** [ ] Copiar os trechos relevantes (seções) da Proposta (ETAPA 0) para o Pré-Projeto (LyX).
+** [ ] Responder aos novos quesitos específicos do Pré-Projeto (ex: Análise de Viabilidade, Estimativa de Recursos).
+** [ ] Revisar o texto (LyX) do pré-projeto.
+** [ ] Gerar o PDF do pré-projeto.
+** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]].
+** [ ] Criar a TAG de fim desta etapa (ex: PreProjeto-final).
+** [ ] Executar o commit para o servidor.
+
+* ETAPA 2-Projeto-IdentificacaoDaProposta
+** [ ] Copiar os trechos relevantes do Pré-Projeto (ETAPA 1) para o Projeto (LyX).
+** [ ] Responder aos novos quesitos específicos do Projeto (ex: Arquitetura de Software Detalhada).
+** [ ] Revisar o texto (LyX).
+** [ ] Gerar o PDF do Projeto.
+** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]].
+** [ ] Criar a TAG de fim desta etapa (ex: Projeto-final).
+** [ ] Executar o commit para o servidor.
+
+* ETAPA 3-Execucao-ModelosDeEngenharia
+** [ ] Conferir a parte conceitual do Projeto (ETAPA 2).
+** [ ] Conferir/Desenvolver os modelos UML e de Engenharia (ex: Diagramas de Classes, Sequência, Estado).
+** [ ] (Ferramenta) Gerar diagramas usando [[https://plantuml.com/][PlantUML]] (arquivos [[file:Modelos/Diagramas/Exemplo.puml][.puml]] versionados).
+** [ ] Se usou Visual Paradigm (VP), exportar os diagramas para PlantUML.
+** [ ] Exportar os diagramas para PNG com resolução mínima de **300dpi**.
+** [ ] Revisar o texto (LyX) dos modelos de engenharia.
+** [ ] Gerar o PDF dos Modelos de Engenharia.
+** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]].
+** [ ] Criar a TAG de fim desta etapa (ex: ModelosEngenharia-final).
+** [ ] Executar o commit para o servidor.
+
+* ETAPA 4: Execução - Detalhamento, Construção e Testes (Iterações)
+
+** ETAPA 4.1: Versão-0.1 (Foco: Simplicidade e Solução Direta)
+*** Código (v0.1)
+**** [ ] Clonar/Copiar o código da versão antiga (v0.1) para o diretório [[file:src/v0.1][src/v0.1]].
+**** [ ] Se mantida, aplicar as atualizações (modelagem leve, C++, padrões Stroustrup/Sutter, Eglot).
+**** [ ] Criar/Atualizar o sistema de construção específico para v0.1.
+**** [ ] Garantir que a v0.1 compila sem *warnings*.
+**** [ ] Revisar modelos UML (ETAPA 3) em função de refatorações de código.
+*** Testes (v0.1)
+**** [ ] Selecionar/Integrar ferramenta de testes de unidade (ex: Catch2, Google Test).
+**** [ ] Preparar arquivos de teste.
+**** [ ] Realizar os testes de unidade.
+**** [ ] Garantir que todos os testes passem.
+*** Documentação (v0.1)
+**** [ ] Revisar o texto (LyX) do Detalhamento da Construção, descrevendo a v0.1.
+**** [ ] Incluir resultados dos testes na documentação.
+**** [ ] Gerar o PDF do Detalhamento/Construção (v0.1).
+**** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]].
+**** [ ] Criar a **tag Git** (ex: `v0.1-final`) e registrar no [[file:CHANGELOG.md][CHANGELOG.md]].
+**** [ ] Executar o commit para o servidor.
+
+** ETAPA 4.2: Versão-0.2 (Foco: Otimizações Seriais, Robustez, Makefile)
+*** Código (v0.2)
+**** [ ] Clonar/Copiar o código da versão antiga (v0.2) para o diretório [[file:src/v0.2][src/v0.2]].
+**** [ ] Se mantida, aplicar as atualizações (modelagem foco em otimização, C++, padrões).
+**** [ ] Criar/Atualizar o sistema de construção específico para v0.2.
+**** [ ] Garantir que a v0.2 compila sem *warnings*.
+**** [ ] Revisar modelos UML (ETAPA 3) em função de alterações.
+*** Testes (v0.2)
+**** [ ] Executar o **Teste de Regressão** (conjunto de testes da v0.1).
+**** [ ] Revisar os modelos e premissas dos testes (incluir testes de *performance* se o foco for otimização).
+**** [ ] Realizar os testes de unidade.
+**** [ ] Garantir que todos os testes passem.
+*** Documentação (v0.2)
+**** [ ] Revisar o texto (LyX) do Detalhamento, descrevendo a v0.2 e as otimizações.
+**** [ ] Incluir resultados de testes na documentação.
+**** [ ] Gerar o PDF do Detalhamento/Construção (v0.2).
+**** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]].
+**** [ ] Criar a **tag Git** (ex: `v0.2-final`) e registrar no [[file:CHANGELOG.md][CHANGELOG.md]].
+**** [ ] Executar o commit para o servidor.
+
+** ETAPA 4.3: Versão-0.3 (Foco: Construtores, Operadores, Recursão, Biblioteca)
+*** Código (v0.3)
+**** [ ] Clonar/Copiar o código da versão antiga (v0.3) para o diretório [[file:src/v0.3][src/v0.3]].
+**** [ ] Se mantida, aplicar as atualizações (foco em *features* de POO).
+**** [ ] Criar/Atualizar o sistema de construção específico para v0.3.
+**** [ ] Garantir que a v0.3 compila sem *warnings*.
+**** [ ] Revisar modelos UML (ETAPA 3) em função de alterações.
+*** Testes (v0.3)
+**** [ ] Executar o **Teste de Regressão** (conjuntos de testes v0.1 e v0.2).
+**** [ ] Revisar os modelos e premissas dos testes (adicionar testes para sobrecarga de operadores).
+**** [ ] Realizar os testes de unidade.
+**** [ ] Realizar **Teste de Integração** (se houver componentes de terceiros ou I/O de arquivo).
+**** [ ] Garantir que todos os testes passem.
+*** Documentação (v0.3)
+**** [ ] Revisar o texto (LyX) do Detalhamento, descrevendo a v0.3 e suas *features* de POO.
+**** [ ] Incluir resultados de testes na documentação.
+**** [ ] Gerar o PDF do Detalhamento/Construção (v0.3).
+**** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]].
+**** [ ] Criar a **tag Git** (ex: `v0.3-final`) e registrar no [[file:CHANGELOG.md][CHANGELOG.md]].
+**** [ ] Executar o commit para o servidor.
+
+** ETAPA 4.4: Versão-0.4 (Foco: Interfaces Gráficas - GUI, I/O de Arquivos)
+*** Código (v0.4)
+**** [ ] Clonar/Copiar o código da versão anterior para o diretório [[file:src/v0.4][src/v0.4]].
+**** [ ] Implementar a interface gráfica (ex: usando Qt).
+**** [ ] Implementar rotinas robustas de leitura e escrita de arquivos.
+**** [ ] Criar/Atualizar o sistema de construção (ex: adicionar qmake/CMake para Qt).
+*** Testes (v0.4)
+**** [ ] Executar o **Teste de Regressão**.
+**** [ ] Realizar **Teste de Unidade** para os novos módulos (GUI não-visível, I/O).
+**** [ ] Realizar **Teste de Usabilidade** (básico) na GUI.
+**** [ ] Realizar **Testes de Arquivo** (I/O): verificar se a saída gerada no Linux pode ser lida no Windows/Mac.
+*** Documentação (v0.4)
+**** [ ] Documentar a interface gráfica e o manuseio de arquivos.
+**** [ ] Gerar o PDF do Detalhamento/Construção (v0.4).
+**** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]].
+**** [ ] Criar a **tag Git** (ex: `v0.4-final`) e registrar no [[file:CHANGELOG.md][CHANGELOG.md]].
+**** [ ] Executar o commit para o servidor.
+
+** ETAPA 4.5: Versão-0.5 (Foco: Paralelização, Multi-Threads, Profiling)
+*** Código (v0.5)
+**** [ ] Clonar/Copiar o código da versão anterior para o diretório [[file:src/v0.5][src/v0.5]].
+**** [ ] Incorporar otimizações usando processamento concorrente/paralelo (ex: OpenMP, pthreads, std::thread).
+**** [ ] Aplicar técnicas de *profiling* para identificar gargalos (ex: gprof, KCachegrind).
+*** Testes (v0.5)
+**** [ ] Executar o **Teste de Regressão**.
+**** [ ] Realizar **Teste de Unidade** nos novos módulos paralelos.
+**** [ ] Realizar **Teste de Performance/Carga**.
+**** [ ] Garantir que o projeto compila e roda em diferentes configurações de CPU (se possível).
+*** Documentação (v0.5)
+**** [ ] Documentar a arquitetura paralela e os resultados de *profiling*.
+**** [ ] Gerar o PDF do Detalhamento/Construção (v0.5).
+**** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]].
+**** [ ] Criar a **tag Git** (ex: `v0.5-final`) e registrar no [[file:CHANGELOG.md][CHANGELOG.md]].
+**** [ ] Executar o commit para o servidor.
+
+** ETAPA 4.6: Versão-0.6 (Foco: Integração de Bibliotecas Científicas e Expansão)
+*** Código (v0.6)
+**** [ ] Clonar/Copiar o código da versão anterior para o diretório [[file:src/v0.6][src/v0.6]].
+**** [ ] Integrar novas bibliotecas externas (ex: [[https://www.boost.org/][Boost]], [[https://opencv.org/][OpenCV]], Bibliotecas de IA).
+**** [ ] Expandir o escopo do problema de engenharia (complexidade).
+*** Testes (v0.6)
+**** [ ] Executar o **Teste de Regressão**.
+**** [ ] Realizar **Teste de Integração** robusto com as novas bibliotecas.
+**** [ ] Testes de Portabilidade/Compilação em **diferentes sistemas operacionais** (Linux, Windows/DevC++, Mac).
+**** [ ] Garantir que todos os testes passem.
+*** Documentação (v0.6)
+**** [ ] Documentar a integração das bibliotecas e as novas funcionalidades.
+**** [ ] Gerar o PDF do Detalhamento/Construção (v0.6).
+**** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]].
+**** [ ] Criar a **tag Git** (ex: `v0.6-final`) e registrar no [[file:CHANGELOG.md][CHANGELOG.md]].
+**** [ ] Executar o commit para o servidor.
+
+** ETAPA 4.7: Versão-0.7 até v0.9 (Foco: Ajustes Finos e Preparação para V1.0)
+*** [ ] Repetir o ciclo de Código, Testes e Documentação, focando em: Correção de *bugs* finais e pendências, Aprimoramento da documentação e Reforço na robustez.
+*** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]].
+*** [ ] Após a conclusão de cada iteração, criar uma **tag Git** e registrar no [[file:CHANGELOG.md][CHANGELOG.md]].
+*** [ ] Executar o commit para o servidor.
+
+** ETAPA 4.8: Versão-1.0 (Foco: Maturidade, Confiabilidade, Testes Automatizados)
+*** Código (v1.0)
+**** [ ] Clonar/Copiar o código da versão final ([[file:src/v1.0][src/v1.0]]).
+**** [ ] Garantir a **Confiabilidade do Software** (foco principal da v1.0).
+**** [ ] Revisão final de padrões e *clean code*.
+*** Testes (v1.0)
+**** [ ] Executar **Todos os Testes de Regressão** (v0.1 a v0.9).
+**** [ ] **Teste de Instalação e Execução** nos ambientes de laboratório (padrão Linux e Windows).
+**** [ ] Teste de *build* e execução em sistemas de Integração Contínua (CI) se aplicável.
+*** Documentação (v1.0)
+**** [ ] Documentar o Detalhamento Final (v1.0).
+**** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]].
+**** [ ] Criar a **tag Git final** (`v1.0`) e registrar no [[file:CHANGELOG.md][CHANGELOG.md]].
+**** [ ] Executar o commit para o servidor.
+
+* ETAPA 5: Entrega-PosVenda (versão final)
+** [ ] Gerar o pacote da versão final estável (Build de Release).
+** [ ] Realizar backup em outros dispositivos/serviços.
+** [ ] Elaborar o **Manual Técnico Científico** (Local: [[file:manual/ManualTecnicoCientifico.pdf][manual/ManualTecnicoCientifico.pdf]]).
+** [ ] Elaborar o **Manual do Desenvolvedor** (Local: [[file:manual/ManualDesenvolvedor.pdf][manual/ManualDesenvolvedor.pdf]]).
+** [ ] Elaborar o **Manual do Usuário** (Local: [[file:manual/ManualUsuario.pdf][manual/ManualUsuario.pdf]]).
+** [ ] Revisão final de toda a documentação (Proposta, Pré-Projeto, Projeto, Detalhamentos).
+** [ ] Publicar o projeto (ex: Repositório Principal, Página do Curso).
+** [ ] (Pós-Venda) Criar um arquivo [[file:FAQ.org][FAQ.org]].
+** [ ] Preencher o [[file:README.org][README.org]] e exportar para [[file:README.md][README.md]].
+** [ ] Criar a TAG de fim desta etapa (ex: Entrega-final).
+** [ ] Executar o commit para o servidor.
+
+* FERRAMENTAS PADRÃO UTILIZADAS
+Esta seção deve ser adaptada para cada projeto, listando as ferramentas realmente usadas.
+
+** Sistema Operacional Padrão
+*** [ ] GNU/Linux - Fedora (Padrão de desenvolvimento).
+*** [ ] Windows (Ambiente de Teste/Usuário).
+** Linguagem e Padrões
+*** [ ] C++ (Versão mínima e máxima a ser suportada).
+*** [ ] Padrões de Codificação: [[https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines][Livros Stroustroup/Sutter]].
+** Edição e Gestão
+*** [ ] Edição de Projetos: [[https://www.gnu.org/software/emacs/][Emacs]].
+*** [ ] Gestão de Projetos: Trello, GTD, [[file:~/Dropbox/05-Gestao/agenda-todo-org][agenda-todo-org]].
+*** [ ] Controle de Versões: [[https://git-scm.com/][Git]], [[https://magit.vc/][Magit]] (Emacs).
+** Compilação e Montagem
+*** [ ] Compiladores: gcc/g++, clang (Para testes de portabilidade).
+*** [ ] Montadores: make, cmake, qmake (Para projetos Qt).
+** Bibliotecas de Apoio (Exemplos)
+*** [ ] Geração de Gráficos: [[http://www.gnuplot.info/][Gnuplot]], QtCharts.
+*** [ ] Científicas/Engenharia: Boost.
+*** [ ] Processamento de Imagens: OpenCV.
+*** [ ] Inteligência Artificial (Opcional): [[https://keras.io/][Keras]], [[https://www.tensorflow.org/][TensorFlow]], [[https://pytorch.org/][Pytorch]].
+** Debug e Análise
+*** [ ] Debugers: gdb, ddd.
+*** [ ] Profilers: gprof, kcachegrind.
+** Documentação e Modelagem
+*** [ ] Documentação/Manuais: [[https://www.lyx.org/][LyX]] (LaTeX).
+*** [ ] Modelagem UML: [[https://plantuml.com/][PlantUML]] (Padrão), Umbrello, [[https://www.visual-paradigm.com/][VP - Visual Paradigm]] (Opcional).

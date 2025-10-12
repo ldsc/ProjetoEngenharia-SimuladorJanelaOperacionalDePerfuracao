@@ -1,5 +1,5 @@
 #========================================================#
-# Makefile para gerar versıes da tese                    #
+# Makefile para gerar vers√µes da tese                    #
 #========================================================#
 # Comando               Gera o arquivo
 # make dvi: 		Monografia-Dissertacao-Tese-master.dvi
@@ -8,19 +8,19 @@
 # make ps-2on1: 	Monografia-Dissertacao-Tese-master-2on1.ps
 # make pdf-2on1: 	Monografia-Dissertacao-Tese-master-2on1.pdf
 
-# Diretorio onde os arquivos temporarios ser„o armazenados
+# Diretorio onde os arquivos temporarios ser√£o armazenados
 OUTPUT=/tmp/
 
 all: dvi pdflatex
-x2:  dvi ps 2on1.ps 
-x:   dvi ps tex2pdf 
+x2:  dvi ps 2on1.ps
+x:   dvi ps tex2pdf
 lyx: pdf 2on1.ps
 pdflatex: pdflatex
 
 #========================================================Gera o dvi a partir do latex
 latex: dvi
 dvi:  Monografia-Dissertacao-Tese-master.tex
-	echo "No LyX vocÍ deve exportar o arquivo com a opÁ„o: file->export->Latex(simples)."
+	echo "No LyX voc√™ deve exportar o arquivo com a op√ß√£o: file->export->Latex(simples)."
 	echo "make dvi: gera arquivo da tese no formato dvi."
 	echo "Running latex......(1)\a"
 	latex Monografia-Dissertacao-Tese-master.tex
@@ -28,7 +28,7 @@ dvi:  Monografia-Dissertacao-Tese-master.tex
 	bibtex Monografia-Dissertacao-Tese-master
 	echo "ReRunning latex....(2)\a"
 	latex Monografia-Dissertacao-Tese-master.tex
-# Retire o coment·rio das duas linhas abaixo se usar indice remissivo no final da tese
+# Retire o coment√°rio das duas linhas abaixo se usar indice remissivo no final da tese
 # echo "Running makeindex....(2b)\a"
 # makeindex Monografia-Dissertacao-Tese-master.idx
 	echo "ReRunning latex....(3)\a"
@@ -37,16 +37,16 @@ dvi:  Monografia-Dissertacao-Tese-master.tex
 	latex Monografia-Dissertacao-Tese-master.tex
 	echo "Rerunning latex....(5)\a"
 	latex Monografia-Dissertacao-Tese-master.tex
-	echo "Vers„o da tese no formato dvi pronta."
+	echo "Vers√£o da tese no formato dvi pronta."
 	ls -lah Monografia-Dissertacao-Tese-master.dvi
 
-#========================================================VisualizaÁ„o do dvi
+#========================================================Visualiza√ß√£o do dvi
 xdvi: Monografia-Dissertacao-Tese-master.dvi
 	echo "make xdvi: executa o visualizador do arquivo da tese no formato dvi."
 	xdvi Monografia-Dissertacao-Tese-master.dvi
 
 #========================================================Gera ps a partir de dvi
-dvips: Monografia-Dissertacao-Tese-master.dvi 
+dvips: Monografia-Dissertacao-Tese-master.dvi
 	echo "make ps: gera arquivo da tese no formato ps (Dimensoes A4)."
 	dvips -D 600 -t portrait -T 21.0cm,29.7cm -o "Monografia-Dissertacao-Tese-master.ps" Monografia-Dissertacao-Tese-master.dvi
 ## dvips -o Monografia-Dissertacao-Tese-master.ps Monografia-Dissertacao-Tese-master.dvi
@@ -58,31 +58,31 @@ ps2pdf: Monografia-Dissertacao-Tese-master.ps
 	ps2pdf -sPAPERSIZE=a4 Monografia-Dissertacao-Tese-master.ps
 #========================================================Gera 2on1.ps (formato brochura para costura)
 2on1.ps: Monografia-Dissertacao-Tese-master.ps
-	echo "make 2on1.ps:  gera arquivo da tese no formato ps com 2 p·ginas em uma."
+	echo "make 2on1.ps:  gera arquivo da tese no formato ps com 2 p√°ginas em uma."
 	echo "Executando psbook e pstops..."
 	psbook -s20 Monografia-Dissertacao-Tese-master.ps | pstops -pa4 "4:0@.7L(21cm,00)+1L@.7(21cm,14.8cm),2L@.7(21cm,00)+3L@.7(21cm,14.8cm)" > Monografia-Dissertacao-Tese-master-2on1.ps
 
-#========================================================Gera 2on1.pdf (duas p·ginas em uma)
+#========================================================Gera 2on1.pdf (duas p√°ginas em uma)
 2p: 	Monografia-Dissertacao-Tese-master.ps
-	echo "make 2p: Converte arquivo A4.ps em arquivo com 2 p·ginas em cada folha A4"
+	echo "make 2p: Converte arquivo A4.ps em arquivo com 2 p√°ginas em cada folha A4"
 	cat Monografia-Dissertacao-Tese-master.ps | pstops -pa4 "4:0@.7L(21cm,00)+1L@.7(21cm,14.8cm),2L@.7(21cm,00)+3L@.7(21cm,14.8cm)" > Monografia-Dissertacao-Tese-master-2p.ps
 
 #========================================================Gera 2on1.pdf
 2on1.pdf: Monografia-Dissertacao-Tese-master-2p.ps
-	echo "make 2on1.pdf: gera arquivo da tese no formato pdf com 2 p·ginas em uma."
+	echo "make 2on1.pdf: gera arquivo da tese no formato pdf com 2 p√°ginas em uma."
 	ps2pdf Monografia-Dissertacao-Tese-master-2p.ps
 
 #========================================================Gera ps a partir de pdf
 pdf2ps: Monografia-Dissertacao-Tese-master.pdf
-	echo "make pdf2ps: gera arquivo da tese no formato ps a partir da vers„o pdf."
+	echo "make pdf2ps: gera arquivo da tese no formato ps a partir da vers√£o pdf."
 	echo "pdf2ps..."
 	pdf2ps -dLanguageLevel=1 Monografia-Dissertacao-Tese-master.pdf Monografia-Dissertacao-Tese-master.ps
 #	echo "mpage..."
 
 #========================================================Gera pdf usando pdflatex
-pdflatex: Monografia-Dissertacao-Tese-master.tex  
+pdflatex: Monografia-Dissertacao-Tese-master.tex
 	echo "make pdflatex: gera arquivo da tese no formato pdf partindo diretamente do arquivo tex."
-	echo "No LyX vocÍ deve exportar o arquivo com a opÁ„o: file->export->Latex(pdflatex)."
+	echo "No LyX voc√™ deve exportar o arquivo com a op√ß√£o: file->export->Latex(pdflatex)."
 	echo "Running pdflatex...(1)\a"
 	pdflatex Monografia-Dissertacao-Tese-master.tex
 #thumbpdf Monografia-Dissertacao-Tese-master.tex
@@ -103,17 +103,16 @@ tex2pdf :
 	echo "make tex2pdf: gera arquivo da tese no formato pdf partindo diretamente do arquivo tex."
 	tex2pdf Monografia-Dissertacao-Tese-master.tex
 
-#========================================================Eliminando arquivos tempor·rios
+#========================================================Eliminando arquivos tempor√°rios
 clean:
-	echo "make clean: Eliminar os arquivos tempor·rios."
+	echo "make clean: Eliminar os arquivos tempor√°rios."
 	rm -f *.ps *.dvi *.aux *.toc *.idx *.ind *.ilg *.log *.out *.lyx~ *.blg *.lof *.lot *.bbl *.brf *.nlo *~
 
 
 #========================================================PROGRAMAS UTILIZADOS
 
-# mpage: gera duas p·ginas em uma com borda (as vezes n„o funciona)
-# psbook -s4 (cria livro rearranjando cada 4 p·ginas em 1)
-# psbook -s40 (cria livro rearranjando cada 40 p·ginas em 10)
+# mpage: gera duas p√°ginas em uma com borda (as vezes n√£o funciona)
+# psbook -s4 (cria livro rearranjando cada 4 p√°ginas em 1)
+# psbook -s40 (cria livro rearranjando cada 40 p√°ginas em 10)
 # pstops ?
-# psnup coloca em  1 p·gina A4 duas p·ginas
-
+# psnup coloca em  1 p√°gina A4 duas p√°ginas
