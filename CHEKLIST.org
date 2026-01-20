@@ -54,7 +54,7 @@
 
 ** ETAPA 4.1: Versão-0.1 (Foco: Simplicidade e Solução Direta)
 *** Código (v0.1)
-**** [ ] Clonar/Copiar o código da versão antiga (v0.1) para o diretório [[file:src/v0.1][src/v0.1]].
+**** [ ] Clonar/Copiar o código da versão  anterior para o diretório [[file:src/v0.1][src/v0.1]].
 **** [ ] Se mantida, aplicar as atualizações (modelagem leve, C++, padrões Stroustrup/Sutter, Eglot).
 **** [ ] Criar/Atualizar o sistema de construção específico para v0.1.
 **** [ ] Garantir que a v0.1 compila sem *warnings*.
@@ -74,13 +74,13 @@
 
 ** ETAPA 4.2: Versão-0.2 (Foco: Otimizações Seriais, Robustez, Makefile)
 *** Código (v0.2)
-**** [ ] Clonar/Copiar o código da versão antiga (v0.2) para o diretório [[file:src/v0.2][src/v0.2]].
+**** [ ] Clonar/Copiar o código da versão  anterior para o diretório [[file:src/v0.2][src/v0.2]].
 **** [ ] Se mantida, aplicar as atualizações (modelagem foco em otimização, C++, padrões).
 **** [ ] Criar/Atualizar o sistema de construção específico para v0.2.
 **** [ ] Garantir que a v0.2 compila sem *warnings*.
 **** [ ] Revisar modelos UML (ETAPA 3) em função de alterações.
 *** Testes (v0.2)
-**** [ ] Executar o **Teste de Regressão** (conjunto de testes da v0.1).
+**** [ ] Executar o **Teste de Regressão** (conjunto de testes da v0.2).
 **** [ ] Revisar os modelos e premissas dos testes (incluir testes de *performance* se o foco for otimização).
 **** [ ] Realizar os testes de unidade.
 **** [ ] Garantir que todos os testes passem.
@@ -94,7 +94,7 @@
 
 ** ETAPA 4.3: Versão-0.3 (Foco: Construtores, Operadores, Recursão, Biblioteca)
 *** Código (v0.3)
-**** [ ] Clonar/Copiar o código da versão antiga (v0.3) para o diretório [[file:src/v0.3][src/v0.3]].
+**** [ ] Clonar/Copiar o código da versão  anterior para o diretório [[file:src/v0.3][src/v0.3]].
 **** [ ] Se mantida, aplicar as atualizações (foco em *features* de POO).
 **** [ ] Criar/Atualizar o sistema de construção específico para v0.3.
 **** [ ] Garantir que a v0.3 compila sem *warnings*.
@@ -175,8 +175,9 @@
 *** Código (v1.0)
 **** [ ] Clonar/Copiar o código da versão final ([[file:src/v1.0][src/v1.0]]).
 **** [ ] Garantir a **Confiabilidade do Software** (foco principal da v1.0).
-**** [ ] Revisão final de padrões e *clean code*.
-*** Testes (v1.0)
+**** [ ] Revisão final de [[https://refactoring.guru/pt-br/design-patterns/cpp][padrões de projeto]].
+**** [ ] Revisão final de *clean code*.
+**** Testes (v1.0)
 **** [ ] Executar **Todos os Testes de Regressão** (v0.1 a v0.9).
 **** [ ] **Teste de Instalação e Execução** nos ambientes de laboratório (padrão Linux e Windows).
 **** [ ] Teste de *build* e execução em sistemas de Integração Contínua (CI) se aplicável.
