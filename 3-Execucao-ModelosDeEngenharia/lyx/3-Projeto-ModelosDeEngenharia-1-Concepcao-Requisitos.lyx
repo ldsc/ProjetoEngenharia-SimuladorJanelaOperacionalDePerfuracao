@@ -635,6 +635,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename imagens/Visão geral do funcionamento proposto para o software.png
+	scale 65
 
 \end_inset
 
