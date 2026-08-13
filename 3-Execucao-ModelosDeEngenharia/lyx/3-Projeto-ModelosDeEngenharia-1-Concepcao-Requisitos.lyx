@@ -1,5 +1,5 @@
-#LyX 2.4 created this file. For more info see https://www.lyx.org/
-\lyxformat 620
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -20,11 +20,9 @@
 \togglefalse{FormatoApresentacaoTRUE}
 %\toggletrue{IncluirBibliografiaNoCapituloTRUE}
 \togglefalse{IncluirBibliografiaNoCapituloTRUE}
-
 % Para usar no meio dos arquivos do lyx crie um comando latex e cole o texto abaixo
 %\iftoggle{FormatoApresentacaoTRUE}{..verdadeiro..}{..falso..}
 %\iftoggle{FormatoApresentacaoTRUE}{\newpage}{}
-
 %---------------------------------------------------------------
 % Para adicionar/excluir uma seção inteira
 %---------------------------------------------------------------
@@ -36,24 +34,21 @@
 % Para usar
 % \ifIncluirSecaoProgramacaoAvancada no início do blobo
 % \fi para finalizar o bloco
-
 %---------------------------------------------------------------
 %GERAL
 %---------------------------------------------------------------
 \usepackage{verbatim}
 %%\usepackage{algorithm}
 \usepackage{fancyvrb}
-\usepackage{keyval} 
+\usepackage{keyval}
 \usepackage{indentfirst}
 %\usepackage{color}
 \usepackage{xcolor}
 \definecolor{azulclaro}{rgb}{0.6,1,1}%   rgb color model
 \definecolor{BLACK}{rgb}{0,0,0}%   rgb color model
 \definecolor{BLUE}{rgb}{0,0,1}%   rgb color model
-
 %Informa que vai usar o pacote listings, disponibilizado em /usr/share/texmf/doc/latex/styles/listings.dvi
 \usepackage{listings}
-
 %Define um novo comando, chamado lst
 %observe que lst chama o comando  lstinputlisting.
 \newcommand{\lst}[2]{%
@@ -62,26 +57,19 @@
     basicstyle=\footnotesize\tt,labelstep=1,labelstyle=\tiny,indent=2em,language=Java,breaklines]{#1}
     \vspace{1ex}%
 }
-
 %\listfiles
 %\usepackage[]{hyperref}
-
 %\usepackage{mathptmx}  % instead of package times
-
 %\usepackage[scaled=0.9]{helvet} % or [scaled=0.92], if you like
-
 %% Pacote de citações para formato abnt
 %%\usepackage[num]{abntcite}
 %%\usepackage[alf]{abntcite}
-
 %%\usepackage[cam,a4,center]{crop}
 %% a4 é o tamanho físico
 %% center é para centralizar
 %% cam inclui quatro marcas diferentes
-
 %%\usepackage[cam,width=20truecm,height=28truecm,center]{crop}
 %\usepackage[cam,width=18truecm,height=26truecm,center]{crop}
-
 %\noindent
 \end_preamble
 \use_default_options false
@@ -133,11 +121,19 @@
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
-\use_refstyle 0
+\justification default
+\crossref_package prettyref
 \use_formatted_ref 0
 \use_minted 0
 \use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
 \index Índice
 \shortcut idx
 \color #008000
@@ -169,6 +165,7 @@
 \html_be_strict false
 \docbook_table_output 0
 \docbook_mathml_prefix 1
+\docbook_mathml_version 0
 \end_header
 
 \begin_body
@@ -178,7 +175,6 @@
 status open
 
 \begin_layout Plain Layout
-
 
 \backslash
 lhead{
@@ -190,13 +186,11 @@ space - Especificação}
 
 \begin_layout Plain Layout
 
-
 \backslash
 chead{}  
 \end_layout
 
 \begin_layout Plain Layout
-
 
 \backslash
 rhead{}  
@@ -231,8 +225,9 @@ Concepção
 \end_layout
 
 \begin_layout Standard
-Apresenta-se neste capítulo do projeto de engenharia a concepção,
- a especificação do sistema a ser modelado e desenvolvido.
+O Simulador de Janela Operacional de Perfuração será desenvolvido com o objetivo de auxiliar na análise das condições operacionais de perfuração de poços,
+ por meio do cálculo e da integração de parâmetros relacionados às geopressões,
+ permitindo determinar os limites inferior e superior da janela operacional e avaliar condições seguras de perfuração.
 \end_layout
 
 \begin_layout Standard
@@ -352,58 +347,63 @@ name "sec:Metodologia"
 \end_layout
 
 \begin_layout Standard
-A Figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig: Metodologia utilizada no desenvolvimento do sistema"
-nolink "false"
-
-\end_inset
-
- apresenta a metodologia a ser utilizada no desenvolvimento do sistema.
-\begin_inset Float figure
-placement document
-alignment document
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../../imagens/ProjetoEngenharia-Etapas-Geral-wide.png
-	lyxscale 50
-	width 100text%
-	keepAspectRatio
-	special height=0.8\textheight
-
-\end_inset
-
-
+A metodologia adotada no desenvolvimento do Simulador de Janela Operacional de Perfuração é baseada na integração de conceitos de petrofísica,
+ geomecânica e engenharia de poços,
+ seguindo uma sequência de cálculo destinada à estimativa das geopressões e à determinação dos limites operacionais de perfuração.
 \end_layout
 
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Metodologia utilizada no desenvolvimento do sistema
-\begin_inset CommandInset label
-LatexCommand label
-name "fig: Metodologia utilizada no desenvolvimento do sistema"
-
-\end_inset
-
-
+\begin_layout Standard
+Inicialmente,
+ são utilizados dados de profundidade e tempo de trânsito sônico,
+ os quais são organizados e tratados para representar as diferentes camadas do poço.
+ As profundidades são convertidas para as unidades necessárias aos cálculos,
+ sendo também determinada a profundidade média de cada intervalo analisado.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
+A partir dos valores de perfil sônico,
+ a porosidade das formações é estimada utilizando a equação tempo-médio de Wyllie.
+ Em seguida,
+ a densidade bulk é calculada considerando as densidades da matriz rochosa e do fluido presente nos poros.
 \end_layout
 
-\end_inset
+\begin_layout Standard
+Com os valores de densidade determinados ao longo das camadas,
+ calcula-se a tensão de sobrecarga por meio da integração incremental do peso das formações.
+ Posteriormente,
+ é construída a tendência normal de compactação do perfil sônico,
+ utilizada como referência para identificação de desvios associados à ocorrência de pressões anormais.
+\end_layout
 
+\begin_layout Standard
+A pressão de poro é estimada por meio do método de Eaton aplicado ao perfil sônico,
+ utilizando a relação entre o tempo de trânsito observado e a tendência normal de compactação.
+ A pressão obtida é posteriormente convertida em gradiente de pressão de poro e em densidade equivalente de lama.
+\end_layout
 
+\begin_layout Standard
+O gradiente de fratura é determinado a partir da estimativa da tensão mínima horizontal,
+ considerando a tensão de sobrecarga,
+ a pressão de poro e o coeficiente de Poisson.
+ Com os gradientes de pressão de poro e de fratura,
+ é então estabelecida a janela operacional de perfuração,
+ correspondente ao intervalo de densidade de lama no qual a pressão exercida pelo fluido de perfuração deve permanecer para evitar influxos da formação e fraturamento da rocha.
+\end_layout
+
+\begin_layout Standard
+Complementarmente,
+ o simulador realiza a análise da Equivalent Circulating Density (ECD),
+ considerando a densidade da lama,
+ a perda de pressão por atrito durante a circulação e a profundidade analisada.
+ O valor calculado é comparado aos limites da janela operacional,
+ permitindo avaliar se a condição de perfuração se encontra dentro da faixa segura,
+ abaixo do gradiente de pressão de poro ou acima do gradiente de fratura.
+\end_layout
+
+\begin_layout Standard
+Ao final do processamento,
+ os resultados são organizados de forma a permitir a análise integrada das propriedades petrofísicas,
+ das geopressões e dos limites operacionais ao longo do poço.
 \end_layout
 
 \begin_layout Section
@@ -439,7 +439,7 @@ Nome
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Simulador de Janela Operacional de Perfuração
 \end_layout
 
 \end_inset
@@ -461,7 +461,13 @@ Componentes principais
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Módulos para entrada e tratamento de dados do poço,
+ cálculo de porosidade e densidade bulk,
+ determinação da tensão de sobrecarga,
+ estimativa da pressão de poro pelo método de Eaton,
+ cálculo do gradiente de fratura,
+ determinação da janela operacional de perfuração,
+ cálculo de ECD e apresentação dos resultados.
 \end_layout
 
 \end_inset
@@ -483,7 +489,9 @@ Missão
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Desenvolver uma ferramenta computacional capaz de estimar geopressões e determinar a janela operacional de perfuração,
+ auxiliando na avaliação de condições seguras de peso de lama e na identificação de riscos de influxo,
+ fraturamento da formação e perdas de circulação.
 \end_layout
 
 \end_inset
@@ -532,17 +540,123 @@ especificação
 \end_layout
 
 \begin_layout Standard
-Apresenta-se a seguir a especificação do software.
+O Simulador de Janela Operacional de Perfuração será um software desenvolvido em linguagem C++ com o objetivo de realizar a análise integrada das geopressões ao longo de um poço e determinar os limites operacionais seguros para a densidade do fluido de perfuração.
 \end_layout
 
 \begin_layout Standard
-....coloque aqui a especificação...
+O sistema deverá receber como dados de entrada as informações referentes à profundidade das camadas do poço,
+ valores de tempo de trânsito obtidos do perfil sônico e parâmetros físicos e geomecânicos necessários aos cálculos,
+ tais como densidade da matriz rochosa,
+ densidade do fluido presente nos poros,
+ tempo de trânsito da matriz,
+ tempo de trânsito do fluido,
+ gradiente hidrostático normal,
+ expoente do método de Eaton e coeficiente de Poisson.
 \end_layout
 
 \begin_layout Standard
-...eventualmente coloque imagem ilustrativa geral,
- mostrando o que se pretente (primeira ideia) do software;
- normalmente esta figura já será mais detalhada que aquela apresentada no escopo...
+A partir dos dados fornecidos,
+ o sistema realizará o tratamento e a organização das informações por camada.
+ Em seguida,
+ serão executadas sequencialmente as etapas de cálculo necessárias à caracterização das geopressões.
+\end_layout
+
+\begin_layout Standard
+A porosidade das formações será estimada a partir do perfil sônico utilizando a equação tempo-médio de Wyllie.
+ Com a porosidade calculada,
+ será determinada a densidade bulk de cada camada,
+ permitindo posteriormente calcular a tensão de sobrecarga ao longo da profundidade do poço.
+\end_layout
+
+\begin_layout Standard
+O software também deverá determinar uma tendência normal de compactação do perfil sônico e comparar os valores calculados com os valores observados.
+ A partir dessa comparação será aplicada a metodologia de Eaton para estimativa da pressão de poro e de seu respectivo gradiente.
+\end_layout
+
+\begin_layout Standard
+Posteriormente,
+ utilizando a pressão de poro,
+ a tensão de sobrecarga e o coeficiente de Poisson,
+ o sistema calculará a tensão mínima horizontal e o gradiente de fratura da formação.
+\end_layout
+
+\begin_layout Standard
+Os gradientes de pressão de poro e de fratura serão utilizados para estabelecer a janela operacional de perfuração,
+ correspondente ao intervalo no qual a densidade equivalente do fluido deve permanecer durante a operação.
+ Valores inferiores ao gradiente de pressão de poro poderão indicar condição favorável à ocorrência de influxo de fluidos da formação (kick),
+ enquanto valores superiores ao gradiente de fratura poderão indicar risco de fraturamento da formação e perdas de circulação.
+\end_layout
+
+\begin_layout Standard
+O simulador também permitirá a realização de análises de Equivalent Circulating Density (ECD).
+ Para essa análise,
+ o usuário poderá informar parâmetros relacionados à operação,
+ como densidade da lama,
+ perda de pressão por atrito e profundidade de interesse.
+ O ECD calculado será comparado aos limites da janela operacional,
+ permitindo classificar a condição analisada como:
+\end_layout
+
+\begin_layout Itemize
+condição dentro da janela operacional;
+\end_layout
+
+\begin_layout Itemize
+risco de influxo (kick);
+\end_layout
+
+\begin_layout Itemize
+risco de fraturamento da formação e perdas de circulação.
+\end_layout
+
+\begin_layout Standard
+Os resultados deverão ser apresentados de forma organizada,
+ permitindo ao usuário consultar as principais propriedades e gradientes calculados ao longo das diferentes profundidades do poço.
+ O sistema deverá também possibilitar a geração e exportação de resultados para posterior análise e documentação.
+\end_layout
+
+\begin_layout Standard
+Dessa forma,
+ o software deverá integrar,
+ em uma única ferramenta computacional,
+ os principais cálculos necessários à estimativa de geopressões e à construção da janela operacional de perfuração,
+ fornecendo suporte à análise das condições operacionais de um poço.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/augus/OneDrive/Imagens/Capturas de tela/Captura de tela 2026-08-13 201735.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Visão geral do funcionamento proposto para o software.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -631,8 +745,10 @@ RF-01
 \begin_inset Text
 
 \begin_layout Plain Layout
-O sistema deve conter uma base de dados xxx.
- O usuário deve ser capaz de xxx.
+O sistema deve conter uma base de dados com informações de profundidade,
+ perfil sônico e parâmetros petrofísicos e geomecânicos do poço.
+ O usuário deve ser capaz de inserir,
+ consultar e utilizar esses dados nas simulações.
 \end_layout
 
 \end_inset
@@ -671,7 +787,7 @@ RF-02
 \begin_inset Text
 
 \begin_layout Plain Layout
-O usuário deverá ter liberdade para xxxx.
+O usuário deverá ter liberdade para definir e alterar os parâmetros de entrada utilizados nos cálculos do simulador.
 \end_layout
 
 \end_inset
@@ -752,7 +868,8 @@ RF-04
 \begin_inset Text
 
 \begin_layout Plain Layout
-Deve permitir a escolha da equação xxx.
+Deve permitir a escolha da equação ou correlação disponível para realização dos cálculos de geopressões,
+ quando houver mais de um modelo implementado.
 \end_layout
 
 \end_inset
@@ -794,7 +911,9 @@ RF-05
 \begin_inset Text
 
 \begin_layout Plain Layout
-O usuário deve ter tal liberdade para escolher xxx.
+O usuário deve ter liberdade para escolher a profundidade e os parâmetros operacionais,
+ como densidade da lama e perda de pressão por atrito,
+ utilizados na análise do ECD e da janela operacional.
 \end_layout
 
 \end_inset
@@ -899,7 +1018,8 @@ RNF-01
 \begin_inset Text
 
 \begin_layout Plain Layout
-Os cálculos devem ser feitos utilizando-se xxxx.
+Os cálculos devem ser feitos utilizando-se modelos e correlações da Engenharia de Petróleo,
+ como a equação tempo-médio de Wyllie e o método de Eaton.
 \end_layout
 
 \end_inset
@@ -942,20 +1062,8 @@ RNF-02
 
 \begin_layout Plain Layout
 O programa deverá ser multi-plataforma,
- podendo ser executado em 
-\emph on
-Windows
-\emph default
-,
- 
-\emph on
-GNU/Linux
-\emph default
- ou 
-\emph on
-Mac
-\emph default
-.
+ podendo ser executado em Windows,
+ GNU/Linux ou Mac.
 \end_layout
 
 \end_inset
