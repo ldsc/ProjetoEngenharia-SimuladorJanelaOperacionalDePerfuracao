@@ -1697,50 +1697,20 @@ do software
 \end_layout
 
 \begin_layout Standard
-....coloque aqui casos de uso específicos,
- descrição + figura(s)...
-\end_layout
-
-\begin_layout Standard
-exemplo...O caso de uso Calcular área função descrito na Figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:Diagrama-caso-uso-geral"
-nolink "false"
-
-\end_inset
-
- e na Tabela 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:Exemplo-de-um-caso-de-uso (tabela)"
-nolink "false"
-
-\end_inset
-
- é detalhado na Figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:Diagrama-de-caso-de-uso-especifico:Titulo"
-nolink "false"
-
-\end_inset
-
-.
- O usuário criará um objeto função matemática,
- um objeto para sua integração;
- em seguida,
- definirá o intervalo de integração,
- calculará a área da função criada e,
-  por fim,
- analisará os resultados (eventualmente gerará gráficos com os resultados obtidos utilizando um sistema externo,
- como o software 
-\emph on
-gnuplot
-\emph default
-).
- Este diagrama de caso de uso ilustra as etapas a serem executadas pelo usuário ou sistema,
- a iteração do usuário com o sistema.
+O diagrama de caso de uso específico da Figura 1.3 apresenta o detalhamento da execução da simulação da janela operacional de perfuração.
+ O usuário inicia o processo fornecendo os dados do poço e configurando os parâmetros necessários à análise.
+ Durante a simulação,
+ o sistema realiza os cálculos das propriedades petrofísicas e das geopressões,
+ incluindo porosidade,
+ densidade bulk,
+ tensão de sobrecarga,
+ pressão de poro e gradiente de fratura.
+ A partir desses resultados,
+ o sistema determina a janela operacional de perfuração.
+ Complementarmente,
+ o usuário poderá realizar a avaliação do ECD e,
+ ao final,
+ analisar ou exportar os resultados obtidos.
 \end_layout
 
 \begin_layout Standard
@@ -1754,7 +1724,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeCasoDeUso-Especifico-1.png
+	filename imagens/Diagrama Caso de Uso Específico.png
 	width 100text%
 
 \end_inset
