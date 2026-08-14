@@ -1313,7 +1313,7 @@ Nome do caso de uso:
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Simular Janela Operacional de Perfuração
 \end_layout
 
 \end_inset
@@ -1333,7 +1333,10 @@ Resumo/descrição:
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+O usuário fornece ou carrega os dados do poço e os parâmetros necessários aos cálculos.
+ O sistema processa as informações,
+ calcula as propriedades petrofísicas e geomecânicas,
+ estima os gradientes de pressão de poro e de fratura e determina a janela operacional de perfuração.
 \end_layout
 
 \end_inset
@@ -1353,7 +1356,62 @@ Etapas:
 \begin_inset Text
 
 \begin_layout Plain Layout
+1.
+ O usuário inicia a simulação.
+ 
+\end_layout
 
+\begin_layout Plain Layout
+2.
+ O usuário carrega ou informa os dados de profundidade e perfil sônico.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+3.
+ O usuário informa ou confirma os parâmetros petrofísicos e geomecânicos.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+4.
+ O sistema calcula a porosidade e a densidade bulk.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+5.
+ O sistema calcula a tensão de sobrecarga.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+6.
+ O sistema determina a tendência normal de compactação.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+7.
+ O sistema estima a pressão de poro pelo método de Eaton.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+8.
+ O sistema calcula o gradiente de fratura.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+9.
+ O sistema determina a janela operacional de perfuração.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+10.
+ O sistema apresenta os resultados ao usuário
 \end_layout
 
 \end_inset
@@ -1373,7 +1431,9 @@ Cenários alternativos:
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Caso os dados de entrada estejam ausentes ou sejam inválidos,
+ o sistema deverá informar o problema e solicitar sua correção antes de realizar os cálculos.
+ O usuário também poderá alterar os parâmetros de entrada e executar novamente a simulação.
 \end_layout
 
 \end_inset
@@ -1413,8 +1473,17 @@ status open
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 ....coloque aqui caso de uso geral,
  descrição + figura(s)...
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1549,21 +1618,25 @@ Você não precisará ficar copiando e colando.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 exemplo...
 \end_layout
 
-\begin_layout Standard
-O diagrama de caso de uso geral da Figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:Diagrama-caso-uso-geral"
-nolink "false"
-
 \end_inset
 
- mostra o usuário acessando os sistemas de ajuda do software,
- calculando a área de uma função ou analisando resultados.
- 
+
+\end_layout
+
+\begin_layout Standard
+O diagrama de caso de uso geral da Figura 1.2 apresenta as principais interações entre o usuário e o Simulador de Janela Operacional de Perfuração.
+ O usuário poderá carregar os dados do poço,
+ configurar os parâmetros de entrada,
+ executar a simulação da janela operacional,
+ avaliar o ECD,
+ analisar os resultados obtidos e exportar os dados gerados pelo sistema.
 \end_layout
 
 \begin_layout Standard
@@ -1577,33 +1650,23 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeCasoUso-Geral.png
-	lyxscale 50
-	width 100text%
-	keepAspectRatio
-	special height=0.3\textheight
+	filename imagens/DiagramaCasoDeUsoGeral.png
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de caso de uso – Caso de uso geral
-\begin_inset CommandInset label
-LatexCommand label
-name "cap:Diagrama-caso-uso-geral"
+Diagrama de Caso de Uso Geral
+\end_layout
 
 \end_inset
 
 
 \end_layout
 
-\end_inset
-
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -1724,6 +1787,10 @@ name "cap:Diagrama-de-caso-de-uso-especifico:Titulo"
 \end_layout
 
 \begin_layout Description
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Nota:
  
 \begin_inset space ~
@@ -1742,6 +1809,11 @@ Não perca de vista a visão do todo;
  a capacidade de desenvolver projetos,
  de ver o todo e suas diferentes partes,
  de modelar processos/sistemas/produtos de engenharia.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
