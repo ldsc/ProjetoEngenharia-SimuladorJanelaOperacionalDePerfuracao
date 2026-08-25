@@ -1,5 +1,5 @@
-#LyX 2.4 created this file. For more info see https://www.lyx.org/
-\lyxformat 620
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -10,18 +10,16 @@
 \usepackage {longtable}
 \usepackage {indentfirst}
 \renewenvironment{center}{\par\centering}{\par}
-
 % Comentar linhas abaixo se não estiver usando pacote abntex
 % ou se o pacote ainda não foi instalado.
 % neste caso sugere-se usar citações no padrão apalike (lembra o da anbt).
 %\usepackage[alf ,abnt-etal-cite=2 , abnt-year-extra-label=yes , abnt-etal-list=0]{abntcite}
 %\usepackage {helvet}
 %\renewcommand {\familydefault}{\sfdefault}
-
 % Para uso de listagens de código
 \usepackage{color}
 \definecolor{azulclaro}{rgb}{0.6,1,1}%   rgb color model
-% Informa que vai usar o pacote listings, 
+% Informa que vai usar o pacote listings,
 % disponibilizado em /usr/share/texmf/doc/latex/styles/listings.dvi
 \usepackage{listings}
 \end_preamble
@@ -73,11 +71,19 @@
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
-\use_refstyle 0
+\justification default
+\crossref_package prettyref
 \use_formatted_ref 0
 \use_minted 0
 \use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
 \index Índice
 \shortcut idx
 \color #008000
@@ -109,6 +115,7 @@
 \html_be_strict false
 \docbook_table_output 0
 \docbook_mathml_prefix 1
+\docbook_mathml_version 0
 \end_header
 
 \begin_body
@@ -129,7 +136,6 @@ name "cha:Introdução"
 status open
 
 \begin_layout Plain Layout
-
 
 \backslash
 lhead{
@@ -155,28 +161,97 @@ mantenha esta seção como esta,
 
 \end_inset
 
-Segundo o CREA/CONFEA um dos quesitos fundamentais que diferenciam a atuação de um tecnólogo da atuação de um engenheiro é a capacidade de desenvolver um projeto de engenharia;
- Neste trabalho,
- apresenta-se a pré-proposta de um projeto em engenharia de software aplicado a solução de um problema específico da engenharia de petróleo.
- 
+
 \end_layout
 
 \begin_layout Standard
-Apresenta-se aqui a proposta de desenvolvimento do software XX_nome_XX.
- Um software aplicado a engenharia de petróleo e que visa ...descrever.
- em um parágrafo super resumido..
+A previsão de geopressões ao longo de um poço constitui uma etapa essencial no planejamento e execução de operações de perfuração,
+ especialmente em ambientes offshore,
+ onde
 \end_layout
 
-\begin_layout Itemize
-O primeiro parágrafo pode ser um super resumo da proposta de projeto.
- A ideia é fazer um resumo do resumo.
- Foque no problema que pretende resolver e não em como irá resolvê-lo!
+\begin_layout Standard
+as janelas operacionais são estreitas,
+ os custos são elevados e a ocorrência de zonas sobrepressurizadas é frequente.
+ A determinação adequada da pressão de poro,
+ do gradiente
 \end_layout
 
-\begin_layout Itemize
-PS:
- Observe que ESTE MODELO TEM TEXTOS EXPLICATIVOS QUE DEVEM SER ELIMINADOS DA VERSÃO FINAL.
- O OBJETIVO DE COLOCAR AS EXPLICAÇÕES É FACILITAR O ENTENDIMENTO DO QUE DEVE ENTRAR EM CADA SEÇÃO.
+\begin_layout Standard
+de fratura e da janela operacional de densidade de lama é fundamental para garantir a
+\end_layout
+
+\begin_layout Standard
+segurança do poço,
+ minimizar riscos de influxo (kick),
+ fraturas indesejadas e perdas de
+\end_layout
+
+\begin_layout Standard
+circulação,
+ além de otimizar o tempo não-produtivo (NPT) e a eficiência operacional.
+\end_layout
+
+\begin_layout Standard
+Diversas técnicas clássicas são amplamente utilizadas na engenharia de poços para a
+\end_layout
+
+\begin_layout Standard
+estimativa dessas grandezas ao longo da profundidade,
+ incluindo:
+\end_layout
+
+\begin_layout Standard
+• a equação tempo–médio de Wyllie et al.
+ (1956),
+ utilizada para estimar a porosidade
+\end_layout
+
+\begin_layout Standard
+a partir do perfil sônico;
+\end_layout
+
+\begin_layout Standard
+• o método de Eaton (1969),
+ referência mundial para predição de pressão de poro;
+\end_layout
+
+\begin_layout Standard
+• formulações geomecânicas simplificadas baseadas no coeficiente de Poisson,
+ aplicadas ao cálculo da tensão mínima horizontal e do gradiente de fratura (Zoback,
+\end_layout
+
+\begin_layout Standard
+2010);
+\end_layout
+
+\begin_layout Standard
+• modelos clássicos de gradientes e envelopes operacionais apresentados por Bourgoyne
+\end_layout
+
+\begin_layout Standard
+et al.
+ (1986).
+\end_layout
+
+\begin_layout Standard
+O presente estudo aplica essas metodologias a um conjunto de dados sintético representando um poço offshore composto por 40 camadas,
+ abrangendo lâmina d’água,
+ sedimentos inconsolidados e formações consolidadas com registro sônico disponível.
+ A partir
+\end_layout
+
+\begin_layout Standard
+desses dados,
+ foram gerados perfis de porosidade,
+ densidade,
+ tensões,
+ gradientes e janela
+\end_layout
+
+\begin_layout Standard
+operacional ao longo da profundidade,
+ estruturados em oito tabelas e sete figuras.
 \end_layout
 
 \begin_layout Section
@@ -189,7 +264,7 @@ Tipo de investimento /divulgação:
 \end_layout
 
 \begin_layout Itemize
-PROJETO DE PESQUISA E DESENVOLVIMENTO / DESENVOLVIMENTO DE SOFTWARE - Versão 2 
+PROJETO DE PESQUISA E DESENVOLVIMENTO / DESENVOLVIMENTO DE SOFTWARE - Versão 1 
 \end_layout
 
 \begin_layout Subsubsection
@@ -211,7 +286,15 @@ André Duarte Bueno
 \end_layout
 
 \begin_layout Subsubsection
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Gerência técnica:
+\end_layout
+
+\end_inset
+
  
 \begin_inset Note Note
 status open
@@ -241,11 +324,30 @@ Por exemplo,
 \end_layout
 
 \begin_layout Itemize
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Nome Empresa/Instituição:
+ UNIVERSIDADE ESTADUAL DO NORTE FLUMINENSE DARCY RIBEIRO
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Nome Gerente
+\end_layout
+
+\end_inset
+
+
 \begin_inset Note Note
 status open
 
@@ -260,7 +362,16 @@ pode ser um professor(a)
 \end_layout
 
 \begin_layout Itemize
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 E-mail:
+\end_layout
+
+\end_inset
+
+
 \begin_inset Note Note
 status open
 
@@ -275,7 +386,16 @@ coloque o email da empresa;
 \end_layout
 
 \begin_layout Itemize
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Telefone:
+\end_layout
+
+\end_inset
+
+
 \begin_inset Note Note
 status open
 
@@ -293,7 +413,8 @@ Equipe:
 \end_layout
 
 \begin_layout Itemize
-Nome (gerente-equipe) [email/telefone]
+Nome :
+ Arthur Versiani Gomes da Silva 
 \begin_inset Note Note
 status open
 
@@ -309,7 +430,8 @@ o gerente da equipe é o aluno que faz a comunicação da equipe com a gerência
 \end_layout
 
 \begin_layout Itemize
-Nome [email/telefone] 
+Nome:
+ Augusto Caio Rotte Fernandes Oliveira 
 \begin_inset Note Note
 status open
 
@@ -359,7 +481,7 @@ Duração:
 \end_layout
 
 \begin_layout Itemize
-18-24 mês(es) 
+12 mês(es) 
 \begin_inset Note Note
 status open
 
@@ -378,7 +500,7 @@ Data de submissão:
 \end_layout
 
 \begin_layout Itemize
-Coloque aqui a data de entrega do pré-projeto ao professor coordenador
+Dezembro 2026
 \end_layout
 
 \begin_layout Subsubsection
@@ -387,7 +509,7 @@ Número da proposta:
 \end_layout
 
 \begin_layout Itemize
-LDSC-2023-1-P50
+LDSC-2026-2-P1
 \begin_inset Note Note
 status open
 
@@ -427,7 +549,7 @@ Título do projeto:
 \end_layout
 
 \begin_layout Itemize
-"Título do projeto aqui"
+Simulador de Janela Operacional de Perfuração
 \end_layout
 
 \begin_layout Subsubsection
@@ -436,7 +558,13 @@ Palavras-chave:
 \end_layout
 
 \begin_layout Itemize
-...coloque aqui lista de palavras chaves - até 5...
+Geopressões;
+ Método de Eaton;
+ Gradiente de Fratura;
+ Poço Offshore;
+ Janela de Perfuração;
+ ECD;
+ Perfil Sônico.
 \end_layout
 
 \begin_layout Section
@@ -450,14 +578,67 @@ name "sec:Resumo"
 
 \end_layout
 
-\begin_layout Itemize
-Limite de 500 palavras,
- então seja bem direto!
+\begin_layout Standard
+Este trabalho apresenta uma análise completa das geopressões ao longo de um
 \end_layout
 
-\begin_layout Itemize
-Escreva no final,
- depois de escrever todo o resto.
+\begin_layout Standard
+poço offshore,
+ utilizando dados de profundidade e perfil sônico para estimar porosidade,
+ tensão de sobrecarga,
+ pressão de poro e gradiente de fratura.
+ A metodologia
+\end_layout
+
+\begin_layout Standard
+empregada integra modelos petrofísicos e geomecânicos amplamente utilizados na
+\end_layout
+
+\begin_layout Standard
+engenharia de poços,
+ incluindo a equação tempo-médio de Wyllie para cálculo da
+\end_layout
+
+\begin_layout Standard
+porosidade,
+ a integração da densidade bulk para determinação da sobrecarga e o
+\end_layout
+
+\begin_layout Standard
+método de Eaton aplicado ao registro sônico para estimativa da pressão de poro.
+ A
+\end_layout
+
+\begin_layout Standard
+partir desses resultados,
+ construiu-se a Mud Weight Operational Envelope,
+ permitindo identificar as janelas seguras de perfuração e os limites operacionais impostos
+\end_layout
+
+\begin_layout Standard
+pelos gradientes de poro e de fratura.
+ Adicionalmente,
+ foi realizada uma análise
+\end_layout
+
+\begin_layout Standard
+de Equivalent Circulating Density (ECD) em profundidade crítica,
+ avaliando a estabilidade do poço durante a circulação da lama.
+ Os resultados demonstram a
+\end_layout
+
+\begin_layout Standard
+importância da integração entre geofísica de poço,
+ correlações empíricas e modelos
+\end_layout
+
+\begin_layout Standard
+de tensão,
+ possibilitando a previsão de zonas sobrepressurizadas e o planejamento
+\end_layout
+
+\begin_layout Standard
+seguro das operações de perfuração.
 \end_layout
 
 \begin_layout Section
@@ -471,17 +652,48 @@ name "sec:Escopo-do-Problema"
 
 \end_layout
 
-\begin_layout Itemize
-Definir o escopo do projeto de engenharia,
- a ideia geral do software,
- acentuar sua importância,
- usos e aplicações em engenharia [de petróleo].
+\begin_layout Standard
+O projeto tem como escopo o desenvolvimento de um Simulador de Janela Operacional de Perfuração,
+ destinado à análise de geopressões e à determinação dos limites operacionais de densidade do fluido de perfuração ao longo de um poço.
+ O sistema será desenvolvido em linguagem C++,
+ utilizando programação orientada a objetos.
 \end_layout
 
-\begin_layout Itemize
-Delimitar o assunto.
- Situá-lo no tempo e no espaço.
- Situá-lo em relação a outros softwares.
+\begin_layout Standard
+Na Engenharia de Poços,
+ a determinação adequada da pressão de poro e do gradiente de fratura é fundamental para o planejamento e execução segura das operações de perfuração.
+ O fluido de perfuração deve exercer pressão suficiente para evitar influxos de fluidos da formação,
+ mas não pode ultrapassar o limite de fratura da rocha.
+ Dessa forma,
+ a faixa compreendida entre esses limites constitui a janela operacional de perfuração.
+\end_layout
+
+\begin_layout Standard
+O software utilizará dados de profundidade,
+ perfil sônico e parâmetros petrofísicos e geomecânicos para realizar uma sequência integrada de cálculos.
+ Entre as principais etapas estão a estimativa da porosidade pela equação tempo-médio de Wyllie,
+ o cálculo da densidade bulk,
+ a determinação da tensão de sobrecarga,
+ a construção da tendência normal de compactação,
+ a estimativa da pressão de poro pelo método de Eaton e o cálculo do gradiente de fratura.
+ A partir desses resultados,
+ o sistema determinará a janela operacional ao longo da profundidade analisada.
+\end_layout
+
+\begin_layout Standard
+O simulador também contemplará a avaliação da Equivalent Circulating Density (ECD),
+ permitindo comparar a densidade equivalente durante a circulação com os limites de pressão de poro e de fratura.
+ Essa análise possibilitará classificar determinadas condições operacionais como seguras ou associadas ao risco de influxo (kick),
+ fraturamento da formação ou perdas de circulação.
+\end_layout
+
+\begin_layout Standard
+O escopo do projeto está limitado à análise computacional das geopressões e da janela operacional de perfuração a partir dos dados e modelos implementados.
+ O sistema não tem como objetivo substituir softwares comerciais completos de planejamento de poços,
+ nem abranger todos os fenômenos envolvidos em geomecânica,
+ hidráulica de perfuração ou estabilidade de poços.
+ Seu objetivo é fornecer uma ferramenta de engenharia capaz de integrar os principais cálculos relacionados à janela operacional de maneira estruturada,
+ reproduzível e passível de expansão futura.
 \end_layout
 
 \begin_layout Section
@@ -508,17 +720,12 @@ Objetivo geral:
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
-Descreva aqui o objetivo geral do projeto de engenharia,
- incluindo vínculos com engenharia de petróleo e com modelagem matemática computacional (ideia de lógica,
- algoritmos,...).
+\begin_layout Standard
+O objetivo geral deste estudo é analisar as geopressões ao longo de um poço offshore
 \end_layout
 
-\begin_layout Itemize
-Desenvolver um projeto de engenharia de software para ...[.....descrever de forma clara,
- direta,
- objetiva,
- o objetivo geral do software].
+\begin_layout Standard
+utilizando correlações clássicas da engenharia de poços e ferramentas computacionais modernas.
 \end_layout
 
 \end_deeper
@@ -532,41 +739,35 @@ Objetivos específicos:
 
 \begin_deeper
 \begin_layout Itemize
-Modelar física e matematicamente o problema.
+Estimar a porosidade das formações com base na equação tempo–médio de Wyllie.
 \end_layout
 
 \begin_layout Itemize
-Modelagem estática do software (diagramas de caso de uso,
- de pacotes,
- de classes).
+Determinar a densidade bulk por camada e calcular a tensão de sobrecarga por integração.
 \end_layout
 
 \begin_layout Itemize
-Modelagem dinâmica do software (desenvolver algoritmos e diagramas exemplificando os fluxos de processamento).
+Estimar a pressão de poro utilizando o método de Eaton aplicado ao perfil sônico.
 \end_layout
 
 \begin_layout Itemize
-Calcular XXX[.....descrever de forma clara,
- direta,
- objetiva,
- cada objetivo específico,
- cada parte do software].
+Calcular o gradiente de fratura a partir da tensão efetiva vertical e do coeficiente de Poisson.
 \end_layout
 
 \begin_layout Itemize
-Calcular XXX[.....descrever de forma clara,
- direta,
- objetiva,
- cada objetivo específico,
- cada parte do software].
+Determinar a janela operacional de perfuração (entre gradientes de poro e fratura).
 \end_layout
 
 \begin_layout Itemize
-Simular (realizar simulações para teste do software desenvolvido).
+Desenvolver perfis gráficos representando todas as grandezas calculadas.
 \end_layout
 
 \begin_layout Itemize
-Implementar manual simplificado de uso do software.
+Avaliar um caso de Equivalent Circulating Density (ECD) em profundidade crítica.
+\end_layout
+
+\begin_layout Itemize
+Organizar os resultados em tabelas-resumo para facilitar consulta e interpretação.
 \end_layout
 
 \end_deeper
@@ -585,7 +786,7 @@ name "sec:Metodologia"
 A Figura 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Metodologia utilizada no desenvolvimento do sistema 1: Desafio, pré-projeto e projeto"
+reference "fig:Metodologia utilizada no desenvolvimento do sistema 1: Desafio. pré-projeto e projeto"
 nolink "false"
 
 \end_inset
@@ -604,7 +805,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /home/bueno/Documentos/workdir/ProjetoEngenharia-SoftwareAnaliseEncrustacaoAmostrasSalmouras/imagens/ProjetoEngenharia-Etapas-Geral-portrait-1.png
+	filename D:/home/bueno/Documentos/workdir/ProjetoEngenharia-SoftwareAnaliseEncrustacaoAmostrasSalmouras/imagens/ProjetoEngenharia-Etapas-Geral-portrait-1.png
 	lyxscale 50
 	width 100text%
 	special height=0.8\textheight
@@ -623,7 +824,7 @@ Metodologia utilizada no desenvolvimento do sistema 1:
  pré-projeto e projeto
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Metodologia utilizada no desenvolvimento do sistema 1: Desafio, pré-projeto e projeto"
+name "fig:Metodologia utilizada no desenvolvimento do sistema 1: Desafio. pré-projeto e projeto"
 
 \end_inset
 
@@ -644,7 +845,7 @@ name "fig:Metodologia utilizada no desenvolvimento do sistema 1: Desafio, pré-p
 A Figura 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Metodologia utilizada no desenvolvimento do sistema 2: Análise, Implementação e Entrega"
+reference "fig:Metodologia utilizada no desenvolvimento do sistema 2: Análise. Implementação e Entrega"
 nolink "false"
 
 \end_inset
@@ -665,7 +866,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /home/bueno/Documentos/workdir/ProjetoEngenharia-SoftwareAnaliseEncrustacaoAmostrasSalmouras/imagens/ProjetoEngenharia-Etapas-Geral-portrait-2.png
+	filename D:/home/bueno/Documentos/workdir/ProjetoEngenharia-SoftwareAnaliseEncrustacaoAmostrasSalmouras/imagens/ProjetoEngenharia-Etapas-Geral-portrait-2.png
 	lyxscale 50
 	width 100text%
 	special height=0.8\textheight
@@ -684,7 +885,7 @@ Metodologia utilizada no desenvolvimento do sistema 2:
  Implementação e Entrega 
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Metodologia utilizada no desenvolvimento do sistema 2: Análise, Implementação e Entrega"
+name "fig:Metodologia utilizada no desenvolvimento do sistema 2: Análise. Implementação e Entrega"
 
 \end_inset
 
