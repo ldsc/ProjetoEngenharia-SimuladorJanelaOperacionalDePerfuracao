@@ -1,38 +1,35 @@
-#LyX 2.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 544
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
 \begin_document
 \begin_header
 \save_transient_properties true
 \origin unavailable
 \textclass extbook
 \begin_preamble
-
 \usepackage {graphicx}
 \usepackage {longtable}
 \usepackage {indentfirst}
 \renewenvironment{center}{\par\centering}{\par}
-
 % Comentar linhas abaixo se não estiver usando pacote abntex
 % ou se o pacote ainda não foi instalado.
 % neste caso sugere-se usar citações no padrão apalike (lembra o da anbt).
 %\usepackage[alf ,abnt-etal-cite=2 , abnt-year-extra-label=yes , abnt-etal-list=0]{abntcite}
 %\usepackage {helvet}
 %\renewcommand {\familydefault}{\sfdefault}
-
 % Para uso de listagens de código
 \usepackage{color}
 \definecolor{azulclaro}{rgb}{0.6,1,1}%   rgb color model
-% Informa que vai usar o pacote listings, 
+% Informa que vai usar o pacote listings,
 % disponibilizado em /usr/share/texmf/doc/latex/styles/listings.dvi
 \usepackage{listings}
 \end_preamble
 \use_default_options false
 \master 3-Projeto-ModelosDeEngenharia-Master.lyx
-\maintain_unincluded_children false
+\maintain_unincluded_children no
 \language brazilian
 \language_package auto
-\inputencoding auto
-\fontencoding global
+\inputencoding auto-legacy
+\fontencoding auto
 \font_roman "default" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
@@ -40,7 +37,9 @@
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
-\font_osf false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
 \use_microtype false
@@ -54,7 +53,7 @@
 \paperfontsize 12
 \spacing onehalf
 \use_hyperref false
-\papersize a4paper
+\papersize a4
 \use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
@@ -73,9 +72,19 @@
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
-\use_refstyle 0
+\justification default
+\crossref_package prettyref
+\use_formatted_ref 0
 \use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
 \index Índice
 \shortcut idx
 \color #008000
@@ -97,11 +106,17 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle fancy
+\tablestyle default
 \tracking_changes false
 \output_changes false
+\change_bars false
+\postpone_fragile_content false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
 \end_header
 
 \begin_body
@@ -111,7 +126,6 @@
 status open
 
 \begin_layout Plain Layout
-
 
 \backslash
 lhead{
@@ -129,6 +143,8 @@ space - Elaboração}
 \begin_layout Chapter
 Elaboração
 \begin_inset Index idx
+range none
+pageformat default
 status collapsed
 
 \begin_layout Plain Layout
@@ -148,23 +164,58 @@ name "sec:Elaboração"
 \end_layout
 
 \begin_layout Standard
-Depois da definição dos objetivos, da especificação do software e da montagem
- dos primeiros diagramas de caso de uso, a equipe de desenvolvimento do
- projeto de engenharia passa por um processo de elaboração que envolve o
- estudo de conceitos relacionados ao sistema a ser desenvolvido, a análise
- de domínio e a identificação de pacotes.
- 
+Após a definição dos objetivos,
+ da especificação,
+ dos requisitos e dos primeiros diagramas de caso de uso,
+ inicia-se a etapa de elaboração do Simulador de Janela Operacional de Perfuração.
+ Nesta fase são aprofundados os conceitos técnicos relacionados ao problema de engenharia,
+ permitindo estabelecer de forma mais clara quais informações deverão ser processadas pelo sistema,
+ quais modelos serão empregados e como as diferentes funcionalidades estarão organizadas.
 \end_layout
 
 \begin_layout Standard
-Na elaboração fazemos uma análise dos requisitos, ajustando os requisitos
- iniciais de forma a desenvolver um sistema útil, que atenda às necessidades
- do usuário e, na medida do possível, permita seu reuso e futura extensão.
+Durante a elaboração são analisadas as etapas necessárias para transformar os dados de entrada em informações úteis para a avaliação da janela operacional de perfuração.
+ O processamento inicia-se com dados de profundidade e perfil sônico,
+ além de parâmetros petrofísicos e geomecânicos.
+ A partir dessas informações,
+ o sistema deverá executar sequencialmente os cálculos de porosidade,
+ densidade bulk,
+ tensão de sobrecarga,
+ tendência normal de compactação,
+ pressão de poro,
+ gradiente de fratura e janela operacional.
 \end_layout
 
 \begin_layout Standard
-Eliminam-se os requisitos "impossíveis" e ajusta-se a idéia do sistema de
- forma que este seja flexível, considerando-se aspectos como custos e prazos.
+A estimativa da porosidade será realizada utilizando a equação tempo-médio de Wyllie.
+ A densidade bulk será obtida a partir das densidades da matriz e do fluido presente nos poros,
+ sendo posteriormente utilizada na determinação da tensão de sobrecarga.
+ A pressão de poro será estimada por meio do método de Eaton aplicado aos dados do perfil sônico e à tendência normal de compactação.
+ Com a pressão de poro e a tensão de sobrecarga,
+ será determinado o gradiente de fratura.
+ Esses resultados permitirão estabelecer os limites inferior e superior da janela operacional de perfuração.
+\end_layout
+
+\begin_layout Standard
+O sistema também deverá permitir a avaliação da Equivalent Circulating Density (ECD) em profundidades selecionadas.
+ A ECD será comparada aos gradientes de pressão de poro e de fratura,
+ permitindo identificar se determinada condição operacional encontra-se dentro da janela segura ou se apresenta risco de influxo,
+ fraturamento da formação ou perdas de circulação.
+\end_layout
+
+\begin_layout Standard
+Nesta etapa também são revisados os requisitos definidos anteriormente,
+ buscando assegurar que sejam compatíveis com o escopo e com os recursos disponíveis para o desenvolvimento do projeto.
+ O sistema será desenvolvido de forma modular,
+ permitindo que os diferentes modelos de cálculo sejam organizados em componentes independentes e posteriormente integrados.
+\end_layout
+
+\begin_layout Standard
+A elaboração também servirá como base para as etapas seguintes de análise orientada a objetos e projeto do sistema,
+ nas quais serão identificadas as classes,
+ seus atributos,
+ métodos e relacionamentos,
+ além da arquitetura necessária para implementação do simulador em C++.
 \end_layout
 
 \begin_layout Section
@@ -179,30 +230,237 @@ name "sec:Análise-de-domínio"
 \end_layout
 
 \begin_layout Standard
-Após estudo dos requisitos/especificações do sistema, algumas entrevistas,
- estudos na biblioteca e disciplinas do curso foi possível identificar nosso
- domínio de trabalho:
+O domínio de aplicação do projeto está inserido na área de Engenharia de Poços,
+ mais especificamente no planejamento e na análise das condições de pressão associadas à perfuração de poços de petróleo.
+ O problema central consiste na determinação de uma faixa operacional de densidade do fluido de perfuração capaz de manter o poço em condições hidráulicas adequadas entre os limites impostos pela pressão de poro e pelo gradiente de fratura.
+\end_layout
+
+\begin_layout Standard
+A análise do domínio permite identificar as principais áreas de conhecimento,
+ grandezas físicas,
+ dados de entrada e relações matemáticas necessárias ao desenvolvimento do sistema.
+\end_layout
+
+\begin_layout Subsection
+Definição e caracterização do domínio
+\end_layout
+
+\begin_layout Standard
+O domínio investigado compreende a análise de geopressões e a determinação da janela operacional de perfuração ao longo da profundidade de um poço.
+\end_layout
+
+\begin_layout Standard
+Durante a perfuração,
+ a pressão exercida pelo fluido deve ser suficiente para controlar os fluidos presentes na formação.
+ Entretanto,
+ pressões excessivas podem provocar fraturamento da rocha e perdas de circulação.
+ Dessa forma,
+ o simulador deverá auxiliar na determinação dos limites operacionais definidos pelo gradiente de pressão de poro e pelo gradiente de fratura.
+\end_layout
+
+\begin_layout Standard
+A condição básica utilizada na análise da janela operacional pode ser representada por:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G_{p}<MW<G_{f}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+em que (
+\begin_inset Formula $G_{p}$
+\end_inset
+
+) representa o gradiente de pressão de poro,
+ (
+\begin_inset Formula $MW$
+\end_inset
+
+) representa a densidade equivalente do fluido de perfuração e (
+\begin_inset Formula $G_{f}$
+\end_inset
+
+) representa o gradiente de fratura.
+\end_layout
+
+\begin_layout Standard
+Durante a circulação,
+ a análise poderá considerar a densidade equivalente de circulação:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G_{p}<ECD<G_{f}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+permitindo avaliar a condição hidráulica do poço durante a operação.
+\end_layout
+
+\begin_layout Subsection
+Áreas e disciplinas relacionadas
+\end_layout
+
+\begin_layout Standard
+O desenvolvimento do simulador envolve conhecimentos de diferentes áreas da Engenharia de Petróleo e da modelagem computacional,
+ principalmente:
 \end_layout
 
 \begin_layout Itemize
-Definição e caracterização do domínio a ser investigado 
+
+\series bold
+Engenharia de Poços
+\series default
+:
+ planejamento da perfuração,
+ peso de lama,
+ janela operacional e análise de riscos associados a kick e perdas de circulação;
 \end_layout
 
 \begin_layout Itemize
-Descrição das áreas/disciplinas relacionadas.
+
+\series bold
+Petrofísica e Perfilagem de Poços
+\series default
+:
+ utilização do perfil sônico para estimativa de propriedades das formações;
 \end_layout
 
 \begin_layout Itemize
-Descrição de questões associadas a espaço/tempo (espaço físico, local, instalaçã
-o).
+
+\series bold
+Geomecânica
+\series default
+:
+ análise da tensão de sobrecarga,
+ pressão de poro,
+ tensão mínima horizontal e gradiente de fratura;
 \end_layout
 
 \begin_layout Itemize
-Fotografias de sistemas equivalentes/parecidos.
+
+\series bold
+Hidráulica de Perfuração
+\series default
+:
+ avaliação da Equivalent Circulating Density e dos efeitos das perdas de pressão durante a circulação;
 \end_layout
 
 \begin_layout Itemize
-...
+
+\series bold
+Modelagem Computacional
+\series default
+:
+ implementação dos modelos matemáticos e organização dos cálculos de forma automatizada;
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Engenharia de Software
+\series default
+:
+ desenvolvimento do sistema em C++,
+ utilizando Programação Orientada a Objetos,
+ modelagem UML e controle de versões.
+\end_layout
+
+\begin_layout Subsection
+Dados e grandezas pertencentes ao domínio
+\end_layout
+
+\begin_layout Standard
+Entre as principais informações utilizadas pelo sistema encontram-se:
+\end_layout
+
+\begin_layout Itemize
+profundidade das camadas;
+\end_layout
+
+\begin_layout Itemize
+tempo de trânsito do perfil sônico;
+\end_layout
+
+\begin_layout Itemize
+densidade da matriz rochosa;
+\end_layout
+
+\begin_layout Itemize
+densidade do fluido presente nos poros;
+\end_layout
+
+\begin_layout Itemize
+tempo de trânsito da matriz;
+\end_layout
+
+\begin_layout Itemize
+tempo de trânsito do fluido;
+\end_layout
+
+\begin_layout Itemize
+gradiente hidrostático normal;
+\end_layout
+
+\begin_layout Itemize
+expoente do método de Eaton;
+\end_layout
+
+\begin_layout Itemize
+coeficiente de Poisson;
+\end_layout
+
+\begin_layout Itemize
+densidade da lama;
+\end_layout
+
+\begin_layout Itemize
+perda de pressão por atrito;
+\end_layout
+
+\begin_layout Itemize
+profundidade utilizada para avaliação da ECD.
+\end_layout
+
+\begin_layout Standard
+Essas informações serão processadas para obtenção de grandezas derivadas,
+ como porosidade,
+ densidade bulk,
+ tensão de sobrecarga,
+ pressão de poro,
+ gradiente de pressão de poro,
+ gradiente de fratura,
+ largura da janela operacional e ECD.
+\end_layout
+
+\begin_layout Subsection
+Delimitação espacial e operacional
+\end_layout
+
+\begin_layout Standard
+A implementação inicial será baseada no conjunto de dados do poço offshore.
+ O conjunto utilizado como referência contém informações distribuídas ao longo das camadas do poço e será empregado para validar os resultados obtidos pela implementação em C++.
+\end_layout
+
+\begin_layout Standard
+A análise será realizada em função da profundidade,
+ permitindo observar a evolução das propriedades e dos gradientes ao longo do poço.
+ O sistema não pretende reproduzir todas as etapas do planejamento de um poço,
+ mas concentrar-se especificamente nos cálculos relacionados às geopressões,
+ à janela operacional e à avaliação da ECD.
 \end_layout
 
 \begin_layout Section
@@ -217,30 +475,664 @@ name "sec:Formulação-teórica"
 \end_layout
 
 \begin_layout Standard
-...coloque aqui texto explicando a formulação física-matemática, a descrição
- das equações que serão utilizadas...
+A formulação teórica do Simulador de Janela Operacional de Perfuração é baseada na integração de modelos petrofísicos,
+ geomecânicos e hidráulicos utilizados na Engenharia de Poços.
+ O objetivo é transformar os dados de profundidade,
+ perfil sônico e parâmetros da formação em informações que permitam estimar a pressão de poro,
+ o gradiente de fratura e,
+ consequentemente,
+ os limites da janela operacional de perfuração.
 \end_layout
 
 \begin_layout Standard
-...aqui entram figuras, tabelas explicativas, equações a serem utilizadas no
- software...
+O processamento é realizado de forma sequencial,
+ uma vez que determinadas grandezas calculadas constituem entradas para as etapas seguintes.
+ A sequência considerada no projeto é:
 \end_layout
 
 \begin_layout Standard
-...logo depois, com os dados levantados na análise de domínio, e esta formulação
- teórica, iremos identificar os pacotes, os assuntos com os quais iremos
- trabalhar...
+
+\series bold
+perfil sônico → porosidade → densidade bulk → tensão de sobrecarga → tendência normal de compactação → pressão de poro → gradiente de poro → gradiente de fratura → janela operacional → ECD
+\series default
+.
+\end_layout
+
+\begin_layout Subsection
+Porosidade a partir do perfil sônico
 \end_layout
 
 \begin_layout Standard
-...
- no final da formulação teórica, indicar livros e artigos que tem mais informaçã
-o sobre o assunto...
+O perfil sônico registra o tempo de trânsito da onda acústica através da formação,
+ normalmente representado por (
+\begin_inset Formula $\Delta t$
+\end_inset
+
+).
+ Esse parâmetro pode ser relacionado à porosidade da rocha por meio da equação tempo-médio de Wyllie.
 \end_layout
 
 \begin_layout Standard
-...se vai usar modelos numéricos, colocar seção 3.3.x falando deles; no final
- citar/referenciar fontes...
+A porosidade é calculada por:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\phi=\frac{\Delta t-\Delta t_{ma}}{\Delta t_{fl}-\Delta t_{ma}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+em que:
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\phi$
+\end_inset
+
+) é a porosidade da formação;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\Delta t$
+\end_inset
+
+) é o tempo de trânsito observado no perfil sônico;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\Delta t_{ma}$
+\end_inset
+
+) é o tempo de trânsito da matriz rochosa;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\Delta t_{fl}$
+\end_inset
+
+) é o tempo de trânsito do fluido presente nos poros.
+\end_layout
+
+\begin_layout Standard
+Essa etapa permite utilizar diretamente os dados do perfil sônico para obter uma propriedade petrofísica necessária aos cálculos posteriores.
+\end_layout
+
+\begin_layout Subsection
+Densidade bulk da formação
+\end_layout
+
+\begin_layout Standard
+Com a porosidade determinada,
+ a densidade bulk da formação pode ser estimada considerando a contribuição da matriz rochosa e do fluido presente nos poros.
+\end_layout
+
+\begin_layout Standard
+A relação utilizada é:
+\begin_inset Formula 
+\[
+\rho_{bulk}=(1-\phi)\rho_{m}+\phi\rho_{f}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+em que:
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\rho_{bulk}$
+\end_inset
+
+) é a densidade bulk da formação;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\rho_{m}$
+\end_inset
+
+) é a densidade da matriz rochosa;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\rho_{f}$
+\end_inset
+
+) é a densidade do fluido presente nos poros;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\phi$
+\end_inset
+
+) é a porosidade.
+\end_layout
+
+\begin_layout Standard
+A densidade bulk é uma grandeza fundamental para o cálculo da tensão vertical ou tensão de sobrecarga.
+\end_layout
+
+\begin_layout Subsection
+Tensão de sobrecarga
+\end_layout
+
+\begin_layout Standard
+A tensão de sobrecarga,
+ representada por (
+\begin_inset Formula $\sigma_{v}$
+\end_inset
+
+),
+ corresponde ao peso das camadas sobrepostas a determinada profundidade.
+\end_layout
+
+\begin_layout Standard
+Em sua forma geral:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sigma_{v}=\int^{z}_{0}\rho(z)g\,dz
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para a implementação computacional,
+ o cálculo pode ser realizado de forma incremental ao longo das camadas:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+d\sigma_{v}=0.052\rho dH
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+considerando a densidade em unidades equivalentes de lama e a espessura da camada em pés.
+\end_layout
+
+\begin_layout Standard
+A tensão acumulada até determinada profundidade constitui a tensão de sobrecarga utilizada posteriormente na estimativa da pressão de poro e do gradiente de fratura.
+\end_layout
+
+\begin_layout Subsection
+Tendência normal de compactação
+\end_layout
+
+\begin_layout Standard
+A análise do perfil sônico é realizada comparando o tempo de trânsito observado com uma tendência normal de compactação.
+\end_layout
+
+\begin_layout Standard
+Essa tendência pode ser representada por uma função exponencial:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Delta t_{n}=\Delta t_{0}e^{-kz}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+em que:
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\Delta t_{n}$
+\end_inset
+
+) é o tempo de trânsito correspondente à tendência normal;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\Delta t_{0}$
+\end_inset
+
+) representa o tempo de trânsito de referência;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $k$
+\end_inset
+
+) é a constante de compactação;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $z$
+\end_inset
+
+) representa a profundidade.
+\end_layout
+
+\begin_layout Standard
+Desvios entre o tempo de trânsito observado e a tendência normal podem indicar alterações no processo de compactação,
+ sendo utilizados na estimativa da pressão de poro pelo método de Eaton.
+\end_layout
+
+\begin_layout Subsection
+Pressão de poro pelo método de Eaton
+\end_layout
+
+\begin_layout Standard
+A pressão de poro será estimada utilizando o método de Eaton aplicado ao perfil sônico.
+\end_layout
+
+\begin_layout Standard
+A equação utilizada é:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{p}=\sigma_{v}-(\sigma_{v}-P_{n})\left(\frac{\Delta t_{n}}{\Delta t}\right)^{\alpha}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+em que:
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $P_{p}$
+\end_inset
+
+) é a pressão de poro;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\sigma_{v}$
+\end_inset
+
+) é a tensão de sobrecarga;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $P_{n}$
+\end_inset
+
+) é a pressão de poro normal;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\Delta t_{n}$
+\end_inset
+
+) é o tempo de trânsito da tendência normal;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\Delta t$
+\end_inset
+
+) é o tempo de trânsito observado;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\alpha$
+\end_inset
+
+) é o expoente de Eaton.
+\end_layout
+
+\begin_layout Standard
+O método permite utilizar desvios do perfil sônico em relação à tendência normal para identificar possíveis regiões de pressão anormal.
+\end_layout
+
+\begin_layout Subsection
+Gradiente de pressão de poro
+\end_layout
+
+\begin_layout Standard
+A pressão de poro pode ser convertida em gradiente pela relação:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G_{p}=\frac{P_{p}}{H}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+em que:
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $G_{p}$
+\end_inset
+
+) é o gradiente de pressão de poro;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $P_{p}$
+\end_inset
+
+) é a pressão de poro;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $H$
+\end_inset
+
+) é a profundidade considerada.
+\end_layout
+
+\begin_layout Standard
+Quando necessário,
+ o gradiente pode ser convertido para uma densidade equivalente de lama por:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+MW=\frac{G_{p}}{0.052}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Essa conversão permite comparar diretamente as pressões calculadas com os pesos de lama normalmente utilizados em operações de perfuração.
+\end_layout
+
+\begin_layout Subsection
+Gradiente de fratura
+\end_layout
+
+\begin_layout Standard
+O limite superior da janela operacional é associado ao gradiente de fratura da formação.
+\end_layout
+
+\begin_layout Standard
+Inicialmente,
+ estima-se a tensão horizontal mínima:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sigma_{hmin}=\frac{\nu}{1-\nu}(\sigma_{v}-P_{p})+P_{p}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+em que:
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\sigma_{hmin}$
+\end_inset
+
+) é a tensão horizontal mínima;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $nu$
+\end_inset
+
+) é o coeficiente de Poisson;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\sigma_{v}$
+\end_inset
+
+) é a tensão de sobrecarga;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $P_{p}$
+\end_inset
+
+) é a pressão de poro.
+\end_layout
+
+\begin_layout Standard
+O gradiente de fratura é então determinado por:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G_{f}=\frac{\sigma_{hmin}}{H}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Esse valor estabelece o limite superior de pressão que pode ser aplicado à formação antes que ocorra fraturamento hidráulico indesejado.
+\end_layout
+
+\begin_layout Subsection
+Janela operacional de perfuração
+\end_layout
+
+\begin_layout Standard
+A janela operacional é definida pelo intervalo existente entre o gradiente de pressão de poro e o gradiente de fratura.
+\end_layout
+
+\begin_layout Standard
+A condição básica de operação é:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G_{p}<MW<G_{f}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+O limite inferior é representado pelo gradiente de pressão de poro.
+ Operar abaixo desse limite pode favorecer a entrada de fluidos da formação no poço.
+\end_layout
+
+\begin_layout Standard
+O limite superior é representado pelo gradiente de fratura.
+ Caso a pressão exercida pelo fluido ultrapasse esse valor,
+ podem ocorrer fraturamento da formação e perdas de circulação.
+\end_layout
+
+\begin_layout Standard
+Dessa forma,
+ a largura da janela operacional pode ser expressa como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+J=G_{f}-G_{p}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+em que (
+\begin_inset Formula $J$
+\end_inset
+
+) representa a amplitude disponível para operação entre os dois limites.
+\end_layout
+
+\begin_layout Subsection
+Equivalent Circulating Density
+\end_layout
+
+\begin_layout Standard
+Durante a circulação do fluido,
+ as perdas de pressão por atrito aumentam a pressão efetiva exercida sobre a formação.
+ Esse efeito é representado pela Equivalent Circulating Density (ECD).
+\end_layout
+
+\begin_layout Standard
+O cálculo é realizado por:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+ECD=MW+\frac{\Delta P_{f}}{0.052H}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+em que:
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $ECD$
+\end_inset
+
+) é a densidade equivalente de circulação;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $MW$
+\end_inset
+
+) é a densidade do fluido de perfuração;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $\Delta P_{f}$
+\end_inset
+
+) é a perda de pressão devido ao atrito;
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $H$
+\end_inset
+
+) é a profundidade considerada.
+\end_layout
+
+\begin_layout Standard
+Para que a condição de circulação permaneça dentro da janela operacional,
+ deve-se atender à relação:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G_{p}<ECD<G_{f}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assim,
+ o simulador poderá comparar o ECD com os limites calculados e classificar a condição operacional como dentro da janela,
+ abaixo do limite de pressão de poro ou acima do limite de fratura.
+\end_layout
+
+\begin_layout Subsection
+Integração dos modelos
+\end_layout
+
+\begin_layout Standard
+Os modelos apresentados possuem dependência entre si e serão integrados em uma sequência lógica de processamento.
+ Os dados do perfil sônico permitem estimar a porosidade,
+ que é utilizada no cálculo da densidade bulk.
+ A densidade fornece os valores necessários para a tensão de sobrecarga,
+ enquanto a tendência normal de compactação e a sobrecarga são utilizadas pelo método de Eaton para estimativa da pressão de poro.
+\end_layout
+
+\begin_layout Standard
+A pressão de poro e a tensão de sobrecarga permitem determinar o gradiente de fratura.
+ Finalmente,
+ os gradientes de poro e de fratura definem a janela operacional,
+ sobre a qual podem ser analisados diferentes valores de peso de lama e ECD.
+\end_layout
+
+\begin_layout Standard
+Essa formulação físico-matemática constitui a base para a definição das classes,
+ métodos e módulos de cálculo que serão desenvolvidos nas etapas posteriores da modelagem e implementação do sistema em C++.
 \end_layout
 
 \begin_layout Section
@@ -252,18 +1144,27 @@ Identificação de pacotes – assuntos
 \end_layout
 
 \begin_layout Itemize
-Nome Pacote: Descrição.
- O que é, para que serve, como se relaciona com os demais pacotes.
+Nome Pacote:
+ Descrição.
+ O que é,
+ para que serve,
+ como se relaciona com os demais pacotes.
 \end_layout
 
 \begin_layout Itemize
-Nome Pacote: Descrição.
- O que é, para que serve, como se relaciona com os demais pacotes.
+Nome Pacote:
+ Descrição.
+ O que é,
+ para que serve,
+ como se relaciona com os demais pacotes.
 \end_layout
 
 \begin_layout Itemize
-Nome Pacote: Descrição.
- O que é, para que serve, como se relaciona com os demais pacotes.
+Nome Pacote:
+ Descrição.
+ O que é,
+ para que serve,
+ como se relaciona com os demais pacotes.
 \end_layout
 
 \begin_layout Section
@@ -282,11 +1183,13 @@ name "sec: Diagrama de pacotes – assuntos"
 \end_layout
 
 \begin_layout Standard
-coloque aqui texto falando do diagrama de pacotes, referencie a figura.
+coloque aqui texto falando do diagrama de pacotes,
+ referencie a figura.
  Veja Figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Diagrama-de-Pacotes"
+nolink "false"
 
 \end_inset
 
@@ -295,6 +1198,8 @@ reference "fig:Diagrama-de-Pacotes"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement document
+alignment document
 wide false
 sideways false
 status open
@@ -336,7 +1241,8 @@ name "fig:Diagrama-de-Pacotes"
 \end_layout
 
 \begin_layout Description
-Nota: 
+Nota:
+ 
 \begin_inset space ~
 \end_inset
 
@@ -344,10 +1250,14 @@ Nota:
 \begin_inset Newline newline
 \end_inset
 
-Não perca de vista a visão do todo; do projeto de engenharia como um todo.
- Cada capítulo, cada seção, cada parágrafo deve se encaixar.
+Não perca de vista a visão do todo;
+ do projeto de engenharia como um todo.
+ Cada capítulo,
+ cada seção,
+ cada parágrafo deve se encaixar.
  Este é um diferencial fundamental do engenheiro em relação ao técnico,
- a capacidade de desenvolver projetos, de ver o todo e suas diferentes partes,
+ a capacidade de desenvolver projetos,
+ de ver o todo e suas diferentes partes,
  de modelar processos/sistemas/produtos de engenharia.
 \end_layout
 
