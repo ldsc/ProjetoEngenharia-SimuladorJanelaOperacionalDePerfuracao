@@ -491,11 +491,10 @@ O processamento é realizado de forma sequencial,
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula $perfilsônico→porosidade→densidadebulk→tensãodesobrecarga→tendêncianormaldecompactação→pressãodeporo→gradientedeporo→gradientedefratura→janelaoperacional→ECD.$
+\end_inset
 
-\series bold
-perfil sônico → porosidade → densidade bulk → tensão de sobrecarga → tendência normal de compactação → pressão de poro → gradiente de poro → gradiente de fratura → janela operacional → ECD
-\series default
-.
+
 \end_layout
 
 \begin_layout Subsection
@@ -1140,31 +1139,117 @@ Identificação de pacotes – assuntos
 \end_layout
 
 \begin_layout Standard
-...aqui...
+A partir da análise de domínio e da formulação teórica do problema,
+ foram identificados os principais assuntos envolvidos no Simulador de Janela Operacional de Perfuração.
+ Esses assuntos são organizados em pacotes conceituais,
+ permitindo separar as diferentes responsabilidades do sistema e estabelecer as relações entre os dados de entrada,
+ os modelos de cálculo e os resultados produzidos.
 \end_layout
 
 \begin_layout Itemize
-Nome Pacote:
- Descrição.
- O que é,
- para que serve,
- como se relaciona com os demais pacotes.
+
+\series bold
+Pacote Dados do Poço:
+
+\series default
+ responsável pela representação,
+ organização e armazenamento das informações utilizadas pelo simulador,
+ incluindo profundidade das camadas,
+ perfil sônico e parâmetros físicos necessários aos cálculos.
+ Esse pacote fornece os dados de entrada para os pacotes de Petrofísica e Geopressões.
 \end_layout
 
 \begin_layout Itemize
-Nome Pacote:
- Descrição.
- O que é,
- para que serve,
- como se relaciona com os demais pacotes.
+
+\series bold
+Pacote Petrofísica:
+ 
+\series default
+reúne os cálculos relacionados às propriedades petrofísicas das formações.
+ Inclui a estimativa da porosidade a partir do perfil sônico utilizando a equação tempo-médio de Wyllie e o cálculo da densidade bulk.
+ Os resultados obtidos são utilizados posteriormente no cálculo da tensão de sobrecarga.
 \end_layout
 
 \begin_layout Itemize
-Nome Pacote:
- Descrição.
- O que é,
- para que serve,
- como se relaciona com os demais pacotes.
+
+\series bold
+Pacote Geopressões:
+
+\series default
+ concentra os modelos relacionados à determinação das pressões e tensões atuantes ao longo do poço.
+ Inclui o cálculo da tensão de sobrecarga,
+ a construção da tendência normal de compactação,
+ a estimativa da pressão de poro pelo método de Eaton e a determinação dos respectivos gradientes.
+ Esse pacote utiliza informações provenientes dos pacotes Dados do Poço e Petrofísica.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Pacote Gradiente de Fratura:
+ 
+\series default
+responsável pela determinação da tensão horizontal mínima e do gradiente de fratura da formação.
+ Utiliza principalmente os resultados de tensão de sobrecarga,
+ pressão de poro e coeficiente de Poisson provenientes do pacote Geopressões.
+ O gradiente de fratura constitui o limite superior utilizado na determinação da janela operacional.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Pacote Janela Operacional:
+
+\series default
+ responsável pela integração dos gradientes de pressão de poro e de fratura.
+ A partir desses limites,
+ o sistema determina a faixa admissível de densidade do fluido de perfuração ao longo da profundidade do poço.
+ Esse pacote representa uma das principais funcionalidades do simulador e utiliza os resultados produzidos pelos pacotes Geopressões e Gradiente de Fratura.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Pacote ECD:
+ 
+\series default
+reúne as funcionalidades relacionadas ao cálculo e à avaliação da Equivalent Circulating Density.
+ Utiliza informações de densidade da lama,
+ perda de pressão por atrito e profundidade,
+ comparando o valor calculado de ECD com os limites definidos pela janela operacional.
+ A análise permite identificar condições dentro da faixa operacional,
+ abaixo do gradiente de pressão de poro ou acima do gradiente de fratura.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Pacote Resultados:
+
+\series default
+ responsável pela organização e apresentação das informações produzidas pelos demais pacotes.
+ Reúne valores calculados ao longo da profundidade,
+ resultados da janela operacional,
+ análise de ECD e informações utilizadas para geração de tabelas,
+ gráficos e arquivos de saída.
+\end_layout
+
+\begin_layout Standard
+Os pacotes possuem uma relação sequencial e integrada.
+ De forma simplificada,
+ o fluxo de informações do sistema pode ser representado por:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $DadosdoPoço→Petrofísica→Geopressões→GradientedeFratura→JanelaOperacional→ECD→Resultados.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Essa divisão permite organizar o sistema em componentes com responsabilidades bem definidas,
+ facilitando a identificação das classes e métodos que serão desenvolvidos nas etapas posteriores de análise e projeto orientado a objetos.
 \end_layout
 
 \begin_layout Section
@@ -1179,13 +1264,21 @@ name "sec: Diagrama de pacotes – assuntos"
 \end_layout
 
 \begin_layout Standard
-...aqui...
+O diagrama de pacotes apresentado na Figura 2.1 representa os principais assuntos relacionados ao desenvolvimento do Simulador de Janela Operacional de Perfuração e as dependências existentes entre eles.
+ A organização parte dos dados do poço e dos parâmetros de entrada,
+ utilizados pelos modelos petrofísicos e de geopressões.
+ Os resultados desses cálculos fornecem as informações necessárias para a determinação do gradiente de fratura e da janela operacional de perfuração.
+ A janela calculada é utilizada posteriormente na avaliação da ECD,
+ enquanto o pacote de resultados reúne e organiza as informações produzidas pelos diferentes módulos do sistema.
+ Essa divisão permite visualizar o problema de engenharia de forma abrangente e estabelece uma base para a identificação das classes e componentes que serão detalhados nas próximas etapas do projeto.
 \end_layout
 
 \begin_layout Standard
-coloque aqui texto falando do diagrama de pacotes,
- referencie a figura.
- Veja Figura 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Veja Figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Diagrama-de-Pacotes"
@@ -1194,6 +1287,11 @@ nolink "false"
 \end_inset
 
 .
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1207,9 +1305,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeComponentes-Assuntos-Pacotes.png
-	lyxscale 50
-	width 100text%
+	filename imagens/Diagrama de Assuntos e Pacotes.png
+	lyxscale 125
+	width 50text%
 
 \end_inset
 
@@ -1220,7 +1318,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de Pacotes
+Diagrama de Assuntos/Pacotes do Simulador de Janela Operacional de Perfuração.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Diagrama-de-Pacotes"
@@ -1241,6 +1339,10 @@ name "fig:Diagrama-de-Pacotes"
 \end_layout
 
 \begin_layout Description
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Nota:
  
 \begin_inset space ~
@@ -1259,6 +1361,11 @@ Não perca de vista a visão do todo;
  a capacidade de desenvolver projetos,
  de ver o todo e suas diferentes partes,
  de modelar processos/sistemas/produtos de engenharia.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
