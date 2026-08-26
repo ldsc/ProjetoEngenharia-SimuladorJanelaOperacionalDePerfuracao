@@ -1306,8 +1306,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename imagens/Diagrama de Assuntos e Pacotes.png
-	lyxscale 125
-	width 50text%
+	width 100text%
 
 \end_inset
 
