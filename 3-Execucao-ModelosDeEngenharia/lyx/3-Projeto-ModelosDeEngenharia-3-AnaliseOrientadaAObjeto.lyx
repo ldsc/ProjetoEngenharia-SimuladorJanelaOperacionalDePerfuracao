@@ -1,5 +1,5 @@
-#LyX 2.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 544
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -8,17 +8,16 @@
 \begin_preamble
 \usepackage {graphicx}
 \usepackage {longtable}
-
 \usepackage {indentfirst}
 \renewenvironment{center}{\par\centering}{\par}
 \end_preamble
 \use_default_options false
 \master /home2/andreduartebueno/workdir/ModeloDocumento-ProjetoEngenharia-ProgramacaoPratica/doc/manualDesenvolvedor-lyx/DocumentoMestre-Trabalho-ProgramacaoPratica.lyx
-\maintain_unincluded_children false
+\maintain_unincluded_children no
 \language brazilian
 \language_package auto
-\inputencoding auto
-\fontencoding global
+\inputencoding auto-legacy
+\fontencoding auto
 \font_roman "default" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
@@ -26,7 +25,9 @@
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
-\font_osf false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
 \use_microtype false
@@ -40,7 +41,7 @@
 \paperfontsize 12
 \spacing onehalf
 \use_hyperref false
-\papersize a4paper
+\papersize a4
 \use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
@@ -59,9 +60,19 @@
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
-\use_refstyle 0
+\justification default
+\crossref_package prettyref
+\use_formatted_ref 0
 \use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
 \index Índice
 \shortcut idx
 \color #008000
@@ -83,11 +94,17 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle fancy
+\tablestyle default
 \tracking_changes false
 \output_changes false
+\change_bars false
+\postpone_fragile_content false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
 \end_header
 
 \begin_body
@@ -97,7 +114,6 @@
 status open
 
 \begin_layout Plain Layout
-
 
 \backslash
 lhead{
@@ -115,6 +131,8 @@ space - Análise Orientada a Objeto}
 \begin_layout Chapter
 AOO
 \begin_inset Index idx
+range none
+pageformat default
 status collapsed
 
 \begin_layout Plain Layout
@@ -132,6 +150,8 @@ name "chap:Análise Orientada a Objeto"
 
 
 \begin_inset Index idx
+range none
+pageformat default
 status collapsed
 
 \begin_layout Plain Layout
@@ -151,49 +171,62 @@ name "sec:AOO"
 \end_layout
 
 \begin_layout Standard
-A terceira etapa do desenvolvimento de um projeto de engenharia, no nosso
- caso um software aplicado a engenharia de petróleo, é a AOO – Análise Orientada
- a Objeto.
- A AOO utiliza algumas regras para identificar os objetos de interesse,
- as relacões entre os pacotes, as classes, os atributos, os métodos, as
- heranças, as associações, as agregações, as composições e as dependências.
- 
+A etapa de Análise Orientada a Objetos (AOO) tem como objetivo identificar e organizar os principais elementos que compõem o Simulador de Janela Operacional de Perfuração,
+ estabelecendo suas responsabilidades e os relacionamentos existentes entre eles.
+ Nesta fase,
+ o sistema é analisado a partir dos conceitos envolvidos no problema de engenharia,
+ sem definir ainda os detalhes de implementação.
 \end_layout
 
 \begin_layout Standard
-O modelo de análise deve ser conciso, simplificado e deve mostrar o que
- deve ser feito, não se preocupando como isso será realizado.
+A análise parte dos requisitos,
+ casos de uso,
+ assuntos e pacotes identificados anteriormente.
+ Com base nesses elementos,
+ são definidos os objetos e classes necessários para representar os dados do poço,
+ os parâmetros petrofísicos e geomecânicos,
+ os modelos de cálculo de geopressões,
+ o gradiente de fratura,
+ a janela operacional,
+ a análise de ECD e os resultados produzidos pelo simulador.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Itemize
-O modelo funcional (aspectos microdinâmicos, veja a seção 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:AOO-Modelagem-funcional"
-
-\end_inset
-
-).
- Gabriela: O que fazer com essa nota? Não ficou claro.
- 
+As classes deverão possuir responsabilidades bem definidas,
+ contendo os atributos necessários para representar seu estado e os métodos responsáveis pelas operações associadas a cada elemento do sistema.
+ Também serão identificadas as relações entre as classes,
+ como associações,
+ dependências,
+ agregações e composições,
+ quando aplicáveis.
 \end_layout
 
-\begin_layout Itemize
-DESCONSIDERAR
+\begin_layout Standard
+No simulador,
+ existe uma relação direta entre os diferentes domínios identificados anteriormente.
+ Os dados do poço fornecem informações para os cálculos petrofísicos;
+ os resultados petrofísicos são utilizados na determinação das geopressões;
+ as geopressões e as propriedades geomecânicas permitem determinar o gradiente de fratura;
+ e os gradientes de pressão de poro e de fratura são utilizados na construção da janela operacional.
+ Posteriormente,
+ essa janela é utilizada na avaliação da densidade equivalente de circulação (ECD) e na classificação das condições operacionais.
 \end_layout
 
-\begin_layout Itemize
-algumas notas tem lembretes para mim mesmo.
+\begin_layout Standard
+A modelagem orientada a objetos permitirá representar essas responsabilidades de forma modular,
+ facilitando a compreensão das diferentes partes do sistema e das interações existentes entre elas.
+ Os modelos desenvolvidos nesta etapa servirão como base para o posterior projeto orientado a objetos e para a implementação do simulador em linguagem C++.
 \end_layout
 
-\end_inset
-
-O resultado da análise é um conjunto de diagramas que identificam os objetos
- e seus relacionamentos.
+\begin_layout Standard
+O resultado da análise será constituído por um conjunto de diagramas UML que representarão os principais elementos do sistema,
+ suas estruturas,
+ comportamentos e relacionamentos.
+ Entre eles serão desenvolvidos diagramas de classes,
+ sequência,
+ comunicação,
+ atividades e máquina de estados,
+ conforme a necessidade de representação das diferentes partes do simulador.
 \end_layout
 
 \begin_layout Section
@@ -208,19 +241,28 @@ name "sec:Diagramas-de-classes"
 \end_layout
 
 \begin_layout Standard
-O diagrama de classes é apresentado na Figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:Diagrama-de-classes"
+O diagrama de classes do Simulador de Janela Operacional de Perfuração representa a estrutura estática do sistema,
+ identificando as principais classes responsáveis pela representação dos dados do poço,
+ parâmetros de entrada,
+ modelos de cálculo e resultados da simulação.
+\end_layout
 
-\end_inset
+\begin_layout Standard
+A divisão das classes foi estabelecida de acordo com as responsabilidades identificadas durante a análise de domínio,
+ buscando evitar a concentração de diferentes funções em uma única classe.
+ Dessa forma,
+ cada classe possui responsabilidade específica e relaciona-se com os demais componentes necessários à execução da simulação.
+\end_layout
 
-.
- 
+\begin_layout Standard
+Foram definidas 10 classes principais,
+ atendendo à estrutura orientada a objetos prevista para o sistema.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
+placement document
+alignment document
 wide false
 sideways false
 status open
@@ -228,7 +270,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeClasses.png
+	filename imagens/DiagramaDeClasses.jpeg
 	lyxscale 50
 	width 100text%
 
@@ -262,7 +304,12 @@ name "cap:Diagrama-de-classes"
 \end_layout
 
 \begin_layout Standard
-Nota: 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Nota:
+ 
 \begin_inset space ~
 \end_inset
 
@@ -270,9 +317,15 @@ Nota:
 \begin_inset Newline newline
 \end_inset
 
-deve ocupar toda a página impressa! se necessário rotacionar 90 graus; SE
- NECESSÁRIO DIVIDIR EM 2 PÁGINAS; o importante é que toda figura/tabela
- deve ser bem legível (fonte mínima = 10).
+deve ocupar toda a página impressa!
+ se necessário rotacionar 90 graus;
+ SE NECESSÁRIO DIVIDIR EM 2 PÁGINAS;
+ o importante é que toda figura/tabela deve ser bem legível (fonte mínima = 10).
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -287,20 +340,25 @@ name "subsec:Dicionário-de-classes"
 \end_layout
 
 \begin_layout Itemize
-Classe CNomeClasse: representa.....
+Classe CNomeClasse:
+ representa.....
 \end_layout
 
 \begin_layout Itemize
-Classe CNomeClasse: representa.....
+Classe CNomeClasse:
+ representa.....
 \end_layout
 
 \begin_layout Itemize
-Classe CNomeClasse: representa.....
+Classe CNomeClasse:
+ representa.....
 \end_layout
 
 \begin_layout Section
 Diagrama de seqüência – eventos
 \begin_inset Index idx
+range none
+pageformat default
 status collapsed
 
 \begin_layout Plain Layout
@@ -311,6 +369,8 @@ Eventos
 
  e mensagens
 \begin_inset Index idx
+range none
+pageformat default
 status collapsed
 
 \begin_layout Plain Layout
@@ -321,6 +381,8 @@ Mensagens
 
 
 \begin_inset Index idx
+range none
+pageformat default
 status collapsed
 
 \begin_layout Plain Layout
@@ -343,12 +405,9 @@ name "subsec:diagrama de sequência"
 
 \shape italic
 \emph on
-O diagrama de seqüência enfatiza a troca de eventos e mensagens e sua ordem
- temporal.
+O diagrama de seqüência enfatiza a troca de eventos e mensagens e sua ordem temporal.
  Contém informações sobre o fluxo de controle do software.
- Costuma ser montado a partir de um diagrama de caso de uso e estabelece
- o relacionamento dos atores (usuários e sistemas externos) com alguns objetos
- do sistema.
+ Costuma ser montado a partir de um diagrama de caso de uso e estabelece o relacionamento dos atores (usuários e sistemas externos) com alguns objetos do sistema.
 \end_layout
 
 \begin_layout Subsection
@@ -376,6 +435,7 @@ diagrama de seqüência na
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "cap:Diagrama-de-sequencia"
+nolink "false"
 
 \end_inset
 
@@ -390,6 +450,7 @@ reference "cap:Diagrama-de-sequencia"
 \begin_layout Standard
 \begin_inset Float figure
 placement H
+alignment document
 wide false
 sideways false
 status open
@@ -459,17 +520,21 @@ name "subsec: Diagrama de sequência específico"
 \end_layout
 
 \begin_layout Itemize
-[deve mostrar uma sequência específica; NÃO É PARA REPETIR O GERAL COM 1-2
- coisas diferentes!
+[deve mostrar uma sequência específica;
+ NÃO É PARA REPETIR O GERAL COM 1-2 coisas diferentes!
 \end_layout
 
 \begin_layout Standard
-é um novo diagrama; detalhando algo! ]
+é um novo diagrama;
+ detalhando algo!
+ ]
 \end_layout
 
 \begin_layout Section
 Diagrama de comunicação
 \begin_inset Index idx
+range none
+pageformat default
 status collapsed
 
 \begin_layout Plain Layout
@@ -480,6 +545,8 @@ comunicação
 
  – colaboração
 \begin_inset Index idx
+range none
+pageformat default
 status collapsed
 
 \begin_layout Plain Layout
@@ -497,6 +564,8 @@ name "subsec:Diagrama-de-Comunicação"
 
 
 \begin_inset Index idx
+range none
+pageformat default
 status collapsed
 
 \begin_layout Plain Layout
@@ -516,15 +585,14 @@ name "par:Diagrama-de-colaboração:"
 \end_layout
 
 \begin_layout Standard
-No diagrama de comunicação o foco é a interação e a troca de mensagens e
- dados entre os objetos.
+No diagrama de comunicação o foco é a interação e a troca de mensagens e dados entre os objetos.
  
 \end_layout
 
 \begin_layout Itemize
-[Pode ser a repetição de um diagrama de sequência; mas note que o formato
- do gráfico é diferente, aqui a ênfase é o entendimento das mensagens que
- chegam e saem de cada objeto.]
+[Pode ser a repetição de um diagrama de sequência;
+ mas note que o formato do gráfico é diferente,
+ aqui a ênfase é o entendimento das mensagens que chegam e saem de cada objeto.]
 \end_layout
 
 \begin_layout Standard
@@ -532,6 +600,7 @@ Veja na Figura
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Diagrama-de-Comunicação"
+nolink "false"
 
 \end_inset
 
@@ -542,6 +611,7 @@ reference "subsec:Diagrama-de-Comunicação"
 \begin_layout Standard
 \begin_inset Float figure
 placement H
+alignment document
 wide false
 sideways false
 status open
@@ -585,6 +655,8 @@ name "cap:Diagrama-de-comunicação"
 \begin_layout Section
 Diagrama de estado
 \begin_inset Index idx
+range none
+pageformat default
 status collapsed
 
 \begin_layout Plain Layout
@@ -595,6 +667,8 @@ estado
 
 
 \begin_inset Index idx
+range none
+pageformat default
 status open
 
 \begin_layout Plain Layout
@@ -614,9 +688,7 @@ name "subsec:diagrama de estados"
 \end_layout
 
 \begin_layout Standard
-Um diagrama de máquina de estado representa os diversos estados que o objeto
- assume e os eventos que ocorrem ao longo de sua vida ou mesmo ao longo
- de um processo (histórico do objeto).
+Um diagrama de máquina de estado representa os diversos estados que o objeto assume e os eventos que ocorrem ao longo de sua vida ou mesmo ao longo de um processo (histórico do objeto).
  É usado para modelar aspectos dinâmicos do objeto.
 \end_layout
 
@@ -625,6 +697,7 @@ Veja na Figura
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "cap:Diagrama-de-maquina-de-estado"
+nolink "false"
 
 \end_inset
 
@@ -633,14 +706,15 @@ reference "cap:Diagrama-de-maquina-de-estado"
 \end_layout
 
 \begin_layout Itemize
-Lembre-se, são os estados de um objeto específico e não uma sequência de
- cálculo; as sequência já foram mostrados nos diagramas de sequência e comunicaç
-ão!!
+Lembre-se,
+ são os estados de um objeto específico e não uma sequência de cálculo;
+ as sequência já foram mostrados nos diagramas de sequência e comunicação!!
 \end_layout
 
 \begin_layout Itemize
-Vou repetir; Não faça o diagrama de máquina de estado como sendo uma repetição
- dos diagramas de sequência! 
+Vou repetir;
+ Não faça o diagrama de máquina de estado como sendo uma repetição dos diagramas de sequência!
+ 
 \end_layout
 
 \begin_layout Itemize
@@ -650,6 +724,7 @@ Este diagrama trata dos estados de um objeto único/específico!
 \begin_layout Standard
 \begin_inset Float figure
 placement H
+alignment document
 wide false
 sideways false
 status open
@@ -710,23 +785,22 @@ Veja na Figura
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "cap:Diagrama-de-atividades"
+nolink "false"
 
 \end_inset
 
- o diagrama de atividades correspondente a uma atividade específica do diagrama
- de máguina de estado.
+ o diagrama de atividades correspondente a uma atividade específica do diagrama de máguina de estado.
  Observe que....
 \end_layout
 
 \begin_layout Standard
-...descrever em detalhes uma atividade específica..não pode ser a sequência de
- uso geral, trata-se de um caso específico, detalhado do diagrama de máquina
- de estado.
+...descrever em detalhes uma atividade específica..não pode ser a sequência de uso geral,
+ trata-se de um caso específico,
+ detalhado do diagrama de máquina de estado.
 \end_layout
 
 \begin_layout Itemize
-Lembrar que o diagrama de sequência é a representação de um método de cálculo
- específico.
+Lembrar que o diagrama de sequência é a representação de um método de cálculo específico.
  
 \end_layout
 
@@ -735,12 +809,14 @@ Não é para fazer o diagrama de atividades do método de gerenciamento!!!
 \end_layout
 
 \begin_layout Itemize
-Coloque aqui um diagrama de atividades que mostra contas/cálculos! 
+Coloque aqui um diagrama de atividades que mostra contas/cálculos!
+ 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 placement H
+alignment document
 wide false
 sideways false
 status open
@@ -782,7 +858,8 @@ name "cap:Diagrama-de-atividades"
 \end_layout
 
 \begin_layout Description
-Nota: 
+Nota:
+ 
 \begin_inset space ~
 \end_inset
 
@@ -790,10 +867,14 @@ Nota:
 \begin_inset Newline newline
 \end_inset
 
-Não perca de vista a visão do todo; do projeto de engenharia como um todo.
- Cada capítulo, cada seção, cada parágrafo deve se encaixar.
+Não perca de vista a visão do todo;
+ do projeto de engenharia como um todo.
+ Cada capítulo,
+ cada seção,
+ cada parágrafo deve se encaixar.
  Este é um diferencial fundamental do engenheiro em relação ao técnico,
- a capacidade de desenvolver projetos, de ver o todo e suas diferentes partes,
+ a capacidade de desenvolver projetos,
+ de ver o todo e suas diferentes partes,
  de modelar processos/sistemas/produtos de engenharia.
 \end_layout
 
