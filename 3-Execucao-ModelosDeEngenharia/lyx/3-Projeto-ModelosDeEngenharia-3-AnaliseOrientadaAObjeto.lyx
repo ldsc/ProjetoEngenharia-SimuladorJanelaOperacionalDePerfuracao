@@ -340,18 +340,79 @@ name "subsec:Dicionário-de-classes"
 \end_layout
 
 \begin_layout Itemize
-Classe CNomeClasse:
- representa.....
+Classe SimuladorJanelaOperacional:
+ representa o controlador principal do sistema,
+ responsável por coordenar o carregamento dos dados,
+ a configuração dos parâmetros,
+ a execução dos modelos de cálculo,
+ a determinação da janela operacional,
+ a análise de ECD e a geração dos resultados.
 \end_layout
 
 \begin_layout Itemize
-Classe CNomeClasse:
- representa.....
+Classe Poco:
+ representa o poço analisado,
+ armazenando suas informações gerais e o conjunto de camadas que compõem o modelo utilizado na simulação.
 \end_layout
 
 \begin_layout Itemize
-Classe CNomeClasse:
- representa.....
+Classe Camada:
+ representa cada intervalo de profundidade do poço,
+ contendo os dados de entrada e as propriedades calculadas,
+ como porosidade,
+ densidade bulk,
+ tensão de sobrecarga,
+ pressão de poro e gradiente de fratura.
+\end_layout
+
+\begin_layout Itemize
+Classe ParametrosSimulacao:
+ representa o conjunto de parâmetros físicos,
+ petrofísicos e geomecânicos utilizados nos modelos do simulador,
+ como densidades,
+ tempos de trânsito,
+ gradiente hidrostático,
+ expoente de Eaton e coeficiente de Poisson.
+\end_layout
+
+\begin_layout Itemize
+Classe ModeloPetrofisico:
+ representa o módulo responsável pelos cálculos petrofísicos,
+ incluindo a estimativa da porosidade pelo modelo tempo-médio de Wyllie e o cálculo da densidade bulk da formação.
+\end_layout
+
+\begin_layout Itemize
+Classe ModeloGeopressoes:
+ representa o módulo responsável pelos cálculos de geopressões,
+ incluindo tensão de sobrecarga,
+ tendência normal de compactação,
+ pressão normal,
+ pressão de poro pelo método de Eaton e gradiente de pressão de poro.
+\end_layout
+
+\begin_layout Itemize
+Classe ModeloFratura:
+ representa o módulo responsável pelo cálculo da tensão horizontal mínima e do gradiente de fratura da formação,
+ utilizado como limite superior da janela operacional de perfuração.
+\end_layout
+
+\begin_layout Itemize
+Classe JanelaOperacional:
+ representa os limites operacionais de perfuração em determinada profundidade,
+ definidos pelo gradiente de pressão de poro e pelo gradiente de fratura,
+ além da largura da janela disponível para operação.
+\end_layout
+
+\begin_layout Itemize
+Classe CalculadoraECD:
+ representa o módulo responsável pelo cálculo da Equivalent Circulating Density e pela comparação do valor obtido com os limites da janela operacional.
+\end_layout
+
+\begin_layout Itemize
+Classe Resultados:
+ representa o conjunto de informações produzidas pela simulação,
+ organizando as janelas operacionais calculadas,
+ os resultados da análise de ECD e os dados destinados à apresentação e exportação.
 \end_layout
 
 \begin_layout Section
