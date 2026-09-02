@@ -270,7 +270,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeClasses.jpeg
+	filename imagens/Diagrama de Classe Update.png
 	lyxscale 50
 	width 100text%
 
@@ -466,9 +466,22 @@ name "subsec:diagrama de sequência"
 
 \shape italic
 \emph on
-O diagrama de seqüência enfatiza a troca de eventos e mensagens e sua ordem temporal.
- Contém informações sobre o fluxo de controle do software.
- Costuma ser montado a partir de um diagrama de caso de uso e estabelece o relacionamento dos atores (usuários e sistemas externos) com alguns objetos do sistema.
+Os diagramas de sequência são utilizados para representar a ordem temporal das interações entre os atores e os objetos envolvidos no funcionamento do sistema.
+ Por meio deles é possível visualizar as mensagens trocadas entre os diferentes componentes,
+ a sequência de execução das operações e o fluxo de controle associado às funcionalidades do software.
+\end_layout
+
+\begin_layout Standard
+
+\shape italic
+\emph on
+No Simulador de Janela Operacional de Perfuração,
+ esses diagramas permitem representar de forma dinâmica como os dados do poço e os parâmetros da simulação são processados pelos diferentes modelos de cálculo até a obtenção da janela operacional,
+ da análise de ECD e dos resultados finais.
+ Dessa forma,
+ complementam o diagrama de classes,
+ que apresenta a estrutura estática do sistema,
+ mostrando como as classes interagem durante a execução das funcionalidades.
 \end_layout
 
 \begin_layout Subsection
@@ -483,6 +496,26 @@ name "subsec: Diagrama de sequência geral"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+O diagrama de sequência geral apresentado na Figura 1.2 representa o fluxo principal de utilização do Simulador de Janela Operacional de Perfuração.
+ A interação é iniciada pelo usuário,
+ que fornece os dados do poço e configura os parâmetros necessários à simulação.
+ O sistema então coordena a execução dos modelos petrofísico,
+ de geopressões e de fratura,
+ utilizando os resultados de cada etapa para determinar as janelas operacionais ao longo das camadas analisadas.
+\end_layout
+
+\begin_layout Standard
+Após o processamento principal,
+ as janelas calculadas são armazenadas e organizadas para consulta.
+ O usuário poderá ainda realizar uma avaliação de ECD,
+ comparando a densidade equivalente de circulação com os limites definidos pelos gradientes de pressão de poro e de fratura.
+ Ao final,
+ o sistema disponibiliza os resultados da simulação para análise e,
+ quando solicitado,
+ para exportação.
 \end_layout
 
 \begin_layout Standard
@@ -504,8 +537,17 @@ nolink "false"
 \end_layout
 
 \begin_layout Itemize
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 [Aqui a ênfase é o entendimento da sequência com que as mensagens são trocadas,
  a ordem temporal.]
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -519,7 +561,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeSequencia-Eventos.png
+	filename imagens/Diagrama de sequência geral.png
 	lyxscale 50
 	width 100text%
 
@@ -532,7 +574,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de seqüência
+Diagrama de sequência geral do Simulador de Janela Operacional de Perfuração.
 \begin_inset CommandInset label
 LatexCommand label
 name "cap:Diagrama-de-sequencia"
@@ -569,7 +611,7 @@ deve mostrar uma sequência geral
 Diagrama de sequência específico
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec: Diagrama de sequência específico"
+name "subsec: Diagrama de sequência específico-1"
 
 \end_inset
 
@@ -577,18 +619,91 @@ name "subsec: Diagrama de sequência específico"
 \end_layout
 
 \begin_layout Standard
-...
+O diagrama de sequência específico apresentado na Figura 1.3 detalha o processamento de uma camada do poço para determinação de sua janela operacional de perfuração.
+ Inicialmente,
+ o sistema obtém os dados da camada selecionada.
+ O modelo petrofísico utiliza o perfil sônico e os parâmetros da simulação para calcular a porosidade e a densidade bulk.
+ Em seguida,
+ o modelo de geopressões determina a tensão de sobrecarga,
+ a tendência normal de compactação,
+ a pressão de poro e seu gradiente.
+ O modelo de fratura utiliza os resultados calculados para determinar a tensão horizontal mínima e o gradiente de fratura.
+ Finalmente,
+ é criado um objeto da classe JanelaOperacional,
+ contendo os limites inferior e superior e a largura disponível para operação.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagens/Diagrama de sequência especifico.png
+	lyxscale 50
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de sequência geral do Simulador de Janela Operacional de Perfuração.
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Diagrama-de-sequencia-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 [deve mostrar uma sequência específica;
  NÃO É PARA REPETIR O GERAL COM 1-2 coisas diferentes!
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 é um novo diagrama;
  detalhando algo!
  ]
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
