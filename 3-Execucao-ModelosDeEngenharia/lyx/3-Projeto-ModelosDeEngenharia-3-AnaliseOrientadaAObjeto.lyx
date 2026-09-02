@@ -283,7 +283,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de classes
+Diagrama de Classes.
 \begin_inset CommandInset label
 LatexCommand label
 name "cap:Diagrama-de-classes"
@@ -499,7 +499,7 @@ name "subsec: Diagrama de sequência geral"
 \end_layout
 
 \begin_layout Standard
-O diagrama de sequência geral apresentado na Figura 1.2 representa o fluxo principal de utilização do Simulador de Janela Operacional de Perfuração.
+O diagrama de sequência geral apresentado na Figura 3.2 representa o fluxo principal de utilização do Simulador de Janela Operacional de Perfuração.
  A interação é iniciada pelo usuário,
  que fornece os dados do poço e configura os parâmetros necessários à simulação.
  O sistema então coordena a execução dos modelos petrofísico,
@@ -574,7 +574,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de sequência geral do Simulador de Janela Operacional de Perfuração.
+Diagrama de Sequência Geral.
 \begin_inset CommandInset label
 LatexCommand label
 name "cap:Diagrama-de-sequencia"
@@ -619,7 +619,7 @@ name "subsec: Diagrama de sequência específico-1"
 \end_layout
 
 \begin_layout Standard
-O diagrama de sequência específico apresentado na Figura 1.3 detalha o processamento de uma camada do poço para determinação de sua janela operacional de perfuração.
+O diagrama de sequência específico apresentado na Figura 3.3 detalha o processamento de uma camada do poço para determinação de sua janela operacional de perfuração.
  Inicialmente,
  o sistema obtém os dados da camada selecionada.
  O modelo petrofísico utiliza o perfil sônico e os parâmetros da simulação para calcular a porosidade e a densidade bulk.
@@ -657,7 +657,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de sequência geral do Simulador de Janela Operacional de Perfuração.
+Diagrama de Sequência Específico.
 \begin_inset CommandInset label
 LatexCommand label
 name "cap:Diagrama-de-sequencia-1"
@@ -761,6 +761,34 @@ name "par:Diagrama-de-colaboração:"
 \end_layout
 
 \begin_layout Standard
+O diagrama de comunicação apresentado na Figura 3.4 representa a colaboração entre os principais objetos envolvidos na execução do Simulador de Janela Operacional de Perfuração.
+ O diagrama enfatiza as mensagens trocadas entre os objetos e utiliza numeração sequencial para indicar a ordem em que as principais operações são realizadas.
+\end_layout
+
+\begin_layout Standard
+A interação é iniciada pelo usuário,
+ que solicita o carregamento dos dados do poço,
+ a configuração dos parâmetros e a execução da simulação.
+ O objeto controlador SimuladorJanelaOperacional coordena a comunicação com os objetos responsáveis pelos dados do poço e pelos modelos petrofísico,
+ de geopressões e de fratura.
+ Os resultados desses processamentos são utilizados para determinar a janela operacional de perfuração e,
+ quando solicitado,
+ realizar a análise de ECD.
+ Por fim,
+ o objeto Resultados organiza as informações produzidas,
+ permitindo sua consulta e exportação.
+\end_layout
+
+\begin_layout Standard
+Esse diagrama complementa os diagramas de sequência apresentados anteriormente,
+ destacando de forma espacial as relações de colaboração e as mensagens que chegam e saem de cada objeto durante a execução das principais funcionalidades do sistema.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 No diagrama de comunicação o foco é a interação e a troca de mensagens e dados entre os objetos.
  
 \end_layout
@@ -769,6 +797,11 @@ No diagrama de comunicação o foco é a interação e a troca de mensagens e da
 [Pode ser a repetição de um diagrama de sequência;
  mas note que o formato do gráfico é diferente,
  aqui a ênfase é o entendimento das mensagens que chegam e saem de cada objeto.]
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -780,8 +813,18 @@ nolink "false"
 
 \end_inset
 
- o diagrama de comunicação mostrando a sequência de blablabla.
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+o diagrama de comunicação mostrando a sequência de blablabla.
  Observe que ....
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -795,7 +838,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeComunicacao.png
+	filename imagens/DiagramaDeComunicação-colaboração.png
 	lyxscale 85
 	width 100text%
 
@@ -864,11 +907,61 @@ name "subsec:diagrama de estados"
 \end_layout
 
 \begin_layout Standard
+O diagrama de máquina de estados apresentado na Figura 3.5 representa as diferentes condições assumidas pelo objeto CalculadoraECD durante a avaliação da densidade equivalente de circulação.
+ Diferentemente dos diagramas de sequência e comunicação,
+ o objetivo deste modelo não é apresentar a ordem completa de execução do sistema,
+ mas representar as mudanças de estado de um objeto específico em função dos eventos e condições que ocorrem durante sua utilização.
+\end_layout
+
+\begin_layout Standard
+Inicialmente,
+ o objeto permanece no estado Aguardando parâmetros,
+ até que sejam informados os valores necessários para a análise,
+ como densidade da lama,
+ perda de pressão por atrito e profundidade.
+ Após a validação dessas informações,
+ o objeto passa ao estado Pronto para cálculo.
+\end_layout
+
+\begin_layout Standard
+Com a solicitação do cálculo,
+ o valor da ECD é determinado e o objeto passa ao estado ECD calculada.
+ Em seguida,
+ o valor obtido é comparado aos limites da janela operacional,
+ representados pelo gradiente de pressão de poro (
+\begin_inset Formula $G_{p}$
+\end_inset
+
+) e pelo gradiente de fratura (
+\begin_inset Formula $G_{f}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+A partir dessa comparação,
+ o objeto poderá assumir três estados distintos:
+ Condição segura,
+ quando a ECD permanece entre os limites da janela operacional;
+ Risco de kick,
+ quando a ECD se encontra abaixo do gradiente de pressão de poro;
+ ou Risco de fratura/perdas,
+ quando a ECD ultrapassa o gradiente de fratura.
+ Após a apresentação da classificação,
+ novos parâmetros poderão ser fornecidos para realização de uma nova avaliação.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Um diagrama de máquina de estado representa os diversos estados que o objeto assume e os eventos que ocorrem ao longo de sua vida ou mesmo ao longo de um processo (histórico do objeto).
  É usado para modelar aspectos dinâmicos do objeto.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Veja na Figura 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -897,6 +990,11 @@ Vou repetir;
 Este diagrama trata dos estados de um objeto único/específico!
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement H
@@ -908,7 +1006,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeEstado-ClasseSimulador.png
+	filename imagens/DiagramaDeEstado.png
 	lyxscale 50
 	width 100text%
 
@@ -953,10 +1051,76 @@ name "sec: Diagrama de atividades"
 \end_layout
 
 \begin_layout Standard
-.....
+O diagrama de atividades apresentado na Figura 1.6 detalha a execução do método calcularECD() da classe CalculadoraECD.
+ A atividade foi selecionada a partir do diagrama de estados apresentado anteriormente,
+ no qual o cálculo da densidade equivalente de circulação provoca a transição do estado Pronto para cálculo para o estado ECD calculada.
 \end_layout
 
 \begin_layout Standard
+O processamento inicia-se com a obtenção dos parâmetros necessários ao cálculo:
+ densidade da lama,
+ perda de pressão por atrito e profundidade de análise.
+ Após a validação dos dados,
+ a profundidade é considerada na unidade requerida pela formulação e é calculada a contribuição da perda de pressão por atrito para a densidade equivalente.
+ Em seguida,
+ essa contribuição é adicionada à densidade da lama,
+ obtendo-se o valor final da ECD,
+ que é armazenado no objeto e disponibilizado para as etapas posteriores de avaliação da janela operacional.
+\end_layout
+
+\begin_layout Standard
+A formulação utilizada é:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+ECD=MW+\frac{\Delta P_{f}}{0.052H}​​
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+em que:
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $MW$
+\end_inset
+
+) representa a densidade da lama,
+ 
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $DeltaP_{f}$
+\end_inset
+
+) corresponde à perda de pressão por atrito e 
+\end_layout
+
+\begin_layout Standard
+(
+\begin_inset Formula $H$
+\end_inset
+
+) representa a profundidade considerada no cálculo.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+.....
+\end_layout
+
+\begin_layout Plain Layout
 Veja na Figura 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -969,7 +1133,7 @@ nolink "false"
  Observe que....
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 ...descrever em detalhes uma atividade específica..não pode ser a sequência de uso geral,
  trata-se de um caso específico,
  detalhado do diagrama de máquina de estado.
@@ -989,6 +1153,11 @@ Coloque aqui um diagrama de atividades que mostra contas/cálculos!
  
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement H
@@ -1000,7 +1169,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeAtividade-1.png
+	filename imagens/DiagramaDeAtividades.png
 	lyxscale 85
 	width 100text%
 
@@ -1034,6 +1203,10 @@ name "cap:Diagrama-de-atividades"
 \end_layout
 
 \begin_layout Description
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Nota:
  
 \begin_inset space ~
@@ -1052,6 +1225,11 @@ Não perca de vista a visão do todo;
  a capacidade de desenvolver projetos,
  de ver o todo e suas diferentes partes,
  de modelar processos/sistemas/produtos de engenharia.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
