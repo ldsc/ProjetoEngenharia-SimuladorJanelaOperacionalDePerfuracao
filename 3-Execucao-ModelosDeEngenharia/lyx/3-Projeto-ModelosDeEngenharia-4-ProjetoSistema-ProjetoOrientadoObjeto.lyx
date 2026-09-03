@@ -558,6 +558,13 @@ O código e a documentação do projeto serão adicionalmente versionados por me
  permitindo controle das versões desenvolvidas durante o projeto.
 \end_layout
 
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
 \end_deeper
 \begin_layout Enumerate
 Controle
@@ -1530,35 +1537,36 @@ name "sec:Projeto-orientado-a-objeto"
 \end_layout
 
 \begin_layout Standard
-O projeto orientado a objeto é a etapa posterior ao projeto do sistema.
- Baseia-se na análise,
- mas considera as decisões do projeto do sistema.
- Acrescenta a análise desenvolvida e as características da plataforma escolhida (hardware,
- sistema operacional e linguagem de softwareção).
- Passa pelo maior detalhamento do funcionamento do software,
- acrescentando atributos e métodos que envolvem a solução de problemas específicos não identificados durante a análise.
+O Projeto Orientado a Objetos do Simulador de Janela Operacional de Perfuração parte dos modelos definidos durante a Análise Orientada a Objetos e incorpora as decisões estabelecidas no projeto do sistema.
+ Nesta etapa,
+ as classes,
+ atributos,
+ métodos e relacionamentos passam a considerar aspectos específicos da implementação em linguagem C++,
+ da organização dos arquivos,
+ das estruturas de dados empregadas e da plataforma escolhida.
 \end_layout
 
 \begin_layout Standard
-Envolve a otimização da estrutura de dados e dos algoritmos,
- a minimização do tempo de execução,
- de memória e de custos.
- Existe um desvio de ênfase para os conceitos da plataforma selecionada.
- 
+A estrutura definida anteriormente será preservada,
+ mantendo as dez classes principais do sistema:
+ SimuladorJanelaOperacional,
+ Poco,
+ Camada,
+ ParametrosSimulacao,
+ ModeloPetrofisico,
+ ModeloGeopressoes,
+ ModeloFratura,
+ JanelaOperacional,
+ CalculadoraECD e Resultados.
 \end_layout
 
 \begin_layout Standard
-Exemplo:
- na análise você define que existe um método para salvar um arquivo em disco,
- define um atributo nomeDoArquivo,
- mas não se preocupa com detalhes específicos da linguagem.
- Já no projeto,
- você inclui as bibliotecas necessárias para acesso ao disco,
- cria um objeto específico para acessar o disco,
- podendo,
- portanto,
- acrescentar novas classes àquelas desenvolvidas na análise.
- 
+O detalhamento do projeto busca garantir que cada classe possua responsabilidade específica,
+ mantendo separados o armazenamento dos dados,
+ os cálculos de engenharia,
+ o controle da simulação e a apresentação dos resultados.
+ Também são definidas nesta etapa as estruturas de dados utilizadas para representar conjuntos de camadas e janelas operacionais,
+ os mecanismos de acesso aos arquivos e as dependências necessárias à implementação.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1584,49 +1592,167 @@ name "subsec:Efeito-do-projeto-no-modelo-estrutural"
 
 \end_layout
 
-\begin_layout Itemize
-Adicionar nos diagramas de pacotes as bibliotecas e subsistemas selecionados no projeto do sistema (exemplo:
- a biblioteca gráfica selecionada).
-\begin_inset Separator latexpar
+\begin_layout Standard
+
+\series bold
+Bibliotecas e subsistemas
+\end_layout
+
+\begin_layout Standard
+Neste projeto,
+ o modelo estrutural será complementado pelas bibliotecas necessárias à implementação em C++.
+ A primeira versão do sistema utilizará prioritariamente componentes da biblioteca padrão da linguagem,
+ tais como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+<iostream>
+\end_layout
+
+\begin_layout Plain Layout
+<fstream>
+\end_layout
+
+\begin_layout Plain Layout
+<vector>
+\end_layout
+
+\begin_layout Plain Layout
+<string>
+\end_layout
+
+\begin_layout Plain Layout
+<cmath>
+\end_layout
+
+\begin_layout Plain Layout
+<algorithm>
+\end_layout
+
+\begin_layout Plain Layout
+<iomanip>
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+A biblioteca vector será utilizada principalmente para armazenamento das camadas do poço e das janelas operacionais calculadas.
+ As bibliotecas fstream e iostream serão utilizadas para leitura,
+ escrita e interação com arquivos e usuário,
+ enquanto cmath dará suporte às operações matemáticas necessárias aos modelos de engenharia.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-Novas classes e associações oriundas das bibliotecas selecionadas e da linguagem escolhida devem ser acrescentadas ao modelo.
-\begin_inset Separator latexpar
+\begin_layout Standard
+Não está prevista,
+ nesta versão,
+ a utilização de bibliotecas externas para interface gráfica.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+
+\series bold
+Novas classes e associações
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-Estabelecer as dependências e restrições associadas à plataforma escolhida.
-\begin_inset Separator latexpar
+\begin_layout Standard
+Após a revisão do modelo,
+ não foi identificada necessidade imediata de acrescentar novas classes às dez classes principais anteriormente definidas.
+\end_layout
+
+\begin_layout Standard
+As operações de leitura e escrita de arquivos serão inicialmente incorporadas às responsabilidades das classes já existentes,
+ principalmente SimuladorJanelaOperacional e Resultados,
+ evitando a criação de componentes sem responsabilidade suficiente para justificar uma nova classe.
+\end_layout
+
+\begin_layout Standard
+Entretanto,
+ as associações entre as classes passam a possuir uma representação mais concreta na implementação.
+ Por exemplo,
+ a relação de composição entre Poco e Camada será implementada utilizando uma coleção de objetos Camada.
+\end_layout
+
+\begin_layout Standard
+Conceitualmente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+std::vector<Camada> camadas;
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+Da mesma forma,
+ os resultados poderão armazenar diversas janelas operacionais utilizando:
 \end_layout
 
-\end_deeper
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+std::vector<JanelaOperacional> janelas;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Dependências e restrições da plataforma
+\end_layout
+
+\begin_layout Standard
+O sistema será implementado em C++ e deverá evitar dependências desnecessárias de funções específicas de determinado sistema operacional.
+\end_layout
+
+\begin_layout Standard
+A compilação será realizada utilizando compilador compatível com C++,
+ tendo o g++ como compilador de referência.
+ O projeto será desenvolvido no Visual Studio Code e poderá utilizar CMake para organizar o processo de compilação.
+\end_layout
+
+\begin_layout Standard
+Os arquivos utilizados na entrada e saída do simulador deverão empregar formatos textuais portáveis,
+ como TXT e CSV,
+ evitando formatos proprietários.
+\end_layout
+
 \begin_layout Subsubsection
 Efeitos do projeto no modelo
 \begin_inset Index idx
@@ -1650,33 +1776,136 @@ name "subsec:Efeito-do-projeto-no-modelo-dinamico"
 
 \end_layout
 
+\begin_layout Standard
+
+\series bold
+Revisão dos diagramas de sequência e comunicação:
+\end_layout
+
+\begin_layout Standard
+Os diagramas de sequência e comunicação foram revisados considerando a arquitetura definida para a implementação em C++.
+\end_layout
+
+\begin_layout Standard
+A classe SimuladorJanelaOperacional permanece como elemento coordenador das principais operações,
+ enquanto os cálculos são delegados às classes especializadas:
+\end_layout
+
 \begin_layout Itemize
-Revisar os diagramas de seqüência e de comunicação considerando a plataforma escolhida.
-\begin_inset Separator latexpar
+ModeloPetrofisico;
+\end_layout
+
+\begin_layout Itemize
+ModeloGeopressoes;
+\end_layout
+
+\begin_layout Itemize
+ModeloFratura;
+\end_layout
+
+\begin_layout Itemize
+JanelaOperacional;
+\end_layout
+
+\begin_layout Itemize
+CalculadoraECD.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+As mensagens presentes nos diagramas correspondem a métodos que deverão existir na implementação,
+ como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+processarPoco()
+\end_layout
+
+\begin_layout Plain Layout
+calcularPorosidade()
+\end_layout
+
+\begin_layout Plain Layout
+calcularPressaoPoro()
+\end_layout
+
+\begin_layout Plain Layout
+calcularGradienteFratura()
+\end_layout
+
+\begin_layout Plain Layout
+calcularLargura()
+\end_layout
+
+\begin_layout Plain Layout
+calcularECD()
+\end_layout
+
+\begin_layout Plain Layout
+avaliarJanela()
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+Essa correspondência permite manter rastreabilidade entre os modelos UML e o futuro código C++.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
 \end_layout
 
 \end_deeper
+\begin_layout Standard
+
+\series bold
+Revisão dos diagramas de estado e atividades
+\end_layout
+
+\begin_layout Standard
+O diagrama de estados da classe CalculadoraECD foi mantido porque representa adequadamente as condições assumidas pelo objeto durante a análise.
+\end_layout
+
+\begin_layout Standard
+Os estados considerados são:
+\end_layout
+
+\begin_layout Standard
+Aguardando parâmetros → Pronto para cálculo → ECD calculada → classificação operacional.
+\end_layout
+
+\begin_layout Standard
+A partir da comparação da ECD com os limites da janela,
+ a classificação poderá assumir:
+\end_layout
+
 \begin_layout Itemize
-Verificar a necessidade de se revisar,
- ampliar e adicionar novos diagramas de máquinas de estado e de atividades.
- 
-\begin_inset Separator latexpar
-\end_inset
+condição segura;
+\end_layout
 
+\begin_layout Itemize
+risco de kick;
+\end_layout
 
+\begin_layout Itemize
+risco de fraturamento/perdas.
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+O diagrama de atividades detalha especificamente o método CalculadoraECD::calcularECD(),
+ mantendo coerência entre o comportamento dinâmico e a responsabilidade atribuída à classe.
 \end_layout
 
 \end_deeper
@@ -1703,25 +1932,162 @@ name "subsec:Efeito-do-projeto-nos-atributos"
 
 \end_layout
 
-\begin_layout Itemize
-Atributos novos podem ser adicionados a uma classe,
- como,
- por exemplo,
- atributos específicos de uma determinada linguagem de softwareção (acesso a disco,
- ponteiros,
- constantes e informações correlacionadas).
-\begin_inset Separator latexpar
+\begin_layout Standard
+Os atributos definidos durante a análise passam a possuir tipos concretos da linguagem C++.
+\end_layout
+
+\begin_layout Standard
+Grandezas numéricas utilizadas nos cálculos serão representadas predominantemente pelo tipo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+double
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+Exemplos:
 \end_layout
 
-\end_deeper
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+double profundidadeMedia;
+\end_layout
+
+\begin_layout Plain Layout
+double deltaT;
+\end_layout
+
+\begin_layout Plain Layout
+double porosidade;
+\end_layout
+
+\begin_layout Plain Layout
+double densidadeBulk;
+\end_layout
+
+\begin_layout Plain Layout
+double pressaoPoro;
+\end_layout
+
+\begin_layout Plain Layout
+double gradientePoro;
+\end_layout
+
+\begin_layout Plain Layout
+double gradienteFratura;
+\end_layout
+
+\begin_layout Plain Layout
+double ecdCalculada;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Valores inteiros utilizados para índices ou contagens poderão utilizar:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+int
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Informações textuais serão representadas por:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+std::string
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Coleções de objetos serão armazenadas por meio de:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+std::vector
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por exemplo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+std::vector<Camada> camadas;
+\end_layout
+
+\begin_layout Plain Layout
+std::vector<JanelaOperacional> janelas;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Os atributos permanecerão preferencialmente privados,
+ preservando o encapsulamento e impedindo alterações diretas indevidas no estado dos objetos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Efeitos do projeto nos métodos
 \begin_inset Index idx
@@ -1750,92 +2116,367 @@ Efeitos do projeto nos métodos
 
 \end_layout
 
-\begin_layout Itemize
-Em função da plataforma escolhida,
- verifique as possíveis alterações nos métodos.
- O projeto do sistema costuma afetar os métodos de acesso aos diversos dispositivos (exemplo:
- hd,
- rede).
-\begin_inset Separator latexpar
+\begin_layout Standard
+Alterações associadas à plataforma
+\end_layout
+
+\begin_layout Standard
+Os métodos passam a possuir parâmetros e tipos de retorno compatíveis com C++.
+\end_layout
+
+\begin_layout Standard
+Por exemplo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+double calcularPorosidade(double deltaT);
+\end_layout
+
+\begin_layout Plain Layout
+double calcularDensidadeBulk(double porosidade);
+\end_layout
+
+\begin_layout Plain Layout
+double calcularGradienteFratura(const Camada& camada);
+\end_layout
+
+\begin_layout Plain Layout
+double calcularECD();
+\end_layout
+
+\begin_layout Plain Layout
+bool validarParametros();
+\end_layout
+
+\begin_layout Plain Layout
+void exportarDados(const std::string& nomeArquivo);
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+Quando um objeto precisar apenas ser consultado,
+ poderão ser utilizadas referências constantes,
+ reduzindo cópias desnecessárias e impedindo alterações acidentais.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-De maneira geral os métodos devem ser divididos em dois tipos:
- i) tomada de decisões,
- métodos políticos ou de controle;
- devem ser claros,
- legíveis,
- flexíveis e usam polimorfismo.
- ii) realização de processamentos,
- podem ser otimizados e em alguns casos o polimorfismo deve ser evitado.
- 
-\begin_inset Separator latexpar
+\begin_layout Standard
+\begin_inset space \space{}
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+
+\series bold
+Métodos de controle e métodos de processamento
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-Algoritmos complexos podem ser subdivididos.
- Verifique quais métodos podem ser otimizados.
- Pense em utilizar algoritmos prontos como os da STL (algoritmos genéricos).
-\begin_inset Separator latexpar
+\begin_layout Standard
+Os métodos do projeto serão organizados conceitualmente em dois grupos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+
+\series bold
+Métodos de controle,
+ responsáveis por coordenar o funcionamento do sistema:
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-Responda a pergunta:
- os métodos da classes estão dando resposta às responsabilidades da classe?
-\begin_inset Separator latexpar
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+carregarDados()
+\end_layout
+
+\begin_layout Plain Layout
+configurarParametros()
+\end_layout
+
+\begin_layout Plain Layout
+executarSimulacao()
+\end_layout
+
+\begin_layout Plain Layout
+determinarJanelas()
+\end_layout
+
+\begin_layout Plain Layout
+avaliarECD()
+\end_layout
+
+\begin_layout Plain Layout
+exportarResultados()
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+Esses métodos estarão principalmente associados à classe SimuladorJanelaOperacional.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-Revise os diagramas de classes,
- de seqüência e de máquina de estado.
-\begin_inset Separator latexpar
+\begin_layout Standard
+\begin_inset space \space{}
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+Já os métodos de processamento executarão os cálculos de engenharia:
 \end_layout
 
-\end_deeper
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+calcularPorosidade()
+\end_layout
+
+\begin_layout Plain Layout
+calcularDensidadeBulk()
+\end_layout
+
+\begin_layout Plain Layout
+calcularSobrecarga()
+\end_layout
+
+\begin_layout Plain Layout
+calcularTendenciaNormal()
+\end_layout
+
+\begin_layout Plain Layout
+calcularPressaoPoro()
+\end_layout
+
+\begin_layout Plain Layout
+calcularGradientePoro()
+\end_layout
+
+\begin_layout Plain Layout
+calcularTensaoHorizontalMinima()
+\end_layout
+
+\begin_layout Plain Layout
+calcularGradienteFratura()
+\end_layout
+
+\begin_layout Plain Layout
+calcularLargura()
+\end_layout
+
+\begin_layout Plain Layout
+calcularECD()
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Essa separação evita que a classe responsável pelo controle da aplicação também concentre os algoritmos matemáticos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Subdivisão dos algoritmos
+\end_layout
+
+\begin_layout Standard
+Os cálculos mais complexos foram subdivididos em métodos menores de acordo com suas responsabilidades.
+\end_layout
+
+\begin_layout Standard
+Por exemplo,
+ o cálculo das geopressões não será implementado como um único método extenso.
+ A classe ModeloGeopressoes possuirá operações separadas para:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+calcularSobrecarga()
+\end_layout
+
+\begin_layout Plain Layout
+calcularTendenciaNormal()
+\end_layout
+
+\begin_layout Plain Layout
+calcularPressaoNormal()
+\end_layout
+
+\begin_layout Plain Layout
+calcularPressaoPoro()
+\end_layout
+
+\begin_layout Plain Layout
+calcularGradientePoro()
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da mesma maneira,
+ o modelo de fratura será dividido entre:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+calcularTensaoHorizontalMinima()
+\end_layout
+
+\begin_layout Plain Layout
+calcularGradienteFratura()
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Essa organização facilita testes unitários,
+ manutenção e identificação de erros.
+\end_layout
+
+\begin_layout Standard
+Quando aplicável,
+ algoritmos da biblioteca padrão do C++ poderão ser empregados no tratamento de coleções e operações auxiliares.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Responsabilidades das classes
+\end_layout
+
+\begin_layout Standard
+Após a revisão,
+ os métodos definidos atendem às responsabilidades das respectivas classes.
+\end_layout
+
+\begin_layout Standard
+Por exemplo:
+\end_layout
+
+\begin_layout Itemize
+ModeloPetrofisico trata exclusivamente dos cálculos petrofísicos;
+\end_layout
+
+\begin_layout Itemize
+ModeloGeopressoes executa os cálculos associados às geopressões;
+\end_layout
+
+\begin_layout Itemize
+ModeloFratura determina as grandezas relacionadas ao limite de fratura;
+\end_layout
+
+\begin_layout Itemize
+JanelaOperacional representa e avalia os limites operacionais;
+\end_layout
+
+\begin_layout Itemize
+CalculadoraECD calcula e classifica a ECD;
+\end_layout
+
+\begin_layout Itemize
+Resultados organiza e exporta as informações produzidas;
+\end_layout
+
+\begin_layout Itemize
+SimuladorJanelaOperacional coordena o fluxo entre os componentes.
+\end_layout
+
+\begin_layout Standard
+Dessa forma,
+ não foi identificada necessidade de transferir responsabilidades significativas entre as dez classes definidas.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Revisão dos diagramas
+\end_layout
+
+\begin_layout Standard
+Os diagramas de classes,
+ sequência e máquina de estados foram revisados considerando as decisões estabelecidas no projeto do sistema.
+\end_layout
+
+\begin_layout Standard
+O diagrama de classes permanece como referência estrutural para a implementação,
+ enquanto os diagramas dinâmicos fornecem a ordem de interação e o comportamento esperado dos objetos.
+\end_layout
+
+\begin_layout Standard
+Os métodos representados nos diagramas deverão manter correspondência com as operações implementadas em C++.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Efeitos do projeto nas heranças
 \begin_inset Index idx
@@ -1876,65 +2517,154 @@ Heranças
 
 \end_layout
 
-\begin_layout Itemize
-Reorganização das classes e dos métodos (criar métodos genéricos com parâmetros que nem sempre são necessários e englobam métodos existentes).
- 
-\begin_inset Separator latexpar
+\begin_layout Standard
+
+\series bold
+Reorganização das classes e métodos
+\end_layout
+
+\begin_layout Standard
+Após a revisão das classes,
+ não foi identificada uma relação natural de herança entre os componentes atualmente definidos.
+\end_layout
+
+\begin_layout Standard
+As classes ModeloPetrofisico,
+ ModeloGeopressoes e ModeloFratura,
+ por exemplo,
+ possuem responsabilidades distintas e não representam especializações naturais umas das outras.
+\end_layout
+
+\begin_layout Standard
+Criar uma superclasse apenas para compartilhar pequenas partes da implementação introduziria complexidade desnecessária no modelo.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+
+\series bold
+Abstração de comportamento comum
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-Abstração do comportamento comum (duas classes podem ter uma superclasse em comum).
- 
-\begin_inset Separator latexpar
+\begin_layout Standard
+Embora os modelos de cálculo possuam características semelhantes —
+ recebem parâmetros,
+ processam dados e produzem resultados —
+ essas semelhanças não justificam,
+ neste estágio,
+ a criação de uma superclasse comum.
+\end_layout
+
+\begin_layout Standard
+Caso futuras versões incluam diferentes métodos para estimativa de uma mesma propriedade,
+ poderá ser considerada uma abstração.
+\end_layout
+
+\begin_layout Standard
+Por exemplo,
+ se forem adicionados diferentes modelos para cálculo de pressão de poro,
+ poderia futuramente existir uma abstração como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+ModeloPressaoPoro   
+\end_layout
+
+\begin_layout Plain Layout
+        ↑
+\end_layout
+
+\begin_layout Plain Layout
+        |
+\end_layout
+
+\begin_layout Plain Layout
+ ┌──────┴──────┐
+\end_layout
+
+\begin_layout Plain Layout
+ Eaton      OutroMetodo
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+Entretanto,
+ essa estrutura não será criada enquanto não houver mais de uma implementação concreta que justifique a abstração.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-Utilização de delegação para compartilhar a implementação (quando você cria uma herança irreal para reaproveitar código).
- Usar com cuidado.
-\begin_inset Separator latexpar
+\begin_layout Standard
+\begin_inset space \space{}
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+
+\series bold
+Delegação em vez de herança artificial
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-Revise as heranças no diagrama de classes.
-\begin_inset Separator latexpar
+\begin_layout Standard
+O projeto utilizará composição e delegação sempre que essa abordagem representar melhor a relação entre as classes.
+\end_layout
+
+\begin_layout Standard
+A classe SimuladorJanelaOperacional,
+ por exemplo,
+ não herda dos modelos matemáticos.
+ Ela mantém acesso aos objetos responsáveis pelos diferentes cálculos e delega cada operação à classe apropriada.
+\end_layout
+
+\begin_layout Standard
+Essa abordagem evita a criação de heranças artificiais apenas para reutilização de código.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+
+\series bold
+Revisão das heranças
 \end_layout
 
-\end_deeper
+\begin_layout Standard
+O diagrama de classes foi revisado e,
+ nesta etapa,
+ permanece sem relações de herança.
+\end_layout
+
+\begin_layout Standard
+Essa decisão é intencional e decorre da ausência de relações legítimas do tipo “é um” entre as classes atuais.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Efeitos do projeto nas associações
 \begin_inset Index idx
@@ -1963,56 +2693,177 @@ Associações
 
 \end_layout
 
-\begin_layout Itemize
-Deve-se definir na fase de projeto como as associações serão implementadas,
- se obedecerão um determinado padrão ou não.
- 
-\begin_inset Separator latexpar
+\begin_layout Standard
+
+\series bold
+Implementação das associações
+\end_layout
+
+\begin_layout Standard
+As associações identificadas durante a análise serão implementadas utilizando objetos,
+ referências e coleções fornecidas pela linguagem C++.
+\end_layout
+
+\begin_layout Standard
+A composição:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+Poco 1 ◆──── 1..* Camada
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+será representada por uma coleção de camadas pertencente ao objeto Poco:
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-Se existe uma relação de "muitos",
- pode-se implementar a associação com a utilização de um dicionário,
- que é um mapa das associações entre objetos.
- Assim,
- o objeto A acessa o dicionário fornecendo uma chave (um nome para o objeto que deseja acessar) e o dicionário retorna um valor (um ponteiro) para o objeto correto.
- 
-\begin_inset Separator latexpar
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+std::vector<Camada> camadas;
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+A agregação entre Resultados e JanelaOperacional será implementada por uma coleção equivalente:
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-Evite percorrer várias associações para acessar dados de classes distantes.
- Pense em adicionar associações diretas.
-\begin_inset Separator latexpar
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+std::vector<JanelaOperacional> janelas;
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
+\begin_layout Standard
+Já as dependências entre os modelos e os parâmetros poderão utilizar referências constantes quando apropriado.
 \end_layout
 
-\end_deeper
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Relações de muitos
+\end_layout
+
+\begin_layout Standard
+As relações de multiplicidade identificadas no projeto são predominantemente sequenciais e indexadas.
+\end_layout
+
+\begin_layout Standard
+Por esse motivo,
+ será utilizado inicialmente std::vector em vez de uma estrutura de dicionário ou mapa.
+\end_layout
+
+\begin_layout Standard
+O acesso às camadas poderá ser realizado por posição ou por métodos específicos da classe Poco.
+\end_layout
+
+\begin_layout Standard
+Caso futuramente seja necessário localizar objetos utilizando identificadores textuais ou chaves específicas,
+ poderá ser considerada a utilização de:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+std::map
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ou:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+std::unordered_map
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Entretanto,
+ essas estruturas não são necessárias para a primeira versão.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Acesso entre classes
+\end_layout
+
+\begin_layout Standard
+Será evitado o acesso indireto excessivamente longo entre objetos.
+\end_layout
+
+\begin_layout Standard
+Por exemplo,
+ em vez de uma classe acessar sucessivamente diversos objetos para alcançar um atributo interno distante,
+ o componente responsável deverá fornecer um método adequado para disponibilizar a informação necessária.
+\end_layout
+
+\begin_layout Standard
+Essa abordagem preserva o encapsulamento e reduz o acoplamento entre as classes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Efeitos do projeto nas otimizações
 \begin_inset Index idx
@@ -2029,102 +2880,366 @@ otimizações
 
 \end_layout
 
-\begin_layout Itemize
-Faça uma análise de aspectos relativos à otimização do sistema.
- Lembrando que a otimização deve ser desenvolvida por analistas/desenvolvedores experientes.
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Identifique pontos a serem otimizados em que podem ser utilizados processos concorrentes.
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Pense em incluir bibliotecas otimizadas.
-\end_layout
-
-\begin_layout Itemize
-Se o acesso a determinados objetos (atributos/métodos) requer um caminho longo (exemplo:
- A->B->C->D.atributo),
- pense em incluir associações extras (exemplo:
- A-D.atributo).
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Atributos auxiliares podem ser incluídos.
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-A ordem de execução pode ser alterada.
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Revise as associações nos diagramas de classes.
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Neste projeto blablabla
-\end_layout
-
-\end_deeper
 \begin_layout Standard
-Depois de revisados os diagramas da análise você pode montar dois diagramas relacionados à infraestrutura do sistema.
- As dependências dos arquivos e bibliotecas podem ser descritos pelo diagrama de componentes,
- e as relações e dependências entre o sistema e o hardware podem ser ilustradas com o diagrama de implantação.
+Análise de desempenho
+\end_layout
+
+\begin_layout Standard
+O sistema processará predominantemente conjuntos de dados organizados por camada e executará operações matemáticas de baixa complexidade computacional.
+\end_layout
+
+\begin_layout Standard
+Dessa forma,
+ nesta etapa,
+ não é necessária uma otimização agressiva.
+\end_layout
+
+\begin_layout Standard
+As principais prioridades serão:
+\end_layout
+
+\begin_layout Enumerate
+correção dos cálculos;
+\end_layout
+
+\begin_layout Enumerate
+clareza da implementação;
+\end_layout
+
+\begin_layout Enumerate
+manutenção da precisão numérica;
+\end_layout
+
+\begin_layout Enumerate
+separação das responsabilidades;
+\end_layout
+
+\begin_layout Enumerate
+facilidade de testes;
+\end_layout
+
+\begin_layout Enumerate
+redução de cópias desnecessárias de objetos.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Processamento concorrente
+\end_layout
+
+\begin_layout Standard
+Não foi identificada necessidade de introduzir processamento paralelo na primeira versão do simulador.
+\end_layout
+
+\begin_layout Standard
+Diversos cálculos possuem dependências sequenciais.
+ A tensão de sobrecarga,
+ por exemplo,
+ possui comportamento acumulativo ao longo das camadas,
+ enquanto os cálculos seguintes dependem de resultados produzidos anteriormente.
+\end_layout
+
+\begin_layout Standard
+A introdução de concorrência aumentaria a complexidade sem benefício significativo para o volume de dados inicialmente considerado.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Bibliotecas otimizadas
+\end_layout
+
+\begin_layout Standard
+A biblioteca padrão do C++ será priorizada.
+\end_layout
+
+\begin_layout Standard
+Estruturas como std::vector oferecem gerenciamento de memória e acesso eficiente aos elementos,
+ sendo adequadas para o armazenamento das camadas e resultados.
+\end_layout
+
+\begin_layout Standard
+Bibliotecas numéricas externas somente serão consideradas caso futuras funcionalidades apresentem necessidade comprovada.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Redução de caminhos longos
+\end_layout
+
+\begin_layout Standard
+Os métodos serão estruturados para evitar cadeias excessivas de acesso entre objetos.
+\end_layout
+
+\begin_layout Standard
+A classe controladora terá acesso direto aos principais componentes necessários para coordenar a simulação:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+SimuladorJanelaOperacional
+\end_layout
+
+\begin_layout Plain Layout
+        |
+\end_layout
+
+\begin_layout Plain Layout
+        +-- Poco
+\end_layout
+
+\begin_layout Plain Layout
+        +-- ParametrosSimulacao
+\end_layout
+
+\begin_layout Plain Layout
+        +-- ModeloPetrofisico
+\end_layout
+
+\begin_layout Plain Layout
+        +-- ModeloGeopressoes
+\end_layout
+
+\begin_layout Plain Layout
+        +-- ModeloFratura
+\end_layout
+
+\begin_layout Plain Layout
+        +-- CalculadoraECD
+\end_layout
+
+\begin_layout Plain Layout
+        +-- Resultados
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assim,
+ não será necessário atravessar diversas associações apenas para iniciar uma determinada operação.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Atributos auxiliares
+\end_layout
+
+\begin_layout Standard
+Alguns atributos auxiliares poderão permanecer armazenados quando seu cálculo for necessário em várias etapas.
+\end_layout
+
+\begin_layout Standard
+Por exemplo,
+ a classe Camada armazenará:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+porosidade
+\end_layout
+
+\begin_layout Plain Layout
+densidadeBulk
+\end_layout
+
+\begin_layout Plain Layout
+tensaoSobrecarga
+\end_layout
+
+\begin_layout Plain Layout
+pressaoPoro
+\end_layout
+
+\begin_layout Plain Layout
+gradientePoro
+\end_layout
+
+\begin_layout Plain Layout
+tensaoHorizontalMinima
+\end_layout
+
+\begin_layout Plain Layout
+gradienteFratura
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Isso evita o recálculo das mesmas propriedades sempre que forem utilizadas por etapas posteriores.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Ordem de execução
+\end_layout
+
+\begin_layout Standard
+A ordem de execução definida durante a análise será preservada devido às dependências matemáticas existentes:
+\end_layout
+
+\begin_layout Standard
+Dados
+\end_layout
+
+\begin_layout Standard
+→ Porosidade
+\end_layout
+
+\begin_layout Standard
+→ Densidade bulk
+\end_layout
+
+\begin_layout Standard
+→ Sobrecarga
+\end_layout
+
+\begin_layout Standard
+→ Tendência normal
+\end_layout
+
+\begin_layout Standard
+→ Pressão de poro
+\end_layout
+
+\begin_layout Standard
+→ Gradiente de poro
+\end_layout
+
+\begin_layout Standard
+→ Gradiente de fratura
+\end_layout
+
+\begin_layout Standard
+→ Janela operacional
+\end_layout
+
+\begin_layout Standard
+→ ECD
+\end_layout
+
+\begin_layout Standard
+→ Resultados
+\end_layout
+
+\begin_layout Standard
+Alterações nessa ordem somente deverão ocorrer se não comprometerem as dependências entre os modelos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Revisão das associações
+\end_layout
+
+\begin_layout Standard
+Após a análise das necessidades de implementação,
+ as associações anteriormente definidas continuam adequadas.
+\end_layout
+
+\begin_layout Standard
+A composição entre Poco e Camada,
+ as dependências entre os modelos e ParametrosSimulacao,
+ a associação da Camada com JanelaOperacional e a relação entre CalculadoraECD e JanelaOperacional permanecem coerentes com a arquitetura prevista.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \space{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Fechamento da etapa
+\end_layout
+
+\begin_layout Standard
+Após a incorporação dessas decisões,
+ os diagramas desenvolvidos durante a análise passam a representar não apenas o domínio conceitual do problema,
+ mas uma estrutura compatível com sua implementação em C++.
+\end_layout
+
+\begin_layout Standard
+A arquitetura continuará baseada nas dez classes definidas anteriormente,
+ preservando a rastreabilidade entre requisitos,
+ diagramas UML e código-fonte.
+\end_layout
+
+\begin_layout Standard
+A partir desta revisão,
+ poderão ser elaborados os dois diagramas de infraestrutura solicitados pelo modelo do professor:
+\end_layout
+
+\begin_layout Standard
+Diagrama de Componentes → mostrará arquivos,
+ módulos,
+ bibliotecas e dependências do software.
+\end_layout
+
+\begin_layout Standard
+Diagrama de Implantação → mostrará a relação entre o executável,
+ sistema operacional,
+ computador do usuário e arquivos utilizados pelo sistema.
+\end_layout
+
+\begin_layout Standard
+Esses dois diagramas devem ser os próximos,
+ porque agora já temos decisões suficientes de plataforma e arquitetura para construí-los corretamente.
 \end_layout
 
 \begin_layout Section
@@ -2151,85 +3266,56 @@ name "sec:Diagrama-de-componentes"
 \end_layout
 
 \begin_layout Standard
-O diagrama de componentes mostra a forma como os componentes do software se relacionam,
- suas dependências.
- Inclui itens como:
- componentes,
- subsistemas,
- executáveis,
- nós,
- associações,
- dependências,
- generalizações,
- restrições e notas.
- Exemplos de componentes são bibliotecas estáticas,
- bibliotecas dinâmicas,
- dlls,
- componentes Java,
- executáveis,
- arquivos de disco,
- código-fonte.
- 
+este projeto,
+ o diagrama de componentes representa a organização física prevista para o Simulador de Janela Operacional de Perfuração,
+ identificando os principais arquivos de código-fonte,
+ módulos funcionais,
+ arquivos de dados e dependências necessárias para a compilação e execução do software.
 \end_layout
 
 \begin_layout Standard
-Veja na Figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:Diagrama-de-componentes"
-nolink "false"
-
-\end_inset
-
- um exemplo de diagrama de componentes.
- Observe que este inclui muitas dependências,
- ilustrando as relações entre os arquivos.
- Por exemplo:
- o subsistema biblioteca inclui os arquivos das classes A e B,
- e a geração dos objetos A.obj e B.obj depende dos arquivos A.h,
- A.cpp,
- B.h e B.cpp.
- A geração da biblioteca depende dos arquivos A.obj e B.obj.
- O subsistema biblioteca Qt,
- um subsistema exerno,
- inclui os arquivos de código da biblioteca Qt e a biblioteca em si.
- O subsistema banco de dados representa o banco de dados utilizado pelo sistema e tem uma interface de acesso que é utilizada pelo software para acesso aos dados armazenados no banco de dados.
- O software executável a ser gerado depende da biblioteca gerada,
- dos arquivos da biblioteca Qt,
- do módulo de arquivos MinhaJanela e do banco de dados.
+A implementação será desenvolvida em linguagem C++,
+ sendo cada uma das principais classes do sistema organizada em arquivos de cabeçalho (.h) e implementação (.cpp).
+ Esses arquivos serão agrupados de acordo com suas responsabilidades em três conjuntos principais:
+ Dados e Domínio,
+ Modelos de Engenharia e Controle e Resultados.
 \end_layout
 
 \begin_layout Standard
-Algumas observações úteis para o diagrama de componentes:
-\end_layout
-
-\begin_layout Itemize
-De posse do diagrama de componentes,
- temos a lista de todos os arquivos necessários para compilar e rodar o software.
-\end_layout
-
-\begin_layout Itemize
-Observe que um assunto/pacote pode se transformar em uma biblioteca e será incluído no diagrama de componentes.
-\end_layout
-
-\begin_layout Itemize
-A ligação entre componentes pode incluir um estereótipo indicando o tipo de relacionamento ou algum protocolo utilizado.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Na versão final apagar este texto copiado do livro;
- e colocado aqui para lhe auxiliar;
- deixar somente o que é pertinente ao trabalho
-\end_layout
-
-\end_inset
-
-
+O subsistema Dados e Domínio será responsável pela representação das informações básicas utilizadas na simulação,
+ incluindo as classes Poco,
+ Camada e ParametrosSimulacao.
+ O subsistema Modelos de Engenharia reunirá as classes responsáveis pelos cálculos petrofísicos,
+ geopressões,
+ gradiente de fratura,
+ janela operacional e ECD.
+ Já o subsistema Controle e Resultados concentrará a coordenação da execução do programa e a organização das informações produzidas pela simulação.
 \end_layout
 
 \begin_layout Standard
-Neste projeto blablabla
+O arquivo main.cpp será responsável pela inicialização da aplicação e pela criação do fluxo principal de execução,
+ utilizando a classe SimuladorJanelaOperacional como elemento coordenador dos demais componentes.
+\end_layout
+
+\begin_layout Standard
+A compilação do sistema será organizada por meio do arquivo CMakeLists.txt,
+ responsável por definir os arquivos necessários para geração do executável.
+ O sistema utilizará prioritariamente recursos da biblioteca padrão do C++,
+ evitando dependências externas desnecessárias.
+\end_layout
+
+\begin_layout Standard
+Durante a execução,
+ o programa poderá utilizar arquivos de entrada em formato TXT ou CSV contendo dados do poço,
+ como profundidade e perfil sônico.
+ Os resultados calculados poderão ser exportados também em formatos textuais,
+ permitindo sua posterior análise.
+\end_layout
+
+\begin_layout Standard
+Dessa forma,
+ o diagrama de componentes permite visualizar a correspondência entre a estrutura orientada a objetos definida anteriormente e os arquivos que serão efetivamente utilizados na implementação,
+ compilação e execução do software.
 \end_layout
 
 \begin_layout Standard
@@ -2243,7 +3329,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeComponentes-Assuntos-Pacotes.png
+	filename imagens/DiagramaDeComponentes.png
 	lyxscale 40
 	width 100text%
 
@@ -2312,49 +3398,45 @@ name "sec:Diagrama-de-execução"
 \end_layout
 
 \begin_layout Standard
-O diagrama de implantação é um diagrama de alto nível que inclui relações entre o sistema e o hardware e que se preocupa com os aspectos da arquitetura computacional escolhida.
- Seu enfoque é o hardware,
- a configuração dos nós em tempo de execução.
- 
+O diagrama de implantação apresentado na Figura 1.X representa a infraestrutura necessária para a execução do Simulador de Janela Operacional de Perfuração.
+ Diferentemente dos diagramas anteriores,
+ que descrevem a estrutura lógica e o comportamento do software,
+ o diagrama de implantação enfatiza os elementos físicos e de execução envolvidos no funcionamento do sistema.
 \end_layout
 
 \begin_layout Standard
-O diagrama de implantação deve incluir os elementos necessários para que o sistema seja colocado em funcionamento:
- computador,
- periféricos,
- processadores,
- dispositivos,
- nós,
- relacionamentos de dependência,
- associação,
- componentes,
- subsistemas,
- restrições e notas.
+Nesta primeira versão,
+ o simulador será executado localmente em uma estação de trabalho do usuário,
+ não havendo necessidade de cluster,
+ servidor dedicado ou banco de dados externo.
+ O nó principal do sistema é o computador do usuário,
+ que contém o sistema operacional,
+ o executável do programa e os arquivos utilizados durante a simulação.
 \end_layout
 
 \begin_layout Standard
-Veja na Figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:Diagrama-de-implantação."
-nolink "false"
-
-\end_inset
-
- um exemplo de diagrama de implantação de um cluster.
- Observe a presença de um servidor conectado a um switch.
- Os nós do cluster (ou clientes) também estão conectados ao switch.
- Os resultados das simulações são armazenados em um servidor de arquivos (
-\emph on
-storage
-\emph default
-).
+O ambiente de execução será formado por um computador pessoal compatível com Windows,
+ GNU/Linux ou macOS,
+ contendo o programa compilado em C++ e os arquivos de entrada e saída.
+ Os arquivos de entrada armazenam os dados do poço,
+ como profundidade e perfil sônico,
+ enquanto os arquivos de saída armazenam os resultados calculados,
+ como gradientes,
+ janelas operacionais e análise de ECD.
 \end_layout
 
 \begin_layout Standard
-Pode-se utilizar uma anotação de localização para identificar onde determinado componente está residente,
- por exemplo {localização:
- sala 3}.
+Durante a execução,
+ o usuário interage com o programa,
+ fornece os dados necessários à simulação e recebe os resultados gerados pelo sistema.
+ O armazenamento dos arquivos ocorre no disco local da máquina,
+ podendo futuramente ser adaptado para outras formas de persistência,
+ caso novas versões do projeto exijam compartilhamento em rede ou armazenamento remoto.
+\end_layout
+
+\begin_layout Standard
+Assim,
+ o diagrama de implantação mostra de forma clara a relação entre o software e a arquitetura computacional efetivamente necessária para sua operação.
 \end_layout
 
 \begin_layout Standard
@@ -2368,7 +3450,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeExecucao.png
+	filename imagens/DigramaDeImplatação.png
 	lyxscale 50
 	width 100text%
 
