@@ -1,5 +1,5 @@
-#LyX 2.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 544
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -10,28 +10,26 @@
 \usepackage {longtable}
 \usepackage {indentfirst}
 \renewenvironment{center}{\par\centering}{\par}
-
 % Comentar linhas abaixo se não estiver usando pacote abntex
 % ou se o pacote ainda não foi instalado.
 % neste caso sugere-se usar citações no padrão apalike (lembra o da anbt).
 %\usepackage[alf ,abnt-etal-cite=2 , abnt-year-extra-label=yes , abnt-etal-list=0]{abntcite}
 %\usepackage {helvet}
 %\renewcommand {\familydefault}{\sfdefault}
-
 % Para uso de listagens de código
 \usepackage{color}
 \definecolor{azulclaro}{rgb}{0.6,1,1}%   rgb color model
-% Informa que vai usar o pacote listings, 
+% Informa que vai usar o pacote listings,
 % disponibilizado em /usr/share/texmf/doc/latex/styles/listings.dvi
 \usepackage{listings}
 \end_preamble
 \use_default_options false
 \master DocumentoMestre-Trabalho-ProgramacaoPratica.lyx
-\maintain_unincluded_children false
+\maintain_unincluded_children no
 \language brazilian
 \language_package auto
-\inputencoding auto
-\fontencoding global
+\inputencoding auto-legacy
+\fontencoding auto
 \font_roman "default" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
@@ -39,7 +37,9 @@
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
-\font_osf false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
 \use_microtype false
@@ -53,7 +53,7 @@
 \paperfontsize 12
 \spacing onehalf
 \use_hyperref false
-\papersize a4paper
+\papersize a4
 \use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
@@ -72,9 +72,19 @@
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
-\use_refstyle 0
+\justification default
+\crossref_package prettyref
+\use_formatted_ref 0
 \use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
 \index Índice
 \shortcut idx
 \color #008000
@@ -96,11 +106,17 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle fancy
+\tablestyle default
 \tracking_changes false
 \output_changes false
+\change_bars false
+\postpone_fragile_content false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
 \end_header
 
 \begin_body
@@ -121,11 +137,11 @@ name "chap:Lista-das-Características"
 \end_layout
 
 \begin_layout Standard
-Neste capítulo lista-se as características do sistema a ser desenvolvido
- (seção 
+Neste capítulo lista-se as características do sistema a ser desenvolvido (seção 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Lista-de-características"
+nolink "false"
 
 \end_inset
 
@@ -145,23 +161,24 @@ name "sec:Lista-de-características"
 \end_layout
 
 \begin_layout Standard
-No final do ciclo de concepção e análise chegamos a uma lista de características
- <<
-\emph on
-features
-\emph default
->> que teremos de implementar.
+Ao final das etapas de concepção,
+ elaboração,
+ análise e projeto,
+ foram identificadas as características a serem implementadas no Simulador de Janela Operacional de Perfuração.
+ As features foram organizadas incrementalmente,
+ de modo que cada ciclo acrescente uma nova responsabilidade ao sistema,
+ associada à implementação e aos testes das classes previstas no projeto.
 \end_layout
 
 \begin_layout Standard
-Após a análises desenvolvidas e considerando o requisito de que este material
- deve ter um formato didático, chegamos a seguinte lista:
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
-nota importante, o número de versões irá depender do tamanho do ciclo, ou
- seja, número de dias de cada ciclo e capacidade da equipe.
+nota importante,
+ o número de versões irá depender do tamanho do ciclo,
+ ou seja,
+ número de dias de cada ciclo e capacidade da equipe.
 \end_layout
 
 \end_inset
@@ -170,48 +187,259 @@ nota importante, o número de versões irá depender do tamanho do ciclo, ou
 \end_layout
 
 \begin_layout Itemize
-v0.1
+v0.1 - Representação das camadas do poço
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Ex: O sistema deve plotar gráficos de pressão x temperatura
+Representar os intervalos de profundidade analisados.
 \end_layout
 
 \begin_layout Itemize
-Ex: O sistema deve permitir abrir arquivos num formato especificado.
+Armazenar profundidade,
+ perfil sônico e propriedades calculadas.
 \end_layout
 
 \begin_layout Itemize
-Ex: nome de classe a ser implementada e testada
+Calcular a profundidade média de cada intervalo.
+\end_layout
+
+\begin_layout Itemize
+Implementar e testar a classe Camada.
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-v0.3
+v0.2 – Parâmetros da simulação
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Lista de classes a serem implementadas
+Armazenar os parâmetros petrofísicos e geomecânicos utilizados pelos modelos.
 \end_layout
 
 \begin_layout Itemize
-Testes
+Permitir configuração e validação dos parâmetros de entrada.
+\end_layout
+
+\begin_layout Itemize
+Implementar e testar a classe ParametrosSimulacao.
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-v0.7
+v0.3 – Representação do poço
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Lista de classes a serem implementadas
+Representar o poço analisado.
 \end_layout
 
 \begin_layout Itemize
-Testes
+Armazenar e organizar o conjunto de camadas.
+\end_layout
+
+\begin_layout Itemize
+Permitir inclusão,
+ consulta e validação das camadas.
+\end_layout
+
+\begin_layout Itemize
+Implementar e testar a classe Poco.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+v0.4 – Modelo petrofísico
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Calcular a porosidade utilizando a equação tempo-médio de Wyllie.
+\end_layout
+
+\begin_layout Itemize
+Calcular a densidade bulk.
+\end_layout
+
+\begin_layout Itemize
+Processar os cálculos petrofísicos das camadas.
+\end_layout
+
+\begin_layout Itemize
+Implementar e testar a classe ModeloPetrofisico.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+v0.5 – Modelo de geopressões
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Calcular a tensão de sobrecarga.
+\end_layout
+
+\begin_layout Itemize
+Determinar a tendência normal de compactação.
+\end_layout
+
+\begin_layout Itemize
+Calcular a pressão normal.
+\end_layout
+
+\begin_layout Itemize
+Estimar a pressão de poro pelo método de Eaton.
+\end_layout
+
+\begin_layout Itemize
+Calcular o gradiente de pressão de poro.
+\end_layout
+
+\begin_layout Itemize
+Implementar e testar a classe ModeloGeopressoes.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+v0.6 – Modelo de fratura
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Calcular a tensão horizontal mínima.
+\end_layout
+
+\begin_layout Itemize
+Determinar o gradiente de fratura.
+\end_layout
+
+\begin_layout Itemize
+Processar os resultados ao longo das camadas.
+\end_layout
+
+\begin_layout Itemize
+Implementar e testar a classe ModeloFratura.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+v0.7 – Janela operacional de perfuração
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Integrar os gradientes de pressão de poro e de fratura.
+\end_layout
+
+\begin_layout Itemize
+Determinar os limites inferior e superior da janela.
+\end_layout
+
+\begin_layout Itemize
+Calcular a largura da janela operacional.
+\end_layout
+
+\begin_layout Itemize
+Avaliar o peso de lama em relação aos limites calculados.
+\end_layout
+
+\begin_layout Itemize
+Implementar e testar a classe JanelaOperacional.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+v0.8 – Avaliação da ECD
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Receber densidade da lama,
+ perda de pressão por atrito e profundidade.
+\end_layout
+
+\begin_layout Itemize
+Calcular a Equivalent Circulating Density.
+\end_layout
+
+\begin_layout Itemize
+Comparar a ECD aos limites da janela operacional.
+\end_layout
+
+\begin_layout Itemize
+Classificar a condição como segura,
+ risco de kick ou risco de fraturamento/perdas.
+\end_layout
+
+\begin_layout Itemize
+Implementar e testar a classe CalculadoraECD.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+v0.9 – Organização e exportação dos resultados
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Armazenar as janelas operacionais calculadas.
+\end_layout
+
+\begin_layout Itemize
+Organizar os resultados da análise de ECD.
+\end_layout
+
+\begin_layout Itemize
+Apresentar um resumo da simulação.
+\end_layout
+
+\begin_layout Itemize
+Permitir a exportação dos resultados.
+\end_layout
+
+\begin_layout Itemize
+Implementar e testar a classe Resultados.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+v1.0 – Integração completa do simulador
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Integrar todas as funcionalidades desenvolvidas nos ciclos anteriores.
+\end_layout
+
+\begin_layout Itemize
+Coordenar o carregamento dos dados e a configuração dos parâmetros.
+\end_layout
+
+\begin_layout Itemize
+Executar os modelos petrofísico,
+ de geopressões e de fratura.
+\end_layout
+
+\begin_layout Itemize
+Determinar as janelas operacionais.
+\end_layout
+
+\begin_layout Itemize
+Coordenar a avaliação de ECD.
+\end_layout
+
+\begin_layout Itemize
+Disponibilizar e exportar os resultados finais.
+\end_layout
+
+\begin_layout Itemize
+Implementar e testar a classe SimuladorJanelaOperacional.
+\end_layout
+
+\begin_layout Itemize
+Realizar testes de integração do sistema completo.
 \end_layout
 
 \end_deeper
@@ -221,16 +449,18 @@ status open
 
 \begin_layout Plain Layout
 1.
- Uma feature deve, sempre que possível, poder ser implementada dentro de
- um ciclo.
- Se o ciclo é definido como sendo mensal, a feature deve poder ser concluída
- em um mês.
+ Uma feature deve,
+ sempre que possível,
+ poder ser implementada dentro de um ciclo.
+ Se o ciclo é definido como sendo mensal,
+ a feature deve poder ser concluída em um mês.
 \end_layout
 
 \begin_layout Plain Layout
 2.
  Tente associar as features a componentes a serem implementados.
- Por exemplo, uma feature pode ser uma classe.
+ Por exemplo,
+ uma feature pode ser uma classe.
 \end_layout
 
 \begin_layout Plain Layout
