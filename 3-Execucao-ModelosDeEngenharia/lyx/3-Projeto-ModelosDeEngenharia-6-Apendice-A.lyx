@@ -134,11 +134,15 @@
 
 \begin_body
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
 \begin_layout Chapter
 Dados de entrada e referência para validação do simulador
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset ERT
 status open
 
@@ -160,11 +164,11 @@ thepage}
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Note Note
 status open
 
@@ -188,7 +192,6 @@ Um apêndice pode incluir assuntos mais gerais (geral demais para estar no núcl
 
 \begin_layout Itemize
 Pode conter um artigo de auxílio fundamental ao trabalho.
- 
 \end_layout
 
 \begin_layout Itemize
@@ -225,8 +228,13 @@ Pode conter artigos publicados.
 Sub-Titulo do Apêndice
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 .....conteúdo..
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
