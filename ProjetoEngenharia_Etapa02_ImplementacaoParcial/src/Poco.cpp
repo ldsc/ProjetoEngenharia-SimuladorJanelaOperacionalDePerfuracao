@@ -1,6 +1,4 @@
-// Etapa 1: estrutura de classes; metodos pendentes lancam logic_error.
 #include "Poco.h"
-#include <stdexcept>
 #include <stdexcept>
 
 Poco::Poco() : identificador(""), tipo(""), profundidadeMaxima(0.0) {}
@@ -42,9 +40,6 @@ bool Poco::validarDados() const {
 }
 
 const std::vector<Camada>& Poco::getCamadas() const { return camadas; }
-
 std::vector<Camada>& Poco::getCamadas() { return camadas; }
-
 const std::string& Poco::getIdentificador() const { return identificador; }
-
 double Poco::getProfundidadeMaxima() const { return profundidadeMaxima; }

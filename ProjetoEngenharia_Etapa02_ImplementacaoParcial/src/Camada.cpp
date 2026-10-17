@@ -1,11 +1,11 @@
-// Etapa 1: estrutura de classes; metodos pendentes lancam logic_error.
 #include "Camada.h"
+
 #include <algorithm>
 #include <cctype>
 #include <cmath>
 #include <limits>
 #include <string>
-#include <stdexcept>
+
 
 Camada::Camada()
     : indice(0),
@@ -38,8 +38,10 @@ Camada::Camada()
       ),
       gradienteFratura(
           std::numeric_limits<double>::quiet_NaN()
-      ) {
+      )
+{
 }
+
 
 Camada::Camada(
     int indice,
@@ -82,8 +84,10 @@ Camada::Camada(
       ),
       gradienteFratura(
           std::numeric_limits<double>::quiet_NaN()
-      ) {
+      )
+{
 }
+
 
 // ==========================================================
 // DADOS GEOMÉTRICOS
@@ -94,20 +98,24 @@ int Camada::getIndice() const {
     return indice;
 }
 
+
 double Camada::getTopo() const {
 
     return topo;
 }
+
 
 double Camada::getBase() const {
 
     return base;
 }
 
+
 double Camada::getProfundidadeMedia() const {
 
     return profundidadeMedia;
 }
+
 
 // ==========================================================
 // PERFIL SÔNICO
@@ -118,11 +126,13 @@ double Camada::getDeltaT() const {
     return deltaT;
 }
 
+
 bool Camada::possuiDeltaT() const {
 
     return
         std::isfinite(deltaT);
 }
+
 
 // ==========================================================
 // TIPO DA CAMADA
@@ -133,6 +143,7 @@ TipoCamada Camada::getTipo() const {
     return tipo;
 }
 
+
 void Camada::definirTipo(
     TipoCamada novoTipo
 ) {
@@ -140,6 +151,7 @@ void Camada::definirTipo(
     tipo =
         novoTipo;
 }
+
 
 std::string Camada::getTipoTexto() const {
 
@@ -172,6 +184,7 @@ std::string Camada::getTipoTexto() const {
             return "DESCONHECIDA";
     }
 }
+
 
 // ==========================================================
 // CONVERSÃO TEXTO -> ENUM
@@ -275,6 +288,7 @@ TipoCamada Camada::converterTipo(
         TipoCamada::DESCONHECIDA;
 }
 
+
 // ==========================================================
 // PETROFÍSICA
 // ==========================================================
@@ -287,10 +301,12 @@ void Camada::definirPorosidade(
         valor;
 }
 
+
 double Camada::getPorosidade() const {
 
     return porosidade;
 }
+
 
 void Camada::definirDensidadeBulk(
     double valor
@@ -300,10 +316,12 @@ void Camada::definirDensidadeBulk(
         valor;
 }
 
+
 double Camada::getDensidadeBulk() const {
 
     return densidadeBulk;
 }
+
 
 // ==========================================================
 // GEOPRESSÕES
@@ -317,10 +335,12 @@ void Camada::definirSobrecarga(
         valor;
 }
 
+
 double Camada::getTensaoSobrecarga() const {
 
     return tensaoSobrecarga;
 }
+
 
 void Camada::definirPressaoPoro(
     double valor
@@ -330,10 +350,12 @@ void Camada::definirPressaoPoro(
         valor;
 }
 
+
 double Camada::getPressaoPoro() const {
 
     return pressaoPoro;
 }
+
 
 void Camada::definirGradientePoro(
     double valor
@@ -343,10 +365,12 @@ void Camada::definirGradientePoro(
         valor;
 }
 
+
 double Camada::getGradientePoro() const {
 
     return gradientePoro;
 }
+
 
 // ==========================================================
 // FRATURA
@@ -360,10 +384,12 @@ void Camada::definirTensaoHorizontalMinima(
         valor;
 }
 
+
 double Camada::getTensaoHorizontalMinima() const {
 
     return tensaoHorizontalMinima;
 }
+
 
 void Camada::definirGradienteFratura(
     double valor
@@ -372,6 +398,7 @@ void Camada::definirGradienteFratura(
     gradienteFratura =
         valor;
 }
+
 
 double Camada::getGradienteFratura() const {
 

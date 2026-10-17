@@ -1,6 +1,5 @@
-// Etapa 1: estrutura de classes; metodos pendentes lancam logic_error.
 #include "ParametrosSimulacao.h"
-#include <stdexcept>
+
 
 // ==========================================================
 // CONSTRUTOR
@@ -27,8 +26,10 @@ ParametrosSimulacao::ParametrosSimulacao()
 
       densidadeLama(13.90),
       perdaPressaoECD(980.0),
-      profundidadeECD(4180.0) {
+      profundidadeECD(4180.0)
+{
 }
+
 
 // ==========================================================
 // VALIDAÇÃO
@@ -125,6 +126,7 @@ bool ParametrosSimulacao::validarParametros() const {
         profundidadeECD > 0.0;
 }
 
+
 // ==========================================================
 // SETTERS - PETROFÍSICA
 // ==========================================================
@@ -137,6 +139,7 @@ void ParametrosSimulacao::definirDensidadeMatriz(
         valor;
 }
 
+
 void ParametrosSimulacao::definirDensidadeFluido(
     double valor
 ) {
@@ -144,6 +147,7 @@ void ParametrosSimulacao::definirDensidadeFluido(
     densidadeFluido =
         valor;
 }
+
 
 void ParametrosSimulacao::definirDensidadeAguaMar(
     double valor
@@ -153,6 +157,7 @@ void ParametrosSimulacao::definirDensidadeAguaMar(
         valor;
 }
 
+
 void ParametrosSimulacao::definirDensidadeSedimento(
     double valor
 ) {
@@ -160,6 +165,7 @@ void ParametrosSimulacao::definirDensidadeSedimento(
     densidadeSedimento =
         valor;
 }
+
 
 void ParametrosSimulacao::definirDeltaTMatriz(
     double valor
@@ -169,6 +175,7 @@ void ParametrosSimulacao::definirDeltaTMatriz(
         valor;
 }
 
+
 void ParametrosSimulacao::definirDeltaTFluido(
     double valor
 ) {
@@ -177,6 +184,7 @@ void ParametrosSimulacao::definirDeltaTFluido(
         valor;
 }
 
+
 void ParametrosSimulacao::definirPorosidadeSedimento(
     double valor
 ) {
@@ -184,6 +192,7 @@ void ParametrosSimulacao::definirPorosidadeSedimento(
     porosidadeSedimento =
         valor;
 }
+
 
 void ParametrosSimulacao::definirLimitesPorosidade(
     double minimo,
@@ -198,6 +207,7 @@ void ParametrosSimulacao::definirLimitesPorosidade(
         maximo;
 }
 
+
 // ==========================================================
 // SETTERS - GEOPRESSÕES
 // ==========================================================
@@ -210,6 +220,7 @@ void ParametrosSimulacao::definirGradienteHidrostatico(
         valor;
 }
 
+
 void ParametrosSimulacao::definirExpoenteEaton(
     double valor
 ) {
@@ -217,6 +228,7 @@ void ParametrosSimulacao::definirExpoenteEaton(
     expoenteEaton =
         valor;
 }
+
 
 void ParametrosSimulacao::definirCoeficientePoisson(
     double valor
@@ -226,6 +238,7 @@ void ParametrosSimulacao::definirCoeficientePoisson(
         valor;
 }
 
+
 void ParametrosSimulacao::definirDeltaTReferencia(
     double valor
 ) {
@@ -234,6 +247,7 @@ void ParametrosSimulacao::definirDeltaTReferencia(
         valor;
 }
 
+
 void ParametrosSimulacao::definirConstanteCompactacao(
     double valor
 ) {
@@ -241,6 +255,7 @@ void ParametrosSimulacao::definirConstanteCompactacao(
     constanteCompactacao =
         valor;
 }
+
 
 // ==========================================================
 // SETTERS - ECD
@@ -254,6 +269,7 @@ void ParametrosSimulacao::definirDensidadeLama(
         valor;
 }
 
+
 void ParametrosSimulacao::definirPerdaPressaoECD(
     double valor
 ) {
@@ -262,6 +278,7 @@ void ParametrosSimulacao::definirPerdaPressaoECD(
         valor;
 }
 
+
 void ParametrosSimulacao::definirProfundidadeECD(
     double valor
 ) {
@@ -269,6 +286,7 @@ void ParametrosSimulacao::definirProfundidadeECD(
     profundidadeECD =
         valor;
 }
+
 
 // ==========================================================
 // GETTERS - PETROFÍSICA
@@ -280,11 +298,13 @@ double ParametrosSimulacao::getDensidadeMatriz() const {
         densidadeMatriz;
 }
 
+
 double ParametrosSimulacao::getDensidadeFluido() const {
 
     return
         densidadeFluido;
 }
+
 
 double ParametrosSimulacao::getDensidadeAguaMar() const {
 
@@ -292,11 +312,13 @@ double ParametrosSimulacao::getDensidadeAguaMar() const {
         densidadeAguaMar;
 }
 
+
 double ParametrosSimulacao::getDensidadeSedimento() const {
 
     return
         densidadeSedimento;
 }
+
 
 double ParametrosSimulacao::getDeltaTMatriz() const {
 
@@ -304,11 +326,13 @@ double ParametrosSimulacao::getDeltaTMatriz() const {
         deltaTMatriz;
 }
 
+
 double ParametrosSimulacao::getDeltaTFluido() const {
 
     return
         deltaTFluido;
 }
+
 
 double ParametrosSimulacao::getPorosidadeSedimento() const {
 
@@ -316,17 +340,20 @@ double ParametrosSimulacao::getPorosidadeSedimento() const {
         porosidadeSedimento;
 }
 
+
 double ParametrosSimulacao::getPorosidadeMinima() const {
 
     return
         porosidadeMinima;
 }
 
+
 double ParametrosSimulacao::getPorosidadeMaxima() const {
 
     return
         porosidadeMaxima;
 }
+
 
 // ==========================================================
 // GETTERS - GEOPRESSÕES
@@ -339,11 +366,13 @@ ParametrosSimulacao::getGradienteHidrostaticoNormal() const {
         gradienteHidrostaticoNormal;
 }
 
+
 double ParametrosSimulacao::getExpoenteEaton() const {
 
     return
         expoenteEaton;
 }
+
 
 double ParametrosSimulacao::getCoeficientePoisson() const {
 
@@ -351,17 +380,20 @@ double ParametrosSimulacao::getCoeficientePoisson() const {
         coeficientePoisson;
 }
 
+
 double ParametrosSimulacao::getDeltaTReferencia() const {
 
     return
         deltaTReferencia;
 }
 
+
 double ParametrosSimulacao::getConstanteCompactacao() const {
 
     return
         constanteCompactacao;
 }
+
 
 // ==========================================================
 // GETTERS - ECD
@@ -373,11 +405,13 @@ double ParametrosSimulacao::getDensidadeLama() const {
         densidadeLama;
 }
 
+
 double ParametrosSimulacao::getPerdaPressaoECD() const {
 
     return
         perdaPressaoECD;
 }
+
 
 double ParametrosSimulacao::getProfundidadeECD() const {
 
