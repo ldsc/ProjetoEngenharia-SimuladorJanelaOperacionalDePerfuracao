@@ -122,14 +122,10 @@
 \begin_body
 
 \begin_layout Chapter
-Lista das Características/
-\emph on
-Features
-\emph default
-
+Lista das características / features
 \begin_inset CommandInset label
 LatexCommand label
-name "chap:Lista-das-Características"
+name "cap:features"
 
 \end_inset
 
@@ -137,23 +133,25 @@ name "chap:Lista-das-Características"
 \end_layout
 
 \begin_layout Standard
-Neste capítulo lista-se as características do sistema a ser desenvolvido (seção 
+Neste capítulo lista-se as características do sistema desenvolvido (Seção 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Lista-de-características"
+reference "sec:lista_features"
+plural "false"
+caps "false"
+noprefix "false"
 nolink "false"
 
 \end_inset
 
 ).
- 
 \end_layout
 
 \begin_layout Section
-Lista de características <<features>>
+Lista de características «features»
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Lista-de-características"
+name "sec:lista_features"
 
 \end_inset
 
@@ -165,39 +163,44 @@ Ao final das etapas de concepção,
  elaboração,
  análise e projeto,
  foram identificadas as características a serem implementadas no Simulador de Janela Operacional de Perfuração.
- As features foram organizadas incrementalmente,
+ As 
+\emph on
+features
+\emph default
+ foram organizadas incrementalmente,
  de modo que cada ciclo acrescente uma nova responsabilidade ao sistema,
  associada à implementação e aos testes das classes previstas no projeto.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-nota importante,
- o número de versões irá depender do tamanho do ciclo,
- ou seja,
- número de dias de cada ciclo e capacidade da equipe.
-\end_layout
+ Todas as características listadas foram implementadas na versão 1.0;
+ os testes foram realizados pela execução do caso de referência (Capítulo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:teste"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
 
 \end_inset
 
-
+),
+ uma vez que a versão 1.0 não possui testes unitários automatizados.
 \end_layout
 
-\begin_layout Itemize
-v0.1 - Representação das camadas do poço
+\begin_layout Standard
+
+\series bold
+v0.1 —
+ Representação das camadas do poço
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
 Representar os intervalos de profundidade analisados.
 \end_layout
 
 \begin_layout Itemize
 Armazenar profundidade,
- perfil sônico e propriedades calculadas.
+ perfil sônico,
+ tipo e propriedades calculadas.
 \end_layout
 
 \begin_layout Itemize
@@ -205,15 +208,20 @@ Calcular a profundidade média de cada intervalo.
 \end_layout
 
 \begin_layout Itemize
-Implementar e testar a classe Camada.
+Implementar e testar a classe 
+\family typewriter
+Camada
+\family default
+.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-v0.2 – Parâmetros da simulação
+\begin_layout Standard
+
+\series bold
+v0.2 —
+ Parâmetros da simulação
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
 Armazenar os parâmetros petrofísicos e geomecânicos utilizados pelos modelos.
 \end_layout
@@ -223,15 +231,20 @@ Permitir configuração e validação dos parâmetros de entrada.
 \end_layout
 
 \begin_layout Itemize
-Implementar e testar a classe ParametrosSimulacao.
+Implementar e testar a classe 
+\family typewriter
+ParametrosSimulacao
+\family default
+.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-v0.3 – Representação do poço
+\begin_layout Standard
+
+\series bold
+v0.3 —
+ Representação do poço
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
 Representar o poço analisado.
 \end_layout
@@ -246,15 +259,20 @@ Permitir inclusão,
 \end_layout
 
 \begin_layout Itemize
-Implementar e testar a classe Poco.
+Implementar e testar a classe 
+\family typewriter
+Poco
+\family default
+.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-v0.4 – Modelo petrofísico
+\begin_layout Standard
+
+\series bold
+v0.4 —
+ Modelo petrofísico
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
 Calcular a porosidade utilizando a equação tempo-médio de Wyllie.
 \end_layout
@@ -268,15 +286,20 @@ Processar os cálculos petrofísicos das camadas.
 \end_layout
 
 \begin_layout Itemize
-Implementar e testar a classe ModeloPetrofisico.
+Implementar e testar a classe 
+\family typewriter
+ModeloPetrofisico
+\family default
+.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-v0.5 – Modelo de geopressões
+\begin_layout Standard
+
+\series bold
+v0.5 —
+ Modelo de geopressões
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
 Calcular a tensão de sobrecarga.
 \end_layout
@@ -298,15 +321,20 @@ Calcular o gradiente de pressão de poro.
 \end_layout
 
 \begin_layout Itemize
-Implementar e testar a classe ModeloGeopressoes.
+Implementar e testar a classe 
+\family typewriter
+ModeloGeopressoes
+\family default
+.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-v0.6 – Modelo de fratura
+\begin_layout Standard
+
+\series bold
+v0.6 —
+ Modelo de fratura
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
 Calcular a tensão horizontal mínima.
 \end_layout
@@ -320,15 +348,20 @@ Processar os resultados ao longo das camadas.
 \end_layout
 
 \begin_layout Itemize
-Implementar e testar a classe ModeloFratura.
+Implementar e testar a classe 
+\family typewriter
+ModeloFratura
+\family default
+.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-v0.7 – Janela operacional de perfuração
+\begin_layout Standard
+
+\series bold
+v0.7 —
+ Janela operacional de perfuração
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
 Integrar os gradientes de pressão de poro e de fratura.
 \end_layout
@@ -346,22 +379,31 @@ Avaliar o peso de lama em relação aos limites calculados.
 \end_layout
 
 \begin_layout Itemize
-Implementar e testar a classe JanelaOperacional.
+Implementar e testar a classe 
+\family typewriter
+JanelaOperacional
+\family default
+.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-v0.8 – Avaliação da ECD
+\begin_layout Standard
+
+\series bold
+v0.8 —
+ Avaliação da ECD
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
 Receber densidade da lama,
  perda de pressão por atrito e profundidade.
 \end_layout
 
 \begin_layout Itemize
-Calcular a Equivalent Circulating Density.
+Calcular a 
+\emph on
+Equivalent Circulating Density
+\emph default
+.
 \end_layout
 
 \begin_layout Itemize
@@ -369,20 +411,29 @@ Comparar a ECD aos limites da janela operacional.
 \end_layout
 
 \begin_layout Itemize
-Classificar a condição como segura,
- risco de kick ou risco de fraturamento/perdas.
+Classificar a condição como dentro da janela,
+ risco de influxo/
+\emph on
+kick
+\emph default
+ ou risco de fratura/perdas.
 \end_layout
 
 \begin_layout Itemize
-Implementar e testar a classe CalculadoraECD.
+Implementar e testar a classe 
+\family typewriter
+CalculadoraECD
+\family default
+.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-v0.9 – Organização e exportação dos resultados
+\begin_layout Standard
+
+\series bold
+v0.9 —
+ Organização e exportação dos resultados
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
 Armazenar as janelas operacionais calculadas.
 \end_layout
@@ -400,15 +451,20 @@ Permitir a exportação dos resultados.
 \end_layout
 
 \begin_layout Itemize
-Implementar e testar a classe Resultados.
+Implementar e testar a classe 
+\family typewriter
+Resultados
+\family default
+.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-v1.0 – Integração completa do simulador
+\begin_layout Standard
+
+\series bold
+v1.0 —
+ Integração completa do simulador
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
 Integrar todas as funcionalidades desenvolvidas nos ciclos anteriores.
 \end_layout
@@ -435,42 +491,30 @@ Disponibilizar e exportar os resultados finais.
 \end_layout
 
 \begin_layout Itemize
-Implementar e testar a classe SimuladorJanelaOperacional.
+Implementar e testar a classe 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+Disponibilizar a interface gráfica em Qt 6 (
+\family typewriter
+MainWindow
+\family default
+) com as abas Dados do Poço,
+ Parâmetros,
+ ECD,
+ Resultados e Gráficos.
+\end_layout
+
+\begin_layout Itemize
+Gerar os sete gráficos de resultados com o Gnuplot.
 \end_layout
 
 \begin_layout Itemize
 Realizar testes de integração do sistema completo.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-1.
- Uma feature deve,
- sempre que possível,
- poder ser implementada dentro de um ciclo.
- Se o ciclo é definido como sendo mensal,
- a feature deve poder ser concluída em um mês.
-\end_layout
-
-\begin_layout Plain Layout
-2.
- Tente associar as features a componentes a serem implementados.
- Por exemplo,
- uma feature pode ser uma classe.
-\end_layout
-
-\begin_layout Plain Layout
-3.
- 
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_body

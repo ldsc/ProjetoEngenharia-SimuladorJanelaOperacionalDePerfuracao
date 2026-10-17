@@ -122,27 +122,10 @@
 \begin_body
 
 \begin_layout Chapter
-Projeto 
+Projeto
 \begin_inset CommandInset label
 LatexCommand label
-name "chap:Projeto-do-Sistema"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\backslash
-lhead{
-\backslash
-thechapter - Projeto} 
-\end_layout
+name "cap:projeto"
 
 \end_inset
 
@@ -153,29 +136,18 @@ thechapter - Projeto}
 Neste capítulo do projeto de engenharia veremos questões associadas ao projeto do sistema,
  incluindo protocolos,
  recursos,
+ controle,
  plataformas suportadas,
- inplicações nos diagramas feitos anteriormente,
+ implicações nos diagramas feitos anteriormente,
  diagramas de componentes e implantação.
  Na segunda parte revisamos os diagramas levando em conta as decisões do projeto do sistema.
 \end_layout
 
 \begin_layout Section
-Projeto do Sistema
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
 Projeto do sistema
-\end_layout
-
-\end_inset
-
-
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Projeto-do-sistema"
+name "sec:projeto_sistema"
 
 \end_inset
 
@@ -194,208 +166,353 @@ Após a etapa de Análise Orientada a Objetos,
 \end_layout
 
 \begin_layout Standard
-O sistema será implementado em C++,
+O sistema é implementado em C++17,
  seguindo o paradigma de programação orientada a objetos e utilizando uma arquitetura modular baseada nas classes e responsabilidades identificadas na etapa de análise.
  O objetivo é manter separados os dados do poço,
  os parâmetros da simulação,
  os modelos de cálculo petrofísico e geomecânico,
  a determinação da janela operacional,
- a avaliação de ECD e a apresentação dos resultados.
+ a avaliação de ECD,
+ a apresentação dos resultados e a interface com o usuário.
 \end_layout
 
 \begin_layout Standard
-A classe SimuladorJanelaOperacional exercerá o papel de coordenadora do fluxo principal da aplicação,
+A classe 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+ exerce o papel de coordenadora do fluxo principal da aplicação,
  solicitando os serviços oferecidos pelos diferentes componentes especializados.
  Essa organização busca reduzir o acoplamento entre os módulos,
  facilitar os testes e permitir futuras extensões do sistema.
 \end_layout
 
 \begin_layout Standard
-Também serão adotados padrões de nomenclatura e documentação para manter consistência entre os diagramas UML,
+Também foram adotados padrões de nomenclatura e documentação para manter consistência entre os diagramas UML,
  o código-fonte e a documentação.
- As classes utilizarão nomes representativos do domínio,
- como Poco,
- Camada,
- ModeloGeopressoes e JanelaOperacional,
- enquanto métodos utilizarão nomes que indiquem claramente suas operações,
- como calcularPressaoPoro(),
- calcularGradienteFratura() e calcularECD().
+ As classes utilizam nomes representativos do domínio,
+ como 
+\family typewriter
+Poco
+\family default
+,
+ 
+\family typewriter
+Camada
+\family default
+,
+ 
+\family typewriter
+ModeloGeopressoes
+\family default
+ e 
+\family typewriter
+JanelaOperacional
+\family default
+,
+ enquanto os métodos utilizam nomes que indicam claramente suas operações,
+ como 
+\family typewriter
+calcularPressaoPoro()
+\family default
+,
+ 
+\family typewriter
+calcularGradienteFratura()
+\family default
+ e 
+\family typewriter
+calcularECD()
+\family default
+.
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Subsection
 Protocolos
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-Protocolos
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:protocolos"
 
 \end_inset
 
 
-\begin_inset Separator latexpar
-\end_inset
-
-
 \end_layout
 
-\begin_deeper
 \begin_layout Standard
 
 \series bold
-Comunicação com elementos externos
-\end_layout
+Comunicação com elementos externos.
 
-\begin_layout Standard
-O projeto não prevê,
+\series default
+ O projeto não prevê,
  em sua versão inicial,
  comunicação direta com dispositivos externos,
  redes de sensores,
- clusters ou equipamentos de aquisição de dados.
- A interação externa do sistema ocorrerá principalmente por meio da entrada de dados fornecidos pelo usuário e pela leitura de arquivos contendo informações necessárias à simulação.
-\end_layout
-
-\begin_layout Standard
-Dessa forma,
- não será necessário implementar protocolos de comunicação de rede específicos nesta etapa do desenvolvimento.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
+ 
+\emph on
+clusters
+\emph default
+ ou equipamentos de aquisição de dados.
+ A interação externa do sistema ocorre por meio da entrada de dados fornecidos pelo usuário,
+ da leitura de arquivos com as informações necessárias à simulação e da execução do programa Gnuplot,
+ chamado pelo simulador para gerar os gráficos.
+ Dessa forma,
+ não é necessário implementar protocolos de comunicação de rede.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Comunicação entre elementos internos
-\end_layout
+Comunicação entre elementos internos.
 
-\begin_layout Standard
-A comunicação interna ocorrerá por meio de chamadas de métodos entre os objetos definidos no modelo orientado a objetos.
-\end_layout
-
-\begin_layout Standard
-A classe SimuladorJanelaOperacional atuará como elemento coordenador,
- comunicando-se com objetos das classes Poco,
- ParametrosSimulacao,
- ModeloPetrofisico,
- ModeloGeopressoes,
- ModeloFratura,
- JanelaOperacional,
- CalculadoraECD e Resultados.
-\end_layout
-
-\begin_layout Standard
-Os objetos responsáveis pelos modelos matemáticos receberão os dados e parâmetros necessários,
- executarão suas operações específicas e fornecerão os resultados para as etapas seguintes.
-\end_layout
-
-\begin_layout Standard
-De forma simplificada:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $Simulador→Dados→Petrofísica→Geopressões→Fratura→JanelaOperacional→ECD→Resultados$
+\series default
+ A comunicação interna ocorre por meio de chamadas de métodos entre os objetos definidos no modelo orientado a objetos.
+ A classe 
+\family typewriter
+MainWindow
+\family default
+ (interface gráfica) recebe as ações do usuário e as repassa ao 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+,
+ que atua como elemento coordenador,
+ comunicando-se com objetos das classes 
+\family typewriter
+Poco
+\family default
+,
+ 
+\family typewriter
+ParametrosSimulacao
+\family default
+,
+ 
+\family typewriter
+ModeloPetrofisico
+\family default
+,
+ 
+\family typewriter
+ModeloGeopressoes
+\family default
+,
+ 
+\family typewriter
+ModeloFratura
+\family default
+,
+ 
+\family typewriter
+JanelaOperacional
+\family default
+,
+ 
+\family typewriter
+CalculadoraECD
+\family default
+ e 
+\family typewriter
+Resultados
+\family default
+.
+ Os objetos responsáveis pelos modelos matemáticos recebem os dados e parâmetros necessários,
+ executam suas operações específicas e fornecem os resultados para as etapas seguintes.
+ De forma simplificada:
+ Interface 
+\begin_inset Formula $\rightarrow$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
+ Simulador 
+\begin_inset Formula $\rightarrow$
 \end_inset
 
+ Dados 
+\begin_inset Formula $\rightarrow$
+\end_inset
 
+ Petrofísica 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Geopressões 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Fratura 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Janela Operacional 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ ECD 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Resultados.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Interface API das classes e bibliotecas
+Interface (API) das classes e bibliotecas.
+
+\series default
+ O sistema não utiliza API web ou serviço externo.
+ A interface entre os diferentes componentes é definida pelos métodos públicos das classes C++.
+ Algumas das operações disponíveis são:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+// ModeloPetrofisico
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+double calcularPorosidade(double deltaT) const;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+double calcularDensidadeBulk(double porosidade) const;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+// ModeloGeopressoes
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+double calcularPressaoPoro(const Camada& camada) const;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+double calcularGradientePoro(const Camada& camada) const;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+// ModeloFratura
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+double calcularGradienteFratura(const Camada& camada) const;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+// JanelaOperacional
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+double calcularLargura();
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+// CalculadoraECD
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+double calcularECD() const;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+std::string avaliarJanela(const JanelaOperacional& janela) const;
 \end_layout
 
 \begin_layout Standard
-O sistema não utilizará inicialmente uma API web ou serviço externo.
- A interface entre os diferentes componentes será definida pelos métodos públicos das classes C++.
-\end_layout
-
-\begin_layout Standard
-Por exemplo,
- algumas operações previstas são:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-ModeloPetrofisico::calcularPorosidade()
-\end_layout
-
-\begin_layout Plain Layout
-ModeloPetrofisico::calcularDensidadeBulk()
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-ModeloGeopressoes::calcularPressaoPoro()
-\end_layout
-
-\begin_layout Plain Layout
-ModeloGeopressoes::calcularGradientePoro()
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-ModeloFratura::calcularGradienteFratura()
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-JanelaOperacional::calcularLargura()
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-CalculadoraECD::calcularECD()
-\end_layout
-
-\begin_layout Plain Layout
-CalculadoraECD::avaliarJanela()
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Os atributos internos das classes serão preferencialmente privados,
- enquanto o acesso às funcionalidades será realizado por métodos públicos.
+Os atributos internos das classes são privados,
+ enquanto o acesso às funcionalidades é realizado por métodos públicos.
  Essa decisão contribui para o encapsulamento dos dados e para a separação das responsabilidades entre os objetos.
 \end_layout
 
 \begin_layout Standard
-\begin_inset space \space{}
+
+\series bold
+Formato dos arquivos.
+
+\series default
+ Foram priorizados formatos abertos e de fácil leitura.
+ Os dados de entrada do poço são armazenados em arquivo CSV com as colunas 
+\family typewriter
+profundidade_m
+\family default
+,
+ 
+\family typewriter
+delta_t_us_ft
+\family default
+ e 
+\family typewriter
+tipo
+\family default
+ (separador vírgula ou ponto e vírgula,
+ detectado automaticamente);
+ os parâmetros,
+ em arquivo CSV com linhas 
+\family typewriter
+parametro,valor
+\family default
+.
+ Os resultados numéricos são exportados em CSV,
+ permitindo sua posterior leitura por planilhas eletrônicas ou outros programas de análise;
+ os gráficos são gerados em PNG a partir de um roteiro do Gnuplot (
+\family typewriter
+.gp
+\family default
+).
+ Os arquivos-fonte do projeto são armazenados nos formatos próprios do desenvolvimento:
+\end_layout
+
+\begin_layout Description
+.cpp código-fonte C++;
+\end_layout
+
+\begin_layout Description
+.h arquivos de cabeçalho;
+\end_layout
+
+\begin_layout Description
+CMakeLists.txt configuração da compilação com CMake;
+\end_layout
+
+\begin_layout Description
+.puml código-fonte dos diagramas PlantUML;
+\end_layout
+
+\begin_layout Description
+.lyx texto deste relatório.
+\end_layout
+
+\begin_layout Subsection
+Recursos
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:recursos"
+
 \end_inset
 
 
@@ -404,523 +521,356 @@ Os atributos internos das classes serão preferencialmente privados,
 \begin_layout Standard
 
 \series bold
-Formato dos arquivos
-\end_layout
+Recursos globais.
 
-\begin_layout Standard
-Serão priorizados formatos abertos e de fácil leitura.
-\end_layout
-
-\begin_layout Standard
-Os dados de entrada do poço poderão ser armazenados em arquivos de texto estruturado,
- principalmente TXT ou CSV,
- contendo informações como profundidade e valores do perfil sônico.
-\end_layout
-
-\begin_layout Standard
-Os resultados numéricos produzidos pelo simulador também poderão ser exportados em TXT ou CSV,
- permitindo sua posterior leitura por planilhas eletrônicas ou outros programas de análise.
-\end_layout
-
-\begin_layout Standard
-Os arquivos-fonte do projeto serão armazenados nos formatos próprios do desenvolvimento:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-.cpp   código-fonte C++
-\end_layout
-
-\begin_layout Plain Layout
-.h     arquivos de cabeçalho
-\end_layout
-
-\begin_layout Plain Layout
-.puml  código-fonte dos diagramas PlantUML
-\end_layout
-
-\end_inset
-
-
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Recursos
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-Recursos
-\end_layout
-
-\end_inset
-
-
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-
-\series bold
-Recursos globais
-\end_layout
-
-\begin_layout Standard
-Os principais recursos utilizados pelo sistema serão memória principal,
+\series default
+ Os principais recursos utilizados pelo sistema são memória principal,
  processamento da CPU,
  arquivos de entrada e arquivos de saída.
-\end_layout
-
-\begin_layout Standard
-Os dados referentes às camadas do poço serão mantidos em estruturas de dados durante a execução do programa.
- A classe Poco armazenará o conjunto de objetos da classe Camada,
- enquanto a classe Resultados manterá as informações necessárias para consulta e exportação dos resultados.
-\end_layout
-
-\begin_layout Standard
-O gerenciamento desses recursos será realizado utilizando os mecanismos fornecidos pela linguagem C++,
- buscando evitar cópias desnecessárias de grandes conjuntos de dados e garantir que os objetos tenham ciclos de vida bem definidos.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
+ Os dados referentes às camadas do poço são mantidos em estruturas de dados durante a execução do programa.
+ A classe 
+\family typewriter
+Poco
+\family default
+ armazena o conjunto de objetos da classe 
+\family typewriter
+Camada
+\family default
+,
+ enquanto a classe 
+\family typewriter
+Resultados
+\family default
+ mantém as informações necessárias para consulta e exportação dos resultados.
+ O gerenciamento desses recursos é realizado utilizando os mecanismos fornecidos pela linguagem C++ (objetos com ciclo de vida automático e contêineres 
+\family typewriter
+std::vector
+\family default
+),
+ evitando cópias desnecessárias de grandes conjuntos de dados e alocação manual de memória no núcleo de cálculo.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Banco de dados
-\end_layout
+Banco de dados.
 
-\begin_layout Standard
-Na versão inicial do projeto não foi identificada necessidade de utilização de banco de dados.
-\end_layout
-
-\begin_layout Standard
-O conjunto de informações utilizado pelo simulador apresenta estrutura relativamente simples e pode ser carregado a partir de arquivos de entrada.
- Os resultados também poderão ser armazenados em arquivos de saída.
-\end_layout
-
-\begin_layout Standard
-A utilização de um sistema gerenciador de banco de dados aumentaria a complexidade do projeto sem representar necessidade funcional nesta etapa.
-\end_layout
-
-\begin_layout Standard
-Entretanto,
- a arquitetura modular permitirá que um mecanismo de persistência seja incorporado futuramente caso o sistema passe a gerenciar grande quantidade de poços,
+\series default
+ Na versão inicial do projeto não foi identificada necessidade de utilização de banco de dados.
+ O conjunto de informações utilizado pelo simulador apresenta estrutura relativamente simples e pode ser carregado a partir de arquivos de entrada.
+ Os resultados também são armazenados em arquivos de saída.
+ A utilização de um sistema gerenciador de banco de dados aumentaria a complexidade do projeto sem representar necessidade funcional nesta etapa.
+ Entretanto,
+ a arquitetura modular permite que um mecanismo de persistência seja incorporado futuramente caso o sistema passe a gerenciar grande quantidade de poços,
  projetos ou históricos de simulação.
 \end_layout
 
 \begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 
 \series bold
-Armazenamento de massa
-\end_layout
+Armazenamento de massa.
 
-\begin_layout Standard
-Não será necessário utilizar sistemas especializados de armazenamento de massa,
- storage distribuído ou infraestrutura semelhante.
-\end_layout
-
-\begin_layout Standard
-Os arquivos de entrada,
+\series default
+ Não é necessário utilizar sistemas especializados de armazenamento de massa,
+ 
+\emph on
+storage
+\emph default
+ distribuído ou infraestrutura semelhante.
+ Os arquivos de entrada,
  saída,
- documentação e código-fonte possuem volume reduzido e poderão ser armazenados no sistema de arquivos convencional do computador.
-\end_layout
-
-\begin_layout Standard
-O código e a documentação do projeto serão adicionalmente versionados por meio do Git e mantidos no GitHub,
+ documentação e código-fonte possuem volume reduzido e são armazenados no sistema de arquivos convencional do computador.
+ O código e a documentação do projeto são versionados por meio do Git e mantidos no GitHub,
  permitindo controle das versões desenvolvidas durante o projeto.
 \end_layout
 
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
+\begin_layout Subsection
 Controle
-\begin_inset Index idx
-range none
-pageformat default
-status open
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:controle"
 
-\begin_layout Plain Layout
-Controle
-\end_layout
-
-\end_inset
-
-
-\begin_inset Separator latexpar
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
 \begin_layout Standard
 
 \series bold
-Estrutura de controle
-\end_layout
+Estrutura de controle.
 
-\begin_layout Standard
-O processamento será inicialmente implementado de maneira sequencial,
+\series default
+ O processamento é implementado de maneira sequencial,
  seguindo a dependência existente entre os modelos matemáticos.
-\end_layout
-
-\begin_layout Standard
-A sequência principal será:
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-carregamento dos dados
-\end_layout
-
-\begin_layout Standard
-→ validação
-\end_layout
-
-\begin_layout Standard
-→ cálculo petrofísico
-\end_layout
-
-\begin_layout Standard
-→ cálculo da sobrecarga
-\end_layout
-
-\begin_layout Standard
-→ estimativa da pressão de poro
-\end_layout
-
-\begin_layout Standard
-→ cálculo do gradiente de fratura
-\end_layout
-
-\begin_layout Standard
-→ determinação da janela operacional
-\end_layout
-
-\begin_layout Standard
-→ avaliação de ECD
-\end_layout
-
-\begin_layout Standard
-→ apresentação dos resultados
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
+ A sequência principal é:
+ carregamento dos dados 
+\begin_inset Formula $\rightarrow$
 \end_inset
 
+ validação 
+\begin_inset Formula $\rightarrow$
+\end_inset
 
-\end_layout
+ cálculo petrofísico 
+\begin_inset Formula $\rightarrow$
+\end_inset
 
-\begin_layout Standard
-A adoção do processamento sequencial decorre da existência de dependências entre determinadas etapas.
- Por exemplo,
- a pressão de poro depende de informações obtidas anteriormente,
+ cálculo da sobrecarga 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ estimativa da pressão de poro 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ cálculo do gradiente de fratura 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ determinação da janela operacional 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ avaliação de ECD 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ apresentação dos resultados.
+ A adoção do processamento sequencial decorre da existência de dependências entre determinadas etapas:
+ por exemplo,
+ a pressão de poro depende da sobrecarga calculada anteriormente,
  enquanto a janela operacional depende dos gradientes de poro e de fratura.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
+ Na interface gráfica,
+ o controle é orientado a eventos:
+ cada botão aciona um método da 
+\family typewriter
+MainWindow
+\family default
+,
+ que chama o simulador e atualiza a tela.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Condições extremas e prioridades
+Condições extremas e prioridades.
+
+\series default
+ O sistema verifica condições que impossibilitam ou comprometem os cálculos antes de executar as operações.
+ As situações tratadas na versão 1.0 são:
+\end_layout
+
+\begin_layout Itemize
+arquivo de dados inexistente (o carregamento retorna falso) ou vazio;
+\end_layout
+
+\begin_layout Itemize
+profundidade ausente,
+ não numérica ou fora de ordem estritamente crescente;
+\end_layout
+
+\begin_layout Itemize
+valor sônico não numérico ou não positivo,
+ camada de formação sem registro sônico e tipo de camada ausente ou inválido;
+\end_layout
+
+\begin_layout Itemize
+parâmetro desconhecido,
+ ausente ou com valor não numérico no arquivo de parâmetros;
+\end_layout
+
+\begin_layout Itemize
+parâmetros fisicamente inválidos,
+ verificados pelo método 
+\family typewriter
+validarParametros()
+\family default
+ da classe 
+\family typewriter
+ParametrosSimulacao
+\family default
+:
+ densidades positivas,
+ 
+\begin_inset Formula $\Delta t_{f}>\Delta t_{ma}>0$
+\end_inset
+
+,
+ porosidades entre 0 e 1 com 
+\begin_inset Formula $\phi_{min}\le\phi_{max}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $G_{h}>0$
+\end_inset
+
+,
+ 
+\begin_inset Formula $n>0$
+\end_inset
+
+,
+ 
+\begin_inset Formula $0<\nu<0{,}5$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\Delta t_{0}>0$
+\end_inset
+
+,
+ 
+\begin_inset Formula $k\ge0$
+\end_inset
+
+,
+ 
+\begin_inset Formula $MW>0$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\Delta P_{f}\ge0$
+\end_inset
+
+ e profundidade de ECD positiva;
+\end_layout
+
+\begin_layout Itemize
+camadas em que o gradiente de pressão de poro é superior ou igual ao gradiente de fratura:
+ nenhuma janela é criada para a camada;
+\end_layout
+
+\begin_layout Itemize
+valores de ECD fora da janela operacional:
+ a condição é classificada como risco de influxo ou de fratura/perdas.
 \end_layout
 
 \begin_layout Standard
-O sistema deverá verificar condições que impossibilitem ou comprometam os cálculos antes de executar as operações.
-\end_layout
-
-\begin_layout Standard
-Entre as situações que deverão ser tratadas estão:
-\end_layout
-
-\begin_layout Itemize
-ausência de dados de profundidade;
-\end_layout
-
-\begin_layout Itemize
-valores inválidos do perfil sônico;
-\end_layout
-
-\begin_layout Itemize
-parâmetros petrofísicos ou geomecânicos incompatíveis com os cálculos;
-\end_layout
-
-\begin_layout Itemize
-profundidades não positivas;
-\end_layout
-
-\begin_layout Itemize
-impossibilidade matemática de execução de determinada equação;
-\end_layout
-
-\begin_layout Itemize
-gradiente de pressão de poro superior ou igual ao gradiente de fratura;
-\end_layout
-
-\begin_layout Itemize
-valores de ECD fora da janela operacional.
-\end_layout
-
-\begin_layout Standard
-A validação deverá ocorrer antes ou durante o processamento,
+Erros de leitura e de parâmetros são sinalizados por exceções C++ (
+\family typewriter
+std::runtime_error
+\family default
+,
+ 
+\family typewriter
+std::invalid_argument
+\family default
+ ou 
+\family typewriter
+std::logic_error
+\family default
+),
+ apresentadas ao usuário em caixas de diálogo na interface gráfica ou como mensagem de erro no terminal.
+ A validação ocorre antes do processamento,
  impedindo que valores inválidos se propaguem para as demais etapas.
 \end_layout
 
 \begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 
 \series bold
-Necessidade de otimização
-\end_layout
+Necessidade de otimização.
 
-\begin_layout Standard
-O projeto não apresenta inicialmente requisitos de processamento de grande escala.
- Os cálculos envolvem operações numéricas executadas sobre as camadas que representam o poço e possuem custo computacional reduzido para o conjunto de dados inicialmente considerado.
-\end_layout
-
-\begin_layout Standard
-Dessa forma,
- a prioridade será dada à correção dos cálculos,
+\series default
+ O projeto não apresenta requisitos de processamento de grande escala.
+ Os cálculos envolvem operações numéricas executadas sobre as camadas que representam o poço e possuem custo computacional reduzido para o conjunto de dados considerado.
+ Dessa forma,
+ a prioridade é dada à correção dos cálculos,
  clareza do código,
  modularidade e rastreabilidade dos resultados,
  em vez de otimizações prematuras.
-\end_layout
-
-\begin_layout Standard
-Caso futuramente sejam processados grandes conjuntos de poços ou intervalos de profundidade com elevada resolução,
+ Caso futuramente sejam processados grandes conjuntos de poços ou intervalos de profundidade com elevada resolução,
  poderão ser avaliadas técnicas adicionais de otimização.
 \end_layout
 
 \begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 
 \series bold
-Loops de controle e escalas de tempo
+Loops de controle e escalas de tempo.
+
+\series default
+ O principal processo repetitivo ocorre durante o processamento das camadas do poço.
+ Na implementação,
+ cada modelo percorre todas as camadas antes que o modelo seguinte seja executado:
 \end_layout
 
-\begin_layout Standard
-O principal processo repetitivo ocorrerá durante o processamento das camadas do poço.
+\begin_layout LyX-Code
+
+\size footnotesize
+validar parametros
 \end_layout
 
-\begin_layout Standard
-Conceitualmente:
+\begin_layout LyX-Code
+
+\size footnotesize
+para cada camada:
+ calcular porosidade e densidade bulk
 \end_layout
 
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
+\begin_layout LyX-Code
 
-\begin_layout Plain Layout
-para cada camada do poço
+\size footnotesize
+para cada camada (topo -> base):
+ acumular tensao de sobrecarga
 \end_layout
 
-\begin_layout Plain Layout
-    calcular propriedades petrofísicas
+\begin_layout LyX-Code
+
+\size footnotesize
+para cada camada com delta t:
+ calcular Pp e Gp (Eaton)
 \end_layout
 
-\begin_layout Plain Layout
-    calcular geopressões
+\begin_layout LyX-Code
+
+\size footnotesize
+para cada camada com Pp:
+ calcular Shmin e Gf
 \end_layout
 
-\begin_layout Plain Layout
-    calcular gradiente de fratura
+\begin_layout LyX-Code
+
+\size footnotesize
+para cada camada com Gf > Gp:
+ criar e armazenar a janela operacional
 \end_layout
 
-\begin_layout Plain Layout
-    determinar janela operacional
-\end_layout
+\begin_layout LyX-Code
 
-\begin_layout Plain Layout
-    armazenar resultados
-\end_layout
-
-\begin_layout Plain Layout
-fim
-\end_layout
-
-\end_inset
-
-
+\size footnotesize
+avaliar a ECD na janela mais proxima da profundidade informada
 \end_layout
 
 \begin_layout Standard
 Algumas grandezas,
  principalmente a tensão de sobrecarga,
  possuem caráter acumulativo e dependem das camadas anteriormente processadas.
-\end_layout
-
-\begin_layout Standard
-O sistema não possui,
- nesta versão,
- requisitos de processamento em tempo real.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
+ O sistema não possui requisitos de processamento em tempo real.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Concorrência
+Concorrência.
+
+\series default
+ Não foi identificada necessidade de processamento concorrente ou paralelo.
+ Embora determinados cálculos possam futuramente ser paralelizados,
+ a existência de dependências entre etapas e o volume de dados previsto tornam o processamento sequencial suficiente.
+ A opção por uma implementação sequencial também facilita os testes e a verificação numérica dos resultados.
+ A geração dos gráficos executa o Gnuplot de forma síncrona:
+ a interface aguarda o término do programa externo.
 \end_layout
 
-\begin_layout Standard
-Não foi identificada necessidade de processamento concorrente ou paralelo na implementação inicial.
-\end_layout
-
-\begin_layout Standard
-Embora determinados cálculos possam futuramente ser paralelizados,
- a existência de dependências entre etapas e o volume de dados previsto tornam o processamento sequencial suficiente para a primeira versão.
-\end_layout
-
-\begin_layout Standard
-A opção por uma implementação sequencial também facilita os testes e a verificação numérica dos resultados.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
+\begin_layout Subsection
 Plataformas
-\begin_inset Index idx
-range none
-pageformat default
-status open
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:plataformas"
 
-\begin_layout Plain Layout
-Plataformas
-\end_layout
-
-\end_inset
-
-
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-
-\series bold
-Estrutura arquitetônica
-\end_layout
-
-\begin_layout Standard
-O software utilizará uma arquitetura orientada a objetos e modular.
-\end_layout
-
-\begin_layout Standard
-As responsabilidades serão separadas conceitualmente em componentes relacionados a:
-\end_layout
-
-\begin_layout Itemize
-dados do poço;
-\end_layout
-
-\begin_layout Itemize
-parâmetros da simulação;
-\end_layout
-
-\begin_layout Itemize
-petrofísica;
-\end_layout
-
-\begin_layout Itemize
-geopressões;
-\end_layout
-
-\begin_layout Itemize
-gradiente de fratura;
-\end_layout
-
-\begin_layout Itemize
-janela operacional;
-\end_layout
-
-\begin_layout Itemize
-cálculo de ECD;
-\end_layout
-
-\begin_layout Itemize
-resultados.
-\end_layout
-
-\begin_layout Standard
-A coordenação entre esses módulos será realizada pela classe SimuladorJanelaOperacional.
-\end_layout
-
-\begin_layout Standard
-Essa arquitetura mantém correspondência com os pacotes e classes já identificados durante as etapas de elaboração e análise.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
 \end_inset
 
 
@@ -929,607 +879,552 @@ Essa arquitetura mantém correspondência com os pacotes e classes já identific
 \begin_layout Standard
 
 \series bold
-Subsistemas relacionados à plataforma
-\end_layout
+Estrutura arquitetônica.
 
-\begin_layout Standard
-Inicialmente,
- o projeto poderá ser organizado em três grandes grupos:
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Entrada e dados
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-Poco;
-\end_layout
-
-\begin_layout Plain Layout
-Camada;
-\end_layout
-
-\begin_layout Plain Layout
-ParametrosSimulacao.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
+\series default
+ O software utiliza uma arquitetura orientada a objetos e modular.
+ As responsabilidades são separadas em componentes relacionados a:
+ dados do poço;
+ parâmetros da simulação;
+ petrofísica;
+ geopressões;
+ gradiente de fratura;
+ janela operacional;
+ cálculo de ECD;
+ resultados;
+ e interface com o usuário.
+ A coordenação entre os módulos de cálculo é realizada pela classe 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+.
+ Essa arquitetura mantém correspondência com os pacotes e classes identificados durante as etapas de elaboração e análise.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Processamento
-\end_layout
+Subsistemas relacionados à plataforma.
 
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-ModeloPetrofisico;
-\end_layout
-
-\begin_layout Plain Layout
-ModeloGeopressoes;
-\end_layout
-
-\begin_layout Plain Layout
-ModeloFratura;
-\end_layout
-
-\begin_layout Plain Layout
-JanelaOperacional;
-\end_layout
-
-\begin_layout Plain Layout
-CalculadoraECD.
-\end_layout
+\series default
+ O projeto está organizado em quatro grupos,
+ utilizados como referência para o diagrama de componentes (Seção 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:componentes"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
 
 \end_inset
 
-
+):
 \end_layout
 
-\begin_layout Standard
-\begin_inset space \space{}
+\begin_layout Description
+Entrada
+\begin_inset space ~
 \end_inset
 
+e
+\begin_inset space ~
+\end_inset
 
+dados 
+\family typewriter
+Poco
+\family default
+,
+ 
+\family typewriter
+Camada
+\family default
+ e 
+\family typewriter
+ParametrosSimulacao
+\family default
+;
+\end_layout
+
+\begin_layout Description
+Processamento 
+\family typewriter
+ModeloPetrofisico
+\family default
+,
+ 
+\family typewriter
+ModeloGeopressoes
+\family default
+,
+ 
+\family typewriter
+ModeloFratura
+\family default
+,
+ 
+\family typewriter
+JanelaOperacional
+\family default
+ e 
+\family typewriter
+CalculadoraECD
+\family default
+;
+\end_layout
+
+\begin_layout Description
+Resultados
+\begin_inset space ~
+\end_inset
+
+e
+\begin_inset space ~
+\end_inset
+
+controle 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+ e 
+\family typewriter
+Resultados
+\family default
+;
+\end_layout
+
+\begin_layout Description
+Interface 
+\family typewriter
+MainWindow
+\family default
+ e os programas principais 
+\family typewriter
+main_gui.cpp
+\family default
+ (interface gráfica) e 
+\family typewriter
+main.cpp
+\family default
+ (linha de comando).
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Resultados e controle
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-SimuladorJanelaOperacional;
-\end_layout
-
-\begin_layout Plain Layout
-Resultados.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Essa divisão servirá posteriormente como referência para o diagrama de componentes.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Hardware,
- sistema operacional e linguagem
-\end_layout
+ sistema operacional e linguagem.
 
-\begin_layout Standard
-O sistema será desenvolvido para computadores pessoais convencionais,
+\series default
+ O sistema é desenvolvido para computadores pessoais convencionais,
  não exigindo hardware especializado.
-\end_layout
-
-\begin_layout Standard
-A linguagem utilizada será C++.
-\end_layout
-
-\begin_layout Standard
-Conforme estabelecido nos requisitos do projeto,
- será buscada compatibilidade com:
-\end_layout
-
-\begin_layout Itemize
-Windows;
-\end_layout
-
-\begin_layout Itemize
-GNU/Linux;
-\end_layout
-
-\begin_layout Itemize
-macOS.
-\end_layout
-
-\begin_layout Standard
-A portabilidade será favorecida pela utilização dos recursos padronizados da linguagem C++ e pela redução de dependências específicas de determinado sistema operacional.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
+ A linguagem utilizada é C++17.
+ Conforme estabelecido nos requisitos do projeto,
+ busca-se compatibilidade com Windows,
+ GNU/Linux e macOS.
+ A portabilidade é favorecida pela utilização dos recursos padronizados da linguagem C++ e de bibliotecas multiplataforma,
+ com redução de dependências específicas de determinado sistema operacional.
+ O ambiente principal de desenvolvimento e uso é o Windows.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Bibliotecas externas
-\end_layout
+Bibliotecas externas.
 
-\begin_layout Standard
-A implementação deverá priorizar a biblioteca padrão do C++,
- utilizando componentes como:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
+\series default
+ O núcleo de cálculo utiliza somente a biblioteca padrão do C++ (
+\family typewriter
 iostream
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 fstream
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
+sstream
+\family default
+,
+ 
+\family typewriter
 vector
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 string
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 cmath
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 algorithm
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 iomanip
+\family default
+,
+ 
+\family typewriter
+limits
+\family default
+,
+ 
+\family typewriter
+stdexcept
+\family default
+ e 
+\family typewriter
+filesystem
+\family default
+).
+ Além dela,
+ o projeto utiliza:
 \end_layout
+
+\begin_layout Itemize
+
+\series bold
+Qt 6 (módulo Widgets)
+\series default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "qt6"
+literal "false"
 
 \end_inset
 
-
+:
+ biblioteca da interface gráfica (janela principal,
+ abas,
+ campos numéricos,
+ tabela,
+ caixas de diálogo e exibição das imagens dos gráficos).
+ É utilizada apenas pelo executável 
+\family typewriter
+simulador_gui
+\family default
+;
+ o núcleo de cálculo não depende do Qt;
 \end_layout
 
-\begin_layout Standard
-conforme a necessidade identificada durante a implementação.
-\end_layout
+\begin_layout Itemize
 
-\begin_layout Standard
-O uso de bibliotecas externas será limitado às funcionalidades que não sejam adequadamente atendidas pela biblioteca padrão.
-\end_layout
+\series bold
+Gnuplot
+\series default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gnuplot"
+literal "false"
 
-\begin_layout Standard
-Para os testes automatizados,
- poderá ser adotado um framework de testes compatível com C++,
- conforme definido na etapa de implementação e testes.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
 \end_inset
 
+:
+ programa externo,
+ chamado por 
+\family typewriter
+Resultados::gerarGraficos()
+\family default
+ por meio de 
+\family typewriter
+std::system
+\family default
+,
+ que gera os sete gráficos PNG (terminal 
+\family typewriter
+pngcairo
+\family default
+).
+ Deve estar instalado e acessível pelo PATH do sistema.
+\end_layout
 
+\begin_layout Standard
+Não foi adotado um 
+\emph on
+framework
+\emph default
+ de testes automatizados nesta versão;
+ os testes foram realizados com o caso de referência (Capítulo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:teste"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Interface gráfica – GDI
-\end_layout
+Interface gráfica.
 
-\begin_layout Standard
-Nesta etapa do projeto,
- não está prevista a utilização da biblioteca GDI para construção de uma interface gráfica.
-\end_layout
-
-\begin_layout Standard
-A primeira versão funcional será direcionada à execução e validação dos cálculos do simulador,
- utilizando uma interface textual para interação com o usuário.
-\end_layout
-
-\begin_layout Standard
-Essa decisão reduz a complexidade inicial e permite concentrar os esforços na correta implementação e validação dos modelos de engenharia.
-\end_layout
-
-\begin_layout Standard
-A arquitetura deverá,
- entretanto,
- manter os cálculos separados da camada de interação com o usuário,
- permitindo que uma interface gráfica possa ser incorporada futuramente sem necessidade de reescrever os modelos matemáticos.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
+\series default
+ A interface gráfica foi construída com o Qt 6 Widgets,
+ e não com a biblioteca GDI.
+ Essa escolha mantém a portabilidade prevista no requisito RNF-02,
+ pois o Qt é multiplataforma.
+ A interface (
+\family typewriter
+MainWindow
+\family default
+) é organizada em cinco abas:
+ Dados do Poço,
+ Parâmetros,
+ ECD,
+ Resultados e Gráficos.
+ Os cálculos permanecem separados da camada de interação com o usuário:
+ a mesma biblioteca de classes é utilizada também pela versão em linha de comando (
+\family typewriter
+simulador_cli
+\family default
+),
+ que executa o caso de referência sem interface gráfica.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Ambiente de desenvolvimento – IDE
-\end_layout
+Ambiente de desenvolvimento (IDE).
 
-\begin_layout Standard
-O ambiente de desenvolvimento adotado será o Visual Studio Code (VS Code).
-\end_layout
+\series default
+ O ambiente de desenvolvimento adotado é o Visual Studio Code (VS Code),
+ utilizado para criação e edição dos arquivos C++,
+ organização dos arquivos do projeto,
+ compilação e execução do software,
+ integração com Git e acompanhamento das alterações realizadas no código.
+ O compilador de referência é o g++ do ambiente MSYS2 UCRT64 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "msys2"
+literal "false"
 
-\begin_layout Standard
-O VS Code será utilizado para:
-\end_layout
-
-\begin_layout Itemize
-criação e edição dos arquivos C++;
-\end_layout
-
-\begin_layout Itemize
-organização dos arquivos do projeto;
-\end_layout
-
-\begin_layout Itemize
-compilação e execução do software;
-\end_layout
-
-\begin_layout Itemize
-integração com Git;
-\end_layout
-
-\begin_layout Itemize
-acompanhamento das alterações realizadas no código.
-\end_layout
-
-\begin_layout Standard
-O compilador de referência será o g++,
- utilizando ambiente compatível com a plataforma instalada.
-\end_layout
-
-\begin_layout Standard
-O projeto também poderá utilizar CMake para organização e automação do processo de compilação.
-\end_layout
-
-\begin_layout Standard
-Os diagramas UML serão mantidos em PlantUML,
- conforme orientação estabelecida para o projeto.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
 \end_inset
 
+,
+ e a compilação é automatizada com CMake 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cmake"
+literal "false"
 
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Padrões de projeto
-\begin_inset Separator latexpar
 \end_inset
 
+ e Ninja,
+ por meio da extensão CMake Tools do VS Code.
+ Os diagramas UML são mantidos em PlantUML 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "plantuml"
+literal "false"
 
+\end_inset
+
+.
 \end_layout
 
-\begin_deeper
 \begin_layout Standard
-A arquitetura do sistema será desenvolvida buscando baixo acoplamento e separação clara de responsabilidades entre as classes.
-\end_layout
 
-\begin_layout Standard
-A classe SimuladorJanelaOperacional centraliza a comunicação entre o usuário e os diferentes componentes especializados do sistema.
+\series bold
+Padrões de projeto.
+
+\series default
+ A arquitetura do sistema busca baixo acoplamento e separação clara de responsabilidades entre as classes.
+ A classe 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+ centraliza a comunicação entre a interface e os diferentes componentes especializados do sistema.
  Dessa forma,
  ela fornece uma interface simplificada para operações que internamente dependem da colaboração entre diversas classes.
-\end_layout
+ Essa organização apresenta características do padrão 
+\emph on
+Facade
+\emph default
+ (Fachada) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gamma1994"
+literal "false"
 
-\begin_layout Standard
-Essa organização apresenta características semelhantes ao padrão Facade,
- pois a classe controladora oferece uma interface de alto nível para os diferentes subsistemas responsáveis pelos cálculos.
-\end_layout
+\end_inset
 
-\begin_layout Standard
-Por exemplo,
- o usuário poderá solicitar:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
+,
+ pois a classe controladora oferece uma interface de alto nível para os subsistemas responsáveis pelos cálculos.
+ Por exemplo,
+ a interface solicita 
+\family typewriter
 executarSimulacao()
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-enquanto internamente o sistema realiza operações como:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
+\family default
+,
+ enquanto internamente o sistema realiza 
+\family typewriter
 calcularPetrofisica()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 calcularGeopressoes()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 calcularFratura()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+ e 
+\family typewriter
 determinarJanelas()
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-A utilização formal de outros padrões de projeto será avaliada durante o desenvolvimento caso surja uma necessidade concreta.
- Não serão introduzidos padrões adicionais apenas para aumentar a complexidade da arquitetura.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Padrões gerais adotados no código
-\end_layout
-
-\begin_layout Standard
-Além das decisões anteriores,
- serão adotadas as seguintes convenções:
+\family default
+.
+ A utilização formal de outros padrões de projeto será avaliada caso surja uma necessidade concreta;
+ não são introduzidos padrões adicionais apenas para aumentar a complexidade da arquitetura.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Classes:
- 
+Padrões gerais adotados no código.
+
 \series default
-nomes iniciados por letra maiúscula e representativos do domínio.
+ Além das decisões anteriores,
+ foram adotadas as seguintes convenções:
 \end_layout
 
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
+\begin_layout Description
+Classes nomes iniciados por letra maiúscula e representativos do domínio (
+\family typewriter
 Poco
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 Camada
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 ModeloGeopressoes
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 CalculadoraECD
+\family default
+);
 \end_layout
 
+\begin_layout Description
+Métodos
+\begin_inset space ~
 \end_inset
 
+e
+\begin_inset space ~
+\end_inset
 
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Métodos e atributos:
- 
-\series default
-padrão camelCase.
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
+atributos padrão 
+\emph on
+camelCase
+\emph default
+ (
+\family typewriter
 calcularPressaoPoro()
-\end_layout
-
-\begin_layout Plain Layout
-calcularGradienteFratura()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 profundidadeMedia
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 coeficientePoisson
+\family default
+);
 \end_layout
 
+\begin_layout Description
+Visibilidade atributos privados e métodos de operação públicos;
+\end_layout
+
+\begin_layout Description
+Tipos
+\begin_inset space ~
 \end_inset
 
-
+numéricos valores de engenharia com casas decimais representados pelo tipo 
+\family typewriter
+double
+\family default
+;
+ valores ausentes representados por NaN;
 \end_layout
 
-\begin_layout Standard
-
-\series bold
-Visibilidade:
- 
-\series default
-atributos preferencialmente privados e métodos de operação públicos.
+\begin_layout Description
+Retornos métodos de cálculo retornam o tipo correspondente ao resultado;
+ operações que apenas alteram o estado do objeto utilizam 
+\family typewriter
+void
+\family default
+;
+ validações e operações de arquivo retornam 
+\family typewriter
+bool
+\family default
+;
 \end_layout
 
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-- atributoPrivado
-\end_layout
-
-\begin_layout Plain Layout
-+ metodoPublico()
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Tipos numéricos:
- 
-\series default
-valores de engenharia que necessitem casas decimais serão representados predominantemente pelo tipo double.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Retornos:
-
-\series default
- métodos de cálculo retornarão o tipo correspondente ao resultado;
- operações que apenas alterem o estado do objeto poderão utilizar void;
- validações utilizarão bool.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Documentação:
- 
-\series default
-classes e métodos deverão conter comentários objetivos descrevendo responsabilidade,
+\begin_layout Description
+Documentação classes e métodos com comentários objetivos descrevendo responsabilidade,
  parâmetros,
- unidades utilizadas e valores retornados.
+ unidades utilizadas e valores retornados;
 \end_layout
 
-\begin_layout Standard
-
-\series bold
-Unidades:
+\begin_layout Description
+Unidades unidades explicitadas nos nomes das colunas dos arquivos (
+\family typewriter
+profundidade_m
+\family default
+,
  
-\series default
-as unidades deverão ser explicitadas na documentação e nas entradas e saídas do sistema,
+\family typewriter
+delta_t_us_ft
+\family default
+,
+ 
+\family typewriter
+gp_ppg
+\family default
+),
+ nos rótulos da interface e na documentação,
  evitando ambiguidades entre profundidade,
  pressão,
  gradiente e densidade equivalente.
 \end_layout
 
-\end_deeper
 \begin_layout Section
-Projeto Orientado a Objeto – POO
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-POO
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-Projeto orientado a objeto
-\end_layout
-
-\end_inset
-
-
+Projeto orientado a objeto —
+ POO
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Projeto-orientado-a-objeto"
+name "sec:poo"
 
 \end_inset
 
@@ -1547,45 +1442,70 @@ O Projeto Orientado a Objetos do Simulador de Janela Operacional de Perfuração
 \end_layout
 
 \begin_layout Standard
-A estrutura definida anteriormente será preservada,
- mantendo as dez classes principais do sistema:
- SimuladorJanelaOperacional,
- Poco,
- Camada,
- ParametrosSimulacao,
- ModeloPetrofisico,
- ModeloGeopressoes,
- ModeloFratura,
- JanelaOperacional,
- CalculadoraECD e Resultados.
+A estrutura definida anteriormente foi preservada,
+ mantendo as dez classes principais do núcleo de cálculo:
+ 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+,
+ 
+\family typewriter
+Poco
+\family default
+,
+ 
+\family typewriter
+Camada
+\family default
+,
+ 
+\family typewriter
+ParametrosSimulacao
+\family default
+,
+ 
+\family typewriter
+ModeloPetrofisico
+\family default
+,
+ 
+\family typewriter
+ModeloGeopressoes
+\family default
+,
+ 
+\family typewriter
+ModeloFratura
+\family default
+,
+ 
+\family typewriter
+JanelaOperacional
+\family default
+,
+ 
+\family typewriter
+CalculadoraECD
+\family default
+ e 
+\family typewriter
+Resultados
+\family default
+.
+ O projeto acrescentou a classe de interface 
+\family typewriter
+MainWindow
+\family default
+,
+ descrita adiante.
 \end_layout
 
-\begin_layout Standard
-O detalhamento do projeto busca garantir que cada classe possua responsabilidade específica,
- mantendo separados o armazenamento dos dados,
- os cálculos de engenharia,
- o controle da simulação e a apresentação dos resultados.
- Também são definidas nesta etapa as estruturas de dados utilizadas para representar conjuntos de camadas e janelas operacionais,
- os mecanismos de acesso aos arquivos e as dependências necessárias à implementação.
-\end_layout
-
-\begin_layout Subsubsection
-Efeitos do projeto no modelo
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-modelo
-\end_layout
-
-\end_inset
-
- estrutural
+\begin_layout Subsection
+Efeitos do projeto no modelo estrutural
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Efeito-do-projeto-no-modelo-estrutural"
+name "sec:poo_estrutural"
 
 \end_inset
 
@@ -1595,181 +1515,228 @@ name "subsec:Efeito-do-projeto-no-modelo-estrutural"
 \begin_layout Standard
 
 \series bold
-Bibliotecas e subsistemas
-\end_layout
+Bibliotecas e subsistemas.
 
-\begin_layout Standard
-Neste projeto,
- o modelo estrutural será complementado pelas bibliotecas necessárias à implementação em C++.
- A primeira versão do sistema utilizará prioritariamente componentes da biblioteca padrão da linguagem,
- tais como:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-<iostream>
-\end_layout
-
-\begin_layout Plain Layout
-<fstream>
-\end_layout
-
-\begin_layout Plain Layout
-<vector>
-\end_layout
-
-\begin_layout Plain Layout
-<string>
-\end_layout
-
-\begin_layout Plain Layout
-<cmath>
-\end_layout
-
-\begin_layout Plain Layout
-<algorithm>
-\end_layout
-
-\begin_layout Plain Layout
-<iomanip>
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-A biblioteca vector será utilizada principalmente para armazenamento das camadas do poço e das janelas operacionais calculadas.
- As bibliotecas fstream e iostream serão utilizadas para leitura,
- escrita e interação com arquivos e usuário,
- enquanto cmath dará suporte às operações matemáticas necessárias aos modelos de engenharia.
-\end_layout
-
-\begin_layout Standard
-Não está prevista,
- nesta versão,
- a utilização de bibliotecas externas para interface gráfica.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
+\series default
+ O modelo estrutural é complementado pelas bibliotecas necessárias à implementação.
+ A biblioteca 
+\family typewriter
+vector
+\family default
+ é utilizada para armazenamento das camadas do poço e das janelas operacionais calculadas;
+ 
+\family typewriter
+fstream
+\family default
+,
+ 
+\family typewriter
+sstream
+\family default
+ e 
+\family typewriter
+iostream
+\family default
+ são utilizadas para leitura e escrita de arquivos e mensagens no terminal;
+ 
+\family typewriter
+cmath
+\family default
+ dá suporte às operações matemáticas dos modelos de engenharia;
+ e 
+\family typewriter
+filesystem
+\family default
+ é utilizada para criar a pasta dos gráficos.
+ A interface gráfica utiliza as classes do Qt 6 Widgets (
+\family typewriter
+QMainWindow
+\family default
+,
+ 
+\family typewriter
+QTabWidget
+\family default
+,
+ 
+\family typewriter
+QDoubleSpinBox
+\family default
+,
+ 
+\family typewriter
+QTableWidget
+\family default
+,
+ 
+\family typewriter
+QComboBox
+\family default
+,
+ 
+\family typewriter
+QFileDialog
+\family default
+ e 
+\family typewriter
+QMessageBox
+\family default
+,
+ entre outras).
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Novas classes e associações
-\end_layout
+Novas classes e associações.
 
-\begin_layout Standard
-Após a revisão do modelo,
- não foi identificada necessidade imediata de acrescentar novas classes às dez classes principais anteriormente definidas.
-\end_layout
+\series default
+ A revisão do modelo identificou a necessidade de uma nova classe,
+ 
+\family typewriter
+MainWindow
+\family default
+,
+ derivada de 
+\family typewriter
+QMainWindow
+\family default
+,
+ responsável exclusivamente pela interface gráfica:
+ ela lê os valores dos campos,
+ delega todos os cálculos a um objeto 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+ (composição) e apresenta os resultados nas abas.
+ A Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:classes_projeto"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
 
-\begin_layout Standard
-As operações de leitura e escrita de arquivos serão inicialmente incorporadas às responsabilidades das classes já existentes,
- principalmente SimuladorJanelaOperacional e Resultados,
+\end_inset
+
+ apresenta o diagrama de classes revisado.
+ As operações de leitura e escrita de arquivos foram incorporadas às responsabilidades das classes já existentes,
+ principalmente 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+ (leitura) e 
+\family typewriter
+Resultados
+\family default
+ (exportação e gráficos),
  evitando a criação de componentes sem responsabilidade suficiente para justificar uma nova classe.
 \end_layout
 
 \begin_layout Standard
-Entretanto,
- as associações entre as classes passam a possuir uma representação mais concreta na implementação.
- Por exemplo,
- a relação de composição entre Poco e Camada será implementada utilizando uma coleção de objetos Camada.
-\end_layout
-
-\begin_layout Standard
-Conceitualmente:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-std::vector<Camada> camadas;
-\end_layout
+\align center
+\begin_inset Graphics
+	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/10_classes_projeto.png
+	lyxscale 40
+	width 95text%
 
 \end_inset
 
 
 \end_layout
-
-\begin_layout Standard
-Da mesma forma,
- os resultados poderão armazenar diversas janelas operacionais utilizando:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
 
 \begin_layout Plain Layout
-std::vector<JanelaOperacional> janelas;
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Dependências e restrições da plataforma
-\end_layout
-
-\begin_layout Standard
-O sistema será implementado em C++ e deverá evitar dependências desnecessárias de funções específicas de determinado sistema operacional.
-\end_layout
-
-\begin_layout Standard
-A compilação será realizada utilizando compilador compatível com C++,
- tendo o g++ como compilador de referência.
- O projeto será desenvolvido no Visual Studio Code e poderá utilizar CMake para organizar o processo de compilação.
-\end_layout
-
-\begin_layout Standard
-Os arquivos utilizados na entrada e saída do simulador deverão empregar formatos textuais portáveis,
- como TXT e CSV,
- evitando formatos proprietários.
-\end_layout
-
-\begin_layout Subsubsection
-Efeitos do projeto no modelo
-\begin_inset Index idx
-range none
-pageformat default
-status open
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
-modelo
-\end_layout
-
-\end_inset
-
- dinâmico
+Diagrama de classes revisado no projeto (interface gráfica e núcleo de cálculo).
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Efeito-do-projeto-no-modelo-dinamico"
+name "fig:classes_projeto"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As associações entre as classes passam a possuir uma representação concreta na implementação.
+ A relação de composição entre 
+\family typewriter
+Poco
+\family default
+ e 
+\family typewriter
+Camada
+\family default
+ e a agregação entre 
+\family typewriter
+Resultados
+\family default
+ e 
+\family typewriter
+JanelaOperacional
+\family default
+ são implementadas por coleções:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+std::vector<Camada> camadas;
+             // atributo de Poco
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+std::vector<JanelaOperacional> janelas;
+  // atributo de Resultados
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Dependências e restrições da plataforma.
+
+\series default
+ O sistema é implementado em C++17 e evita dependências desnecessárias de funções específicas de determinado sistema operacional.
+ A compilação utiliza o g++ como compilador de referência,
+ com CMake e Ninja.
+ Os arquivos de entrada e saída empregam formatos textuais portáveis (CSV),
+ evitando formatos proprietários.
+ A única chamada dependente do ambiente é a execução do Gnuplot por 
+\family typewriter
+std::system
+\family default
+,
+ que exige o programa instalado e acessível pelo PATH.
+\end_layout
+
+\begin_layout Subsection
+Efeitos do projeto no modelo dinâmico
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:poo_dinamico"
 
 \end_inset
 
@@ -1779,153 +1746,123 @@ name "subsec:Efeito-do-projeto-no-modelo-dinamico"
 \begin_layout Standard
 
 \series bold
-Revisão dos diagramas de sequência e comunicação:
-\end_layout
+Revisão dos diagramas de sequência e comunicação.
 
-\begin_layout Standard
-Os diagramas de sequência e comunicação foram revisados considerando a arquitetura definida para a implementação em C++.
-\end_layout
-
-\begin_layout Standard
-A classe SimuladorJanelaOperacional permanece como elemento coordenador das principais operações,
- enquanto os cálculos são delegados às classes especializadas:
-\end_layout
-
-\begin_layout Itemize
-ModeloPetrofisico;
-\end_layout
-
-\begin_layout Itemize
-ModeloGeopressoes;
-\end_layout
-
-\begin_layout Itemize
-ModeloFratura;
-\end_layout
-
-\begin_layout Itemize
-JanelaOperacional;
-\end_layout
-
-\begin_layout Itemize
-CalculadoraECD.
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-As mensagens presentes nos diagramas correspondem a métodos que deverão existir na implementação,
- como:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
+\series default
+ Os diagramas de sequência e comunicação foram revisados considerando a arquitetura definida para a implementação em C++ e a interface gráfica.
+ A classe 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+ permanece como elemento coordenador das principais operações,
+ enquanto os cálculos são delegados às classes especializadas 
+\family typewriter
+ModeloPetrofisico
+\family default
+,
+ 
+\family typewriter
+ModeloGeopressoes
+\family default
+,
+ 
+\family typewriter
+ModeloFratura
+\family default
+,
+ 
+\family typewriter
+JanelaOperacional
+\family default
+ e 
+\family typewriter
+CalculadoraECD
+\family default
+.
+ As mensagens presentes nos diagramas correspondem a métodos existentes na implementação,
+ como 
+\family typewriter
 processarPoco()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 calcularPorosidade()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 calcularPressaoPoro()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 calcularGradienteFratura()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 calcularLargura()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 calcularECD()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+ e 
+\family typewriter
 avaliarJanela()
+\family default
+.
+ Essa correspondência mantém a rastreabilidade entre os modelos UML e o código C++.
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Essa correspondência permite manter rastreabilidade entre os modelos UML e o futuro código C++.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\end_deeper
 \begin_layout Standard
 
 \series bold
-Revisão dos diagramas de estado e atividades
-\end_layout
+Revisão dos diagramas de estado e atividades.
 
-\begin_layout Standard
-O diagrama de estados da classe CalculadoraECD foi mantido porque representa adequadamente as condições assumidas pelo objeto durante a análise.
-\end_layout
+\series default
+ O diagrama de estados da classe 
+\family typewriter
+CalculadoraECD
+\family default
+ foi mantido porque representa adequadamente as condições assumidas pelo objeto durante a análise:
+ Aguardando parâmetros 
+\begin_inset Formula $\rightarrow$
+\end_inset
 
-\begin_layout Standard
-Os estados considerados são:
-\end_layout
+ Pronto para cálculo 
+\begin_inset Formula $\rightarrow$
+\end_inset
 
-\begin_layout Standard
-Aguardando parâmetros → Pronto para cálculo → ECD calculada → classificação operacional.
-\end_layout
+ ECD calculada 
+\begin_inset Formula $\rightarrow$
+\end_inset
 
-\begin_layout Standard
-A partir da comparação da ECD com os limites da janela,
- a classificação poderá assumir:
-\end_layout
-
-\begin_layout Itemize
-condição segura;
-\end_layout
-
-\begin_layout Itemize
-risco de kick;
-\end_layout
-
-\begin_layout Itemize
-risco de fraturamento/perdas.
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-O diagrama de atividades detalha especificamente o método CalculadoraECD::calcularECD(),
+ classificação operacional.
+ A partir da comparação da ECD com os limites da janela,
+ a classificação pode assumir:
+ ECD dentro da janela;
+ risco de influxo/
+\emph on
+kick
+\emph default
+;
+ risco de fratura/perdas.
+ O diagrama de atividades detalha especificamente o método 
+\family typewriter
+CalculadoraECD::calcularECD()
+\family default
+,
  mantendo coerência entre o comportamento dinâmico e a responsabilidade atribuída à classe.
 \end_layout
 
-\end_deeper
-\begin_layout Subsubsection
+\begin_layout Subsection
 Efeitos do projeto nos atributos
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-atributos
-\end_layout
-
-\end_inset
-
-
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Efeito-do-projeto-nos-atributos"
+name "sec:poo_atributos"
 
 \end_inset
 
@@ -1934,182 +1871,83 @@ name "subsec:Efeito-do-projeto-nos-atributos"
 
 \begin_layout Standard
 Os atributos definidos durante a análise passam a possuir tipos concretos da linguagem C++.
-\end_layout
-
-\begin_layout Standard
-Grandezas numéricas utilizadas nos cálculos serão representadas predominantemente pelo tipo:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
+ Grandezas numéricas utilizadas nos cálculos são representadas pelo tipo 
+\family typewriter
 double
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Exemplos:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-double profundidadeMedia;
-\end_layout
-
-\begin_layout Plain Layout
-double deltaT;
-\end_layout
-
-\begin_layout Plain Layout
-double porosidade;
-\end_layout
-
-\begin_layout Plain Layout
-double densidadeBulk;
-\end_layout
-
-\begin_layout Plain Layout
-double pressaoPoro;
-\end_layout
-
-\begin_layout Plain Layout
-double gradientePoro;
-\end_layout
-
-\begin_layout Plain Layout
-double gradienteFratura;
-\end_layout
-
-\begin_layout Plain Layout
-double ecdCalculada;
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Valores inteiros utilizados para índices ou contagens poderão utilizar:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
+\family default
+ (por exemplo,
+ 
+\family typewriter
+profundidadeMedia
+\family default
+,
+ 
+\family typewriter
+deltaT
+\family default
+,
+ 
+\family typewriter
+porosidade
+\family default
+,
+ 
+\family typewriter
+densidadeBulk
+\family default
+,
+ 
+\family typewriter
+pressaoPoro
+\family default
+,
+ 
+\family typewriter
+gradientePoro
+\family default
+,
+ 
+\family typewriter
+gradienteFratura
+\family default
+ e 
+\family typewriter
+ecdCalculada
+\family default
+,
+ este último na classe 
+\family typewriter
+Resultados
+\family default
+).
+ Valores inteiros utilizados para índices utilizam 
+\family typewriter
 int
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Informações textuais serão representadas por:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
+\family default
+ ou 
+\family typewriter
+std::size_t
+\family default
+;
+ informações textuais utilizam 
+\family typewriter
 std::string
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Coleções de objetos serão armazenadas por meio de:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
+\family default
+;
+ e coleções de objetos utilizam 
+\family typewriter
 std::vector
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Por exemplo:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-std::vector<Camada> camadas;
-\end_layout
-
-\begin_layout Plain Layout
-std::vector<JanelaOperacional> janelas;
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Os atributos permanecerão preferencialmente privados,
+\family default
+.
+ Os atributos permanecem privados,
  preservando o encapsulamento e impedindo alterações diretas indevidas no estado dos objetos.
 \end_layout
 
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
+\begin_layout Subsection
 Efeitos do projeto nos métodos
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-métodos
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-Efeitos do projeto nos métodos
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:poo_metodos"
 
 \end_inset
 
@@ -2117,185 +1955,137 @@ Efeitos do projeto nos métodos
 \end_layout
 
 \begin_layout Standard
-Alterações associadas à plataforma
+
+\series bold
+Alterações associadas à plataforma.
+
+\series default
+ Os métodos passam a possuir parâmetros e tipos de retorno compatíveis com C++.
+ Por exemplo:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+double calcularPorosidade(double deltaT) const;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+double calcularDensidadeBulk(double porosidade) const;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+double calcularGradienteFratura(const Camada& camada) const;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+double calcularECD() const;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+bool validarParametros() const;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+bool exportarDados(const std::string& caminhoArquivo) const;
 \end_layout
 
 \begin_layout Standard
-Os métodos passam a possuir parâmetros e tipos de retorno compatíveis com C++.
-\end_layout
-
-\begin_layout Standard
-Por exemplo:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-double calcularPorosidade(double deltaT);
-\end_layout
-
-\begin_layout Plain Layout
-double calcularDensidadeBulk(double porosidade);
-\end_layout
-
-\begin_layout Plain Layout
-double calcularGradienteFratura(const Camada& camada);
-\end_layout
-
-\begin_layout Plain Layout
-double calcularECD();
-\end_layout
-
-\begin_layout Plain Layout
-bool validarParametros();
-\end_layout
-
-\begin_layout Plain Layout
-void exportarDados(const std::string& nomeArquivo);
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Quando um objeto precisar apenas ser consultado,
- poderão ser utilizadas referências constantes,
+Quando um objeto precisa apenas ser consultado,
+ são utilizadas referências constantes,
  reduzindo cópias desnecessárias e impedindo alterações acidentais.
 \end_layout
 
 \begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 
 \series bold
-Métodos de controle e métodos de processamento
-\end_layout
+Métodos de controle e métodos de processamento.
 
-\begin_layout Standard
-Os métodos do projeto serão organizados conceitualmente em dois grupos.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Métodos de controle,
- responsáveis por coordenar o funcionamento do sistema:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-carregarDados()
-\end_layout
-
-\begin_layout Plain Layout
-configurarParametros()
-\end_layout
-
-\begin_layout Plain Layout
+\series default
+ Os métodos do projeto estão organizados conceitualmente em dois grupos.
+ Os métodos de controle,
+ responsáveis por coordenar o funcionamento do sistema,
+ estão associados à classe 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+:
+ 
+\family typewriter
+carregarDadosCSV()
+\family default
+,
+ 
+\family typewriter
+carregarParametrosCSV()
+\family default
+,
+ 
+\family typewriter
 executarSimulacao()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 determinarJanelas()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+,
+ 
+\family typewriter
 avaliarECD()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+ e 
+\family typewriter
 exportarResultados()
+\family default
+.
+ Já os métodos de processamento executam os cálculos de engenharia:
 \end_layout
 
-\end_inset
+\begin_layout LyX-Code
 
-
+\size footnotesize
+calcularPorosidade()         calcularDensidadeBulk()
 \end_layout
 
-\begin_layout Standard
-Esses métodos estarão principalmente associados à classe SimuladorJanelaOperacional.
+\begin_layout LyX-Code
+
+\size footnotesize
+calcularSobrecarga()         calcularTendenciaNormal()
 \end_layout
 
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
+\begin_layout LyX-Code
 
-
+\size footnotesize
+calcularPressaoNormal()      calcularPressaoPoro()
 \end_layout
 
-\begin_layout Standard
-Já os métodos de processamento executarão os cálculos de engenharia:
+\begin_layout LyX-Code
+
+\size footnotesize
+calcularGradientePoro()      calcularTensaoHorizontalMinima()
 \end_layout
 
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
+\begin_layout LyX-Code
 
-\begin_layout Plain Layout
-calcularPorosidade()
+\size footnotesize
+calcularGradienteFratura()   calcularLargura()
 \end_layout
 
-\begin_layout Plain Layout
-calcularDensidadeBulk()
-\end_layout
+\begin_layout LyX-Code
 
-\begin_layout Plain Layout
-calcularSobrecarga()
-\end_layout
-
-\begin_layout Plain Layout
-calcularTendenciaNormal()
-\end_layout
-
-\begin_layout Plain Layout
-calcularPressaoPoro()
-\end_layout
-
-\begin_layout Plain Layout
-calcularGradientePoro()
-\end_layout
-
-\begin_layout Plain Layout
-calcularTensaoHorizontalMinima()
-\end_layout
-
-\begin_layout Plain Layout
-calcularGradienteFratura()
-\end_layout
-
-\begin_layout Plain Layout
-calcularLargura()
-\end_layout
-
-\begin_layout Plain Layout
+\size footnotesize
 calcularECD()
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -2303,214 +2093,92 @@ Essa separação evita que a classe responsável pelo controle da aplicação ta
 \end_layout
 
 \begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 
 \series bold
-Subdivisão dos algoritmos
-\end_layout
+Subdivisão dos algoritmos.
 
-\begin_layout Standard
-Os cálculos mais complexos foram subdivididos em métodos menores de acordo com suas responsabilidades.
-\end_layout
-
-\begin_layout Standard
-Por exemplo,
- o cálculo das geopressões não será implementado como um único método extenso.
- A classe ModeloGeopressoes possuirá operações separadas para:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-calcularSobrecarga()
-\end_layout
-
-\begin_layout Plain Layout
-calcularTendenciaNormal()
-\end_layout
-
-\begin_layout Plain Layout
-calcularPressaoNormal()
-\end_layout
-
-\begin_layout Plain Layout
-calcularPressaoPoro()
-\end_layout
-
-\begin_layout Plain Layout
-calcularGradientePoro()
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Da mesma maneira,
- o modelo de fratura será dividido entre:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
+\series default
+ Os cálculos mais complexos foram subdivididos em métodos menores de acordo com suas responsabilidades.
+ Por exemplo,
+ o cálculo das geopressões não é implementado como um único método extenso:
+ a classe 
+\family typewriter
+ModeloGeopressoes
+\family default
+ possui operações separadas para sobrecarga,
+ tendência normal,
+ pressão normal,
+ pressão de poro e gradiente de poro.
+ Da mesma maneira,
+ o modelo de fratura é dividido entre 
+\family typewriter
 calcularTensaoHorizontalMinima()
-\end_layout
-
-\begin_layout Plain Layout
+\family default
+ e 
+\family typewriter
 calcularGradienteFratura()
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Essa organização facilita testes unitários,
+\family default
+.
+ Essa organização facilita testes,
  manutenção e identificação de erros.
 \end_layout
 
 \begin_layout Standard
-Quando aplicável,
- algoritmos da biblioteca padrão do C++ poderão ser empregados no tratamento de coleções e operações auxiliares.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 
 \series bold
-Responsabilidades das classes
+Responsabilidades das classes.
+
+\series default
+ Após a revisão,
+ os métodos definidos atendem às responsabilidades das respectivas classes:
+ 
+\family typewriter
+ModeloPetrofisico
+\family default
+ trata exclusivamente dos cálculos petrofísicos;
+ 
+\family typewriter
+ModeloGeopressoes
+\family default
+ executa os cálculos associados às geopressões;
+ 
+\family typewriter
+ModeloFratura
+\family default
+ determina as grandezas relacionadas ao limite de fratura;
+ 
+\family typewriter
+JanelaOperacional
+\family default
+ representa os limites operacionais;
+ 
+\family typewriter
+CalculadoraECD
+\family default
+ calcula e classifica a ECD;
+ 
+\family typewriter
+Resultados
+\family default
+ organiza,
+ exporta e representa graficamente as informações produzidas;
+ 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+ coordena o fluxo entre os componentes;
+ e 
+\family typewriter
+MainWindow
+\family default
+ faz a interação com o usuário.
 \end_layout
 
-\begin_layout Standard
-Após a revisão,
- os métodos definidos atendem às responsabilidades das respectivas classes.
-\end_layout
-
-\begin_layout Standard
-Por exemplo:
-\end_layout
-
-\begin_layout Itemize
-ModeloPetrofisico trata exclusivamente dos cálculos petrofísicos;
-\end_layout
-
-\begin_layout Itemize
-ModeloGeopressoes executa os cálculos associados às geopressões;
-\end_layout
-
-\begin_layout Itemize
-ModeloFratura determina as grandezas relacionadas ao limite de fratura;
-\end_layout
-
-\begin_layout Itemize
-JanelaOperacional representa e avalia os limites operacionais;
-\end_layout
-
-\begin_layout Itemize
-CalculadoraECD calcula e classifica a ECD;
-\end_layout
-
-\begin_layout Itemize
-Resultados organiza e exporta as informações produzidas;
-\end_layout
-
-\begin_layout Itemize
-SimuladorJanelaOperacional coordena o fluxo entre os componentes.
-\end_layout
-
-\begin_layout Standard
-Dessa forma,
- não foi identificada necessidade de transferir responsabilidades significativas entre as dez classes definidas.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Revisão dos diagramas
-\end_layout
-
-\begin_layout Standard
-Os diagramas de classes,
- sequência e máquina de estados foram revisados considerando as decisões estabelecidas no projeto do sistema.
-\end_layout
-
-\begin_layout Standard
-O diagrama de classes permanece como referência estrutural para a implementação,
- enquanto os diagramas dinâmicos fornecem a ordem de interação e o comportamento esperado dos objetos.
-\end_layout
-
-\begin_layout Standard
-Os métodos representados nos diagramas deverão manter correspondência com as operações implementadas em C++.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
+\begin_layout Subsection
 Efeitos do projeto nas heranças
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-heranças
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-Efeitos do projeto nas heranças
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-Heranças
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:poo_herancas"
 
 \end_inset
 
@@ -2518,519 +2186,76 @@ Heranças
 \end_layout
 
 \begin_layout Standard
-
-\series bold
-Reorganização das classes e métodos
-\end_layout
-
-\begin_layout Standard
-Após a revisão das classes,
- não foi identificada uma relação natural de herança entre os componentes atualmente definidos.
-\end_layout
-
-\begin_layout Standard
-As classes ModeloPetrofisico,
- ModeloGeopressoes e ModeloFratura,
+Após a revisão das classes do núcleo de cálculo,
+ não foi identificada uma relação natural de herança entre os componentes definidos.
+ As classes 
+\family typewriter
+ModeloPetrofisico
+\family default
+,
+ 
+\family typewriter
+ModeloGeopressoes
+\family default
+ e 
+\family typewriter
+ModeloFratura
+\family default
+,
  por exemplo,
  possuem responsabilidades distintas e não representam especializações naturais umas das outras.
+ Criar uma superclasse apenas para compartilhar pequenas partes da implementação introduziria complexidade desnecessária no modelo.
 \end_layout
 
 \begin_layout Standard
-Criar uma superclasse apenas para compartilhar pequenas partes da implementação introduziria complexidade desnecessária no modelo.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Abstração de comportamento comum
-\end_layout
-
-\begin_layout Standard
-Embora os modelos de cálculo possuam características semelhantes —
- recebem parâmetros,
- processam dados e produzem resultados —
+Embora os modelos de cálculo possuam características semelhantes (recebem parâmetros,
+ processam dados e produzem resultados),
  essas semelhanças não justificam,
  neste estágio,
  a criação de uma superclasse comum.
+ Caso futuras versões incluam diferentes métodos para estimativa de uma mesma propriedade (por exemplo,
+ para atender ao requisito RF-04),
+ poderá ser considerada uma abstração como 
+\family typewriter
+ModeloPressaoPoro
+\family default
+,
+ especializada em 
+\family typewriter
+Eaton
+\family default
+ e em outros métodos.
+ Essa estrutura não será criada enquanto não houver mais de uma implementação concreta que a justifique.
 \end_layout
 
 \begin_layout Standard
-Caso futuras versões incluam diferentes métodos para estimativa de uma mesma propriedade,
- poderá ser considerada uma abstração.
-\end_layout
-
-\begin_layout Standard
-Por exemplo,
- se forem adicionados diferentes modelos para cálculo de pressão de poro,
- poderia futuramente existir uma abstração como:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-ModeloPressaoPoro   
-\end_layout
-
-\begin_layout Plain Layout
-        ↑
-\end_layout
-
-\begin_layout Plain Layout
-        |
-\end_layout
-
-\begin_layout Plain Layout
- ┌──────┴──────┐
-\end_layout
-
-\begin_layout Plain Layout
- Eaton      OutroMetodo
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Entretanto,
- essa estrutura não será criada enquanto não houver mais de uma implementação concreta que justifique a abstração.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Delegação em vez de herança artificial
-\end_layout
-
-\begin_layout Standard
-O projeto utilizará composição e delegação sempre que essa abordagem representar melhor a relação entre as classes.
-\end_layout
-
-\begin_layout Standard
-A classe SimuladorJanelaOperacional,
- por exemplo,
- não herda dos modelos matemáticos.
- Ela mantém acesso aos objetos responsáveis pelos diferentes cálculos e delega cada operação à classe apropriada.
-\end_layout
-
-\begin_layout Standard
-Essa abordagem evita a criação de heranças artificiais apenas para reutilização de código.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Revisão das heranças
-\end_layout
-
-\begin_layout Standard
-O diagrama de classes foi revisado e,
- nesta etapa,
- permanece sem relações de herança.
-\end_layout
-
-\begin_layout Standard
-Essa decisão é intencional e decorre da ausência de relações legítimas do tipo “é um” entre as classes atuais.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Efeitos do projeto nas associações
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-Efeitos do projeto nas associações
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-Associações
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Implementação das associações
-\end_layout
-
-\begin_layout Standard
-As associações identificadas durante a análise serão implementadas utilizando objetos,
- referências e coleções fornecidas pela linguagem C++.
-\end_layout
-
-\begin_layout Standard
-A composição:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-Poco 1 ◆──── 1..* Camada
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-será representada por uma coleção de camadas pertencente ao objeto Poco:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-std::vector<Camada> camadas;
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-A agregação entre Resultados e JanelaOperacional será implementada por uma coleção equivalente:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-std::vector<JanelaOperacional> janelas;
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Já as dependências entre os modelos e os parâmetros poderão utilizar referências constantes quando apropriado.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Relações de muitos
-\end_layout
-
-\begin_layout Standard
-As relações de multiplicidade identificadas no projeto são predominantemente sequenciais e indexadas.
-\end_layout
-
-\begin_layout Standard
-Por esse motivo,
- será utilizado inicialmente std::vector em vez de uma estrutura de dicionário ou mapa.
-\end_layout
-
-\begin_layout Standard
-O acesso às camadas poderá ser realizado por posição ou por métodos específicos da classe Poco.
-\end_layout
-
-\begin_layout Standard
-Caso futuramente seja necessário localizar objetos utilizando identificadores textuais ou chaves específicas,
- poderá ser considerada a utilização de:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-std::map
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-ou:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-std::unordered_map
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Entretanto,
- essas estruturas não são necessárias para a primeira versão.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Acesso entre classes
-\end_layout
-
-\begin_layout Standard
-Será evitado o acesso indireto excessivamente longo entre objetos.
-\end_layout
-
-\begin_layout Standard
-Por exemplo,
- em vez de uma classe acessar sucessivamente diversos objetos para alcançar um atributo interno distante,
- o componente responsável deverá fornecer um método adequado para disponibilizar a informação necessária.
-\end_layout
-
-\begin_layout Standard
-Essa abordagem preserva o encapsulamento e reduz o acoplamento entre as classes.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Efeitos do projeto nas otimizações
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-otimizações
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Análise de desempenho
-\end_layout
-
-\begin_layout Standard
-O sistema processará predominantemente conjuntos de dados organizados por camada e executará operações matemáticas de baixa complexidade computacional.
-\end_layout
-
-\begin_layout Standard
-Dessa forma,
- nesta etapa,
- não é necessária uma otimização agressiva.
-\end_layout
-
-\begin_layout Standard
-As principais prioridades serão:
-\end_layout
-
-\begin_layout Enumerate
-correção dos cálculos;
-\end_layout
-
-\begin_layout Enumerate
-clareza da implementação;
-\end_layout
-
-\begin_layout Enumerate
-manutenção da precisão numérica;
-\end_layout
-
-\begin_layout Enumerate
-separação das responsabilidades;
-\end_layout
-
-\begin_layout Enumerate
-facilidade de testes;
-\end_layout
-
-\begin_layout Enumerate
-redução de cópias desnecessárias de objetos.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Processamento concorrente
-\end_layout
-
-\begin_layout Standard
-Não foi identificada necessidade de introduzir processamento paralelo na primeira versão do simulador.
-\end_layout
-
-\begin_layout Standard
-Diversos cálculos possuem dependências sequenciais.
- A tensão de sobrecarga,
- por exemplo,
- possui comportamento acumulativo ao longo das camadas,
- enquanto os cálculos seguintes dependem de resultados produzidos anteriormente.
-\end_layout
-
-\begin_layout Standard
-A introdução de concorrência aumentaria a complexidade sem benefício significativo para o volume de dados inicialmente considerado.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Bibliotecas otimizadas
-\end_layout
-
-\begin_layout Standard
-A biblioteca padrão do C++ será priorizada.
-\end_layout
-
-\begin_layout Standard
-Estruturas como std::vector oferecem gerenciamento de memória e acesso eficiente aos elementos,
- sendo adequadas para o armazenamento das camadas e resultados.
-\end_layout
-
-\begin_layout Standard
-Bibliotecas numéricas externas somente serão consideradas caso futuras funcionalidades apresentem necessidade comprovada.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Redução de caminhos longos
-\end_layout
-
-\begin_layout Standard
-Os métodos serão estruturados para evitar cadeias excessivas de acesso entre objetos.
-\end_layout
-
-\begin_layout Standard
-A classe controladora terá acesso direto aos principais componentes necessários para coordenar a simulação:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
+O projeto utiliza composição e delegação sempre que essa abordagem representa melhor a relação entre as classes.
+ A classe 
+\family typewriter
 SimuladorJanelaOperacional
+\family default
+,
+ por exemplo,
+ não herda dos modelos matemáticos:
+ ela cria os objetos responsáveis pelos diferentes cálculos e delega cada operação à classe apropriada.
+ A única herança do projeto é a de 
+\family typewriter
+MainWindow
+\family default
+ a partir de 
+\family typewriter
+QMainWindow
+\family default
+,
+ exigida pelo Qt para construir a janela principal;
+ trata-se de uma relação legítima do tipo é-um.
 \end_layout
 
-\begin_layout Plain Layout
-        |
-\end_layout
-
-\begin_layout Plain Layout
-        +-- Poco
-\end_layout
-
-\begin_layout Plain Layout
-        +-- ParametrosSimulacao
-\end_layout
-
-\begin_layout Plain Layout
-        +-- ModeloPetrofisico
-\end_layout
-
-\begin_layout Plain Layout
-        +-- ModeloGeopressoes
-\end_layout
-
-\begin_layout Plain Layout
-        +-- ModeloFratura
-\end_layout
-
-\begin_layout Plain Layout
-        +-- CalculadoraECD
-\end_layout
-
-\begin_layout Plain Layout
-        +-- Resultados
-\end_layout
+\begin_layout Subsection
+Efeitos do projeto nas associações
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:poo_associacoes"
 
 \end_inset
 
@@ -3038,227 +2263,313 @@ SimuladorJanelaOperacional
 \end_layout
 
 \begin_layout Standard
-Assim,
- não será necessário atravessar diversas associações apenas para iniciar uma determinada operação.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
+As associações identificadas durante a análise são implementadas utilizando objetos,
+ referências e coleções fornecidas pela linguagem C++.
+ A composição 
+\family typewriter
+Poco
+\family default
+ 1 —
+ 1..* 
+\family typewriter
+Camada
+\family default
+ é representada por uma coleção de camadas pertencente ao objeto 
+\family typewriter
+Poco
+\family default
+,
+ e a agregação entre 
+\family typewriter
+Resultados
+\family default
+ e 
+\family typewriter
+JanelaOperacional
+\family default
+ por uma coleção equivalente.
+ As dependências entre os modelos e os parâmetros utilizam ponteiros para objetos constantes (
+\family typewriter
+const ParametrosSimulacao*
+\family default
+),
+ inicializados no construtor a partir de uma referência.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Atributos auxiliares
-\end_layout
+Relações de muitos.
 
-\begin_layout Standard
-Alguns atributos auxiliares poderão permanecer armazenados quando seu cálculo for necessário em várias etapas.
-\end_layout
-
-\begin_layout Standard
-Por exemplo,
- a classe Camada armazenará:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-porosidade
-\end_layout
-
-\begin_layout Plain Layout
-densidadeBulk
-\end_layout
-
-\begin_layout Plain Layout
-tensaoSobrecarga
-\end_layout
-
-\begin_layout Plain Layout
-pressaoPoro
-\end_layout
-
-\begin_layout Plain Layout
-gradientePoro
-\end_layout
-
-\begin_layout Plain Layout
-tensaoHorizontalMinima
-\end_layout
-
-\begin_layout Plain Layout
-gradienteFratura
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Isso evita o recálculo das mesmas propriedades sempre que forem utilizadas por etapas posteriores.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
-\end_inset
-
-
+\series default
+ As relações de multiplicidade identificadas no projeto são predominantemente sequenciais e indexadas.
+ Por esse motivo,
+ é utilizado 
+\family typewriter
+std::vector
+\family default
+ em vez de uma estrutura de dicionário ou mapa.
+ O acesso às camadas é realizado por posição ou por métodos específicos da classe 
+\family typewriter
+Poco
+\family default
+.
+ Caso futuramente seja necessário localizar objetos utilizando identificadores textuais,
+ poderá ser considerada a utilização de 
+\family typewriter
+std::map
+\family default
+ ou 
+\family typewriter
+std::unordered_map
+\family default
+.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Ordem de execução
+Acesso entre classes.
+
+\series default
+ É evitado o acesso indireto excessivamente longo entre objetos:
+ o componente responsável fornece um método adequado para disponibilizar a informação necessária.
+ Essa abordagem preserva o encapsulamento e reduz o acoplamento entre as classes.
 \end_layout
 
-\begin_layout Standard
-A ordem de execução definida durante a análise será preservada devido às dependências matemáticas existentes:
-\end_layout
+\begin_layout Subsection
+Efeitos do projeto nas otimizações
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:poo_otimizacoes"
 
-\begin_layout Standard
-Dados
-\end_layout
-
-\begin_layout Standard
-→ Porosidade
-\end_layout
-
-\begin_layout Standard
-→ Densidade bulk
-\end_layout
-
-\begin_layout Standard
-→ Sobrecarga
-\end_layout
-
-\begin_layout Standard
-→ Tendência normal
-\end_layout
-
-\begin_layout Standard
-→ Pressão de poro
-\end_layout
-
-\begin_layout Standard
-→ Gradiente de poro
-\end_layout
-
-\begin_layout Standard
-→ Gradiente de fratura
-\end_layout
-
-\begin_layout Standard
-→ Janela operacional
-\end_layout
-
-\begin_layout Standard
-→ ECD
-\end_layout
-
-\begin_layout Standard
-→ Resultados
-\end_layout
-
-\begin_layout Standard
-Alterações nessa ordem somente deverão ocorrer se não comprometerem as dependências entre os modelos.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \space{}
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
+O sistema processa conjuntos de dados organizados por camada e executa operações matemáticas de baixa complexidade computacional.
+ Dessa forma,
+ não é necessária uma otimização agressiva.
+ As principais prioridades são:
+ correção dos cálculos;
+ clareza da implementação;
+ manutenção da precisão numérica;
+ separação das responsabilidades;
+ facilidade de testes;
+ e redução de cópias desnecessárias de objetos.
+\end_layout
+
+\begin_layout Standard
+Não foi identificada necessidade de introduzir processamento paralelo:
+ diversos cálculos possuem dependências sequenciais (a tensão de sobrecarga,
+ por exemplo,
+ é acumulativa ao longo das camadas).
+ A biblioteca padrão do C++ é priorizada;
+ estruturas como 
+\family typewriter
+std::vector
+\family default
+ oferecem gerenciamento de memória e acesso eficiente aos elementos.
+ Bibliotecas numéricas externas somente serão consideradas caso futuras funcionalidades apresentem necessidade comprovada.
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Revisão das associações
+Redução de caminhos longos.
+
+\series default
+ A classe controladora possui acesso direto aos objetos necessários para coordenar a simulação:
+ contém 
+\family typewriter
+Poco
+\family default
+,
+ 
+\family typewriter
+ParametrosSimulacao
+\family default
+ e 
+\family typewriter
+Resultados
+\family default
+ como atributos e cria,
+ em cada etapa,
+ os objetos 
+\family typewriter
+ModeloPetrofisico
+\family default
+,
+ 
+\family typewriter
+ModeloGeopressoes
+\family default
+,
+ 
+\family typewriter
+ModeloFratura
+\family default
+ e 
+\family typewriter
+CalculadoraECD
+\family default
+ como variáveis locais.
+ Assim,
+ não é necessário percorrer diversas associações apenas para iniciar uma determinada operação.
 \end_layout
 
 \begin_layout Standard
-Após a análise das necessidades de implementação,
- as associações anteriormente definidas continuam adequadas.
+
+\series bold
+Atributos auxiliares.
+
+\series default
+ Alguns atributos permanecem armazenados porque seu cálculo é necessário em várias etapas.
+ A classe 
+\family typewriter
+Camada
+\family default
+ armazena porosidade,
+ densidade bulk,
+ tensão de sobrecarga,
+ pressão de poro,
+ gradiente de poro,
+ tensão horizontal mínima e gradiente de fratura,
+ o que evita o recálculo das mesmas propriedades nas etapas posteriores,
+ na tabela de resultados e na exportação.
 \end_layout
 
 \begin_layout Standard
-A composição entre Poco e Camada,
- as dependências entre os modelos e ParametrosSimulacao,
- a associação da Camada com JanelaOperacional e a relação entre CalculadoraECD e JanelaOperacional permanecem coerentes com a arquitetura prevista.
-\end_layout
 
-\begin_layout Standard
-\begin_inset space \space{}
+\series bold
+Ordem de execução.
+
+\series default
+ A ordem de execução definida durante a análise foi preservada devido às dependências matemáticas existentes:
+ dados 
+\begin_inset Formula $\rightarrow$
 \end_inset
 
+ porosidade 
+\begin_inset Formula $\rightarrow$
+\end_inset
 
+ densidade bulk 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ sobrecarga 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ tendência normal 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ pressão de poro 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ gradiente de poro 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ gradiente de fratura 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ janela operacional 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ ECD 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ resultados.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Fechamento da etapa
+Revisão das associações.
+
+\series default
+ Após a análise das necessidades de implementação,
+ as associações anteriormente definidas continuam adequadas:
+ a composição entre 
+\family typewriter
+Poco
+\family default
+ e 
+\family typewriter
+Camada
+\family default
+,
+ as dependências entre os modelos e 
+\family typewriter
+ParametrosSimulacao
+\family default
+ e a relação entre 
+\family typewriter
+CalculadoraECD
+\family default
+ e 
+\family typewriter
+JanelaOperacional
+\family default
+.
+ A classe 
+\family typewriter
+JanelaOperacional
+\family default
+ não mantém referência à 
+\family typewriter
+Camada
+\family default
+:
+ ela é criada a partir dos valores de profundidade média,
+ 
+\begin_inset Formula $G_{p}$
+\end_inset
+
+ e 
+\begin_inset Formula $G_{f}$
+\end_inset
+
+ da camada.
 \end_layout
 
 \begin_layout Standard
-Após a incorporação dessas decisões,
+
+\series bold
+Fechamento da etapa.
+
+\series default
+ Após a incorporação dessas decisões,
  os diagramas desenvolvidos durante a análise passam a representar não apenas o domínio conceitual do problema,
- mas uma estrutura compatível com sua implementação em C++.
-\end_layout
-
-\begin_layout Standard
-A arquitetura continuará baseada nas dez classes definidas anteriormente,
+ mas uma estrutura compatível com sua implementação em C++,
  preservando a rastreabilidade entre requisitos,
  diagramas UML e código-fonte.
-\end_layout
-
-\begin_layout Standard
-A partir desta revisão,
- poderão ser elaborados os dois diagramas de infraestrutura solicitados pelo modelo do professor:
-\end_layout
-
-\begin_layout Standard
-Diagrama de Componentes → mostrará arquivos,
+ A partir desta revisão,
+ foram elaborados os dois diagramas de infraestrutura:
+ o diagrama de componentes,
+ que mostra arquivos,
  módulos,
- bibliotecas e dependências do software.
-\end_layout
-
-\begin_layout Standard
-Diagrama de Implantação → mostrará a relação entre o executável,
- sistema operacional,
- computador do usuário e arquivos utilizados pelo sistema.
-\end_layout
-
-\begin_layout Standard
-Esses dois diagramas devem ser os próximos,
- porque agora já temos decisões suficientes de plataforma e arquitetura para construí-los corretamente.
+ bibliotecas e dependências do software,
+ e o diagrama de implantação,
+ que mostra a relação entre os executáveis,
+ o sistema operacional,
+ o computador do usuário e os arquivos utilizados pelo sistema.
 \end_layout
 
 \begin_layout Section
-Diagrama de Componentes
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
 Diagrama de componentes
-\end_layout
-
-\end_inset
-
-
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Diagrama-de-componentes"
+name "sec:componentes"
 
 \end_inset
 
@@ -3266,55 +2577,100 @@ name "sec:Diagrama-de-componentes"
 \end_layout
 
 \begin_layout Standard
-este projeto,
- o diagrama de componentes representa a organização física prevista para o Simulador de Janela Operacional de Perfuração,
+Neste projeto,
+ o diagrama de componentes (Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:componentes"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+) representa a organização física do Simulador de Janela Operacional de Perfuração,
  identificando os principais arquivos de código-fonte,
  módulos funcionais,
  arquivos de dados e dependências necessárias para a compilação e execução do software.
 \end_layout
 
 \begin_layout Standard
-A implementação será desenvolvida em linguagem C++,
- sendo cada uma das principais classes do sistema organizada em arquivos de cabeçalho (.h) e implementação (.cpp).
- Esses arquivos serão agrupados de acordo com suas responsabilidades em três conjuntos principais:
- Dados e Domínio,
- Modelos de Engenharia e Controle e Resultados.
-\end_layout
-
-\begin_layout Standard
-O subsistema Dados e Domínio será responsável pela representação das informações básicas utilizadas na simulação,
- incluindo as classes Poco,
- Camada e ParametrosSimulacao.
- O subsistema Modelos de Engenharia reunirá as classes responsáveis pelos cálculos petrofísicos,
+Cada uma das classes do sistema é organizada em um arquivo de cabeçalho (
+\family typewriter
+.h
+\family default
+) e um arquivo de implementação (
+\family typewriter
+.cpp
+\family default
+).
+ Esses arquivos estão agrupados de acordo com suas responsabilidades em quatro conjuntos:
+ Dados e Domínio (
+\family typewriter
+Poco
+\family default
+,
+ 
+\family typewriter
+Camada
+\family default
+ e 
+\family typewriter
+ParametrosSimulacao
+\family default
+),
+ Modelos de Engenharia (cálculos petrofísicos,
  geopressões,
  gradiente de fratura,
- janela operacional e ECD.
- Já o subsistema Controle e Resultados concentrará a coordenação da execução do programa e a organização das informações produzidas pela simulação.
+ janela operacional e ECD),
+ Controle e Resultados (coordenação da execução e organização das informações produzidas) e Interface (
+\family typewriter
+MainWindow
+\family default
+,
+ 
+\family typewriter
+main_gui.cpp
+\family default
+ e 
+\family typewriter
+main.cpp
+\family default
+).
 \end_layout
 
 \begin_layout Standard
-O arquivo main.cpp será responsável pela inicialização da aplicação e pela criação do fluxo principal de execução,
- utilizando a classe SimuladorJanelaOperacional como elemento coordenador dos demais componentes.
-\end_layout
-
-\begin_layout Standard
-A compilação do sistema será organizada por meio do arquivo CMakeLists.txt,
- responsável por definir os arquivos necessários para geração do executável.
- O sistema utilizará prioritariamente recursos da biblioteca padrão do C++,
- evitando dependências externas desnecessárias.
-\end_layout
-
-\begin_layout Standard
-Durante a execução,
- o programa poderá utilizar arquivos de entrada em formato TXT ou CSV contendo dados do poço,
- como profundidade e perfil sônico.
- Os resultados calculados poderão ser exportados também em formatos textuais,
- permitindo sua posterior análise.
+O arquivo 
+\family typewriter
+CMakeLists.txt
+\family default
+ define dois executáveis a partir do mesmo núcleo de cálculo:
+ 
+\family typewriter
+simulador_gui
+\family default
+,
+ com a interface gráfica Qt,
+ e 
+\family typewriter
+simulador_cli
+\family default
+,
+ versão em linha de comando que executa o caso de referência.
+ Durante a execução,
+ o programa utiliza arquivos de entrada em formato CSV com os dados do poço e os parâmetros;
+ os resultados calculados são exportados em CSV,
+ e os gráficos são gerados pelo Gnuplot a partir de um arquivo de dados e de um roteiro gravados pela classe 
+\family typewriter
+Resultados
+\family default
+.
 \end_layout
 
 \begin_layout Standard
 Dessa forma,
- o diagrama de componentes permite visualizar a correspondência entre a estrutura orientada a objetos definida anteriormente e os arquivos que serão efetivamente utilizados na implementação,
+ o diagrama de componentes permite visualizar a correspondência entre a estrutura orientada a objetos definida anteriormente e os arquivos efetivamente utilizados na implementação,
  compilação e execução do software.
 \end_layout
 
@@ -3329,7 +2685,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeComponentes.png
+	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/11_componentes.png
 	lyxscale 40
 	width 100text%
 
@@ -3342,10 +2698,10 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de componentes
+Diagrama de componentes.
 \begin_inset CommandInset label
 LatexCommand label
-name "cap:Diagrama-de-componentes"
+name "fig:componentes"
 
 \end_inset
 
@@ -3363,34 +2719,10 @@ name "cap:Diagrama-de-componentes"
 \end_layout
 
 \begin_layout Section
-Diagrama de Implantação
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
 Diagrama de implantação
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-Diagrama de execução
-\end_layout
-
-\end_inset
-
-
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Diagrama-de-execução"
+name "sec:implantacao"
 
 \end_inset
 
@@ -3398,31 +2730,55 @@ name "sec:Diagrama-de-execução"
 \end_layout
 
 \begin_layout Standard
-O diagrama de implantação apresentado na Figura 1.X representa a infraestrutura necessária para a execução do Simulador de Janela Operacional de Perfuração.
- Diferentemente dos diagramas anteriores,
- que descrevem a estrutura lógica e o comportamento do software,
- o diagrama de implantação enfatiza os elementos físicos e de execução envolvidos no funcionamento do sistema.
-\end_layout
+O diagrama de implantação (Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:implantacao"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
 
-\begin_layout Standard
-Nesta primeira versão,
- o simulador será executado localmente em uma estação de trabalho do usuário,
- não havendo necessidade de cluster,
+\end_inset
+
+) representa a arquitetura física necessária para a execução do sistema.
+ O simulador é executado localmente na estação de trabalho do usuário,
+ não havendo necessidade de 
+\emph on
+cluster
+\emph default
+,
  servidor dedicado ou banco de dados externo.
  O nó principal do sistema é o computador do usuário,
  que contém o sistema operacional,
- o executável do programa e os arquivos utilizados durante a simulação.
+ os executáveis do programa,
+ as bibliotecas necessárias em tempo de execução e os arquivos utilizados durante a simulação.
 \end_layout
 
 \begin_layout Standard
-O ambiente de execução será formado por um computador pessoal compatível com Windows,
- GNU/Linux ou macOS,
- contendo o programa compilado em C++ e os arquivos de entrada e saída.
- Os arquivos de entrada armazenam os dados do poço,
- como profundidade e perfil sônico,
+O ambiente de execução é formado por um computador pessoal com Windows,
+ contendo os programas 
+\family typewriter
+simulador_gui.exe
+\family default
+ e 
+\family typewriter
+simulador_cli.exe
+\family default
+,
+ as DLLs do Qt 6 e do compilador MinGW (MSYS2 UCRT64),
+ e o Gnuplot instalado e acessível pelo PATH.
+ Os arquivos de entrada armazenam os dados do poço (profundidade,
+ perfil sônico e tipo de camada) e os parâmetros,
  enquanto os arquivos de saída armazenam os resultados calculados,
  como gradientes,
  janelas operacionais e análise de ECD.
+ A versão em linha de comando grava os resultados na pasta 
+\family typewriter
+output
+\family default
+ do projeto;
+ a interface gráfica grava os gráficos em uma pasta temporária do usuário e exporta o CSV completo no local escolhido pelo usuário.
 \end_layout
 
 \begin_layout Standard
@@ -3432,10 +2788,7 @@ Durante a execução,
  O armazenamento dos arquivos ocorre no disco local da máquina,
  podendo futuramente ser adaptado para outras formas de persistência,
  caso novas versões do projeto exijam compartilhamento em rede ou armazenamento remoto.
-\end_layout
-
-\begin_layout Standard
-Assim,
+ Assim,
  o diagrama de implantação mostra de forma clara a relação entre o software e a arquitetura computacional efetivamente necessária para sua operação.
 \end_layout
 
@@ -3450,8 +2803,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DigramaDeImplatação.png
-	lyxscale 50
+	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/12_implantacao.png
+	lyxscale 40
 	width 100text%
 
 \end_inset
@@ -3463,10 +2816,10 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de implantação
+Diagrama de implantação.
 \begin_inset CommandInset label
 LatexCommand label
-name "cap:Diagrama-de-implantação."
+name "fig:implantacao"
 
 \end_inset
 
@@ -3476,36 +2829,6 @@ name "cap:Diagrama-de-implantação."
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Description
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Nota:
- 
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Não perca de vista a visão do todo;
- do projeto de engenharia como um todo.
- Cada capítulo,
- cada seção,
- cada parágrafo deve se encaixar.
- Este é um diferencial fundamental do engenheiro em relação ao técnico,
- a capacidade de desenvolver projetos,
- de ver o todo e suas diferentes partes,
- de modelar processos/sistemas/produtos de engenharia.
 \end_layout
 
 \end_inset

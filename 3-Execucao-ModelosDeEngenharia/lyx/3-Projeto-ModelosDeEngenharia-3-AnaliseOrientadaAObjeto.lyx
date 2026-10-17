@@ -109,61 +109,12 @@
 
 \begin_body
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\backslash
-lhead{
-\backslash
-thechapter
-\backslash
-space - Análise Orientada a Objeto}  
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Chapter
-AOO
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-AOO
-\end_layout
-
-\end_inset
-
- – Análise Orientada a Objeto
+AOO —
+ Análise Orientada a Objeto
 \begin_inset CommandInset label
 LatexCommand label
-name "chap:Análise Orientada a Objeto"
-
-\end_inset
-
-
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-Análise orientada a objeto
-\end_layout
-
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:AOO"
+name "cap:aoo"
 
 \end_inset
 
@@ -172,7 +123,15 @@ name "sec:AOO"
 
 \begin_layout Standard
 A etapa de Análise Orientada a Objetos (AOO) tem como objetivo identificar e organizar os principais elementos que compõem o Simulador de Janela Operacional de Perfuração,
- estabelecendo suas responsabilidades e os relacionamentos existentes entre eles.
+ estabelecendo suas responsabilidades e os relacionamentos existentes entre eles 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "blaha2006"
+literal "false"
+
+\end_inset
+
+.
  Nesta fase,
  o sistema é analisado a partir dos conceitos envolvidos no problema de engenharia,
  sem definir ainda os detalhes de implementação.
@@ -213,27 +172,35 @@ No simulador,
 \end_layout
 
 \begin_layout Standard
-A modelagem orientada a objetos permitirá representar essas responsabilidades de forma modular,
+A modelagem orientada a objetos permite representar essas responsabilidades de forma modular,
  facilitando a compreensão das diferentes partes do sistema e das interações existentes entre elas.
- Os modelos desenvolvidos nesta etapa servirão como base para o posterior projeto orientado a objetos e para a implementação do simulador em linguagem C++.
+ Os modelos desenvolvidos nesta etapa servem como base para o projeto orientado a objetos e para a implementação do simulador em linguagem C++.
 \end_layout
 
 \begin_layout Standard
-O resultado da análise será constituído por um conjunto de diagramas UML que representarão os principais elementos do sistema,
+O resultado da análise é constituído por um conjunto de diagramas UML que representam os principais elementos do sistema,
  suas estruturas,
- comportamentos e relacionamentos.
- Entre eles serão desenvolvidos diagramas de classes,
+ comportamentos e relacionamentos:
+ diagramas de classes,
  sequência,
  comunicação,
- atividades e máquina de estados,
- conforme a necessidade de representação das diferentes partes do simulador.
+ máquina de estados e atividades.
+ Os diagramas foram elaborados em PlantUML 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "plantuml"
+literal "false"
+
+\end_inset
+
+ e conferidos com o código-fonte da versão 1.0.
 \end_layout
 
 \begin_layout Section
 Diagramas de classes
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Diagramas-de-classes"
+name "sec:classes"
 
 \end_inset
 
@@ -245,6 +212,35 @@ O diagrama de classes do Simulador de Janela Operacional de Perfuração represe
  identificando as principais classes responsáveis pela representação dos dados do poço,
  parâmetros de entrada,
  modelos de cálculo e resultados da simulação.
+ Para manter a legibilidade na página,
+ o diagrama foi dividido em duas partes:
+ a Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:classes1"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ apresenta a classe coordenadora,
+ os dados do poço e os parâmetros;
+ a Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:classes2"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ apresenta os modelos de cálculo,
+ a janela operacional e os resultados.
+ Classes apresentadas sem atributos em uma parte estão detalhadas na outra.
 \end_layout
 
 \begin_layout Standard
@@ -252,16 +248,27 @@ A divisão das classes foi estabelecida de acordo com as responsabilidades ident
  buscando evitar a concentração de diferentes funções em uma única classe.
  Dessa forma,
  cada classe possui responsabilidade específica e relaciona-se com os demais componentes necessários à execução da simulação.
-\end_layout
-
-\begin_layout Standard
-Foram definidas 10 classes principais,
+ Foram definidas 10 classes principais e uma enumeração auxiliar (
+\family typewriter
+TipoCamada
+\family default
+),
  atendendo à estrutura orientada a objetos prevista para o sistema.
+ Os atributos e métodos representados correspondem aos declarados nos arquivos de cabeçalho da versão 1.0;
+ métodos de acesso simples (
+\family typewriter
+get
+\family default
+ e 
+\family typewriter
+definir
+\family default
+) foram agrupados para não sobrecarregar o diagrama.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
-placement document
+placement H
 alignment document
 wide false
 sideways false
@@ -270,9 +277,11 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/Diagrama de Classe Update.png
-	lyxscale 50
-	width 100text%
+	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/04a_classes_controle_dados.png
+	lyxscale 40
+	width 88text%
+	keepAspectRatio
+	special height=0.8\textheight
 
 \end_inset
 
@@ -283,10 +292,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de Classes.
+Diagrama de classes (parte 1) —
+ coordenação,
+ dados do poço e parâmetros.
 \begin_inset CommandInset label
 LatexCommand label
-name "cap:Diagrama-de-classes"
+name "fig:classes1"
 
 \end_inset
 
@@ -304,23 +315,46 @@ name "cap:Diagrama-de-classes"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-Nota:
- 
-\begin_inset space ~
+\align center
+\begin_inset Graphics
+	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/04b_classes_modelos_resultados.png
+	lyxscale 40
+	width 92text%
+	keepAspectRatio
+	special height=0.8\textheight
+
 \end_inset
 
- 
-\begin_inset Newline newline
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de classes (parte 2) —
+ modelos de cálculo,
+ janela operacional e resultados.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:classes2"
+
 \end_inset
 
-deve ocupar toda a página impressa!
- se necessário rotacionar 90 graus;
- SE NECESSÁRIO DIVIDIR EM 2 PÁGINAS;
- o importante é que toda figura/tabela deve ser bem legível (fonte mínima = 10).
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -332,7 +366,7 @@ deve ocupar toda a página impressa!
 Dicionário de classes
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Dicionário-de-classes"
+name "sec:dicionario"
 
 \end_inset
 
@@ -340,49 +374,127 @@ name "subsec:Dicionário-de-classes"
 \end_layout
 
 \begin_layout Itemize
+
+\series bold
 Classe SimuladorJanelaOperacional:
+
+\series default
  representa o controlador principal do sistema,
- responsável por coordenar o carregamento dos dados,
- a configuração dos parâmetros,
+ responsável por coordenar o carregamento dos dados (
+\family typewriter
+carregarDadosCSV
+\family default
+) e dos parâmetros (
+\family typewriter
+carregarParametrosCSV
+\family default
+),
  a execução dos modelos de cálculo,
  a determinação da janela operacional,
- a análise de ECD e a geração dos resultados.
+ a análise de ECD e a exportação dos resultados.
+ Contém,
+ por composição,
+ os objetos 
+\family typewriter
+Poco
+\family default
+,
+ 
+\family typewriter
+ParametrosSimulacao
+\family default
+ e 
+\family typewriter
+Resultados
+\family default
+.
 \end_layout
 
 \begin_layout Itemize
+
+\series bold
 Classe Poco:
+
+\series default
  representa o poço analisado,
- armazenando suas informações gerais e o conjunto de camadas que compõem o modelo utilizado na simulação.
+ armazenando suas informações gerais e o conjunto de camadas (
+\family typewriter
+std::vector<Camada>
+\family default
+) que compõem o modelo utilizado na simulação.
 \end_layout
 
 \begin_layout Itemize
+
+\series bold
 Classe Camada:
- representa cada intervalo de profundidade do poço,
- contendo os dados de entrada e as propriedades calculadas,
+
+\series default
+ representa cada intervalo de profundidade do poço (topo,
+ base e profundidade média),
+ contendo os dados de entrada (tempo de trânsito e tipo) e as propriedades calculadas,
  como porosidade,
  densidade bulk,
  tensão de sobrecarga,
- pressão de poro e gradiente de fratura.
+ pressão de poro,
+ gradiente de poro,
+ tensão horizontal mínima e gradiente de fratura.
+ Valores não calculados são representados por NaN.
 \end_layout
 
 \begin_layout Itemize
+
+\series bold
+Enumeração TipoCamada:
+
+\series default
+ identifica o tipo da camada (AGUA,
+ SEDIMENTO,
+ FORMACAO,
+ AR,
+ DESCONHECIDA),
+ que determina como a porosidade e a densidade bulk são atribuídas.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
 Classe ParametrosSimulacao:
+
+\series default
  representa o conjunto de parâmetros físicos,
- petrofísicos e geomecânicos utilizados nos modelos do simulador,
+ petrofísicos,
+ geomecânicos e operacionais utilizados nos modelos,
  como densidades,
  tempos de trânsito,
+ limites de porosidade,
  gradiente hidrostático,
- expoente de Eaton e coeficiente de Poisson.
+ expoente de Eaton,
+ coeficiente de Poisson,
+ parâmetros da tendência normal e dados da análise de ECD.
+ O método 
+\family typewriter
+validarParametros
+\family default
+ verifica a consistência física dos valores.
 \end_layout
 
 \begin_layout Itemize
+
+\series bold
 Classe ModeloPetrofisico:
+
+\series default
  representa o módulo responsável pelos cálculos petrofísicos,
  incluindo a estimativa da porosidade pelo modelo tempo-médio de Wyllie e o cálculo da densidade bulk da formação.
 \end_layout
 
 \begin_layout Itemize
+
+\series bold
 Classe ModeloGeopressoes:
+
+\series default
  representa o módulo responsável pelos cálculos de geopressões,
  incluindo tensão de sobrecarga,
  tendência normal de compactação,
@@ -391,71 +503,70 @@ Classe ModeloGeopressoes:
 \end_layout
 
 \begin_layout Itemize
+
+\series bold
 Classe ModeloFratura:
+
+\series default
  representa o módulo responsável pelo cálculo da tensão horizontal mínima e do gradiente de fratura da formação,
  utilizado como limite superior da janela operacional de perfuração.
 \end_layout
 
 \begin_layout Itemize
+
+\series bold
 Classe JanelaOperacional:
+
+\series default
  representa os limites operacionais de perfuração em determinada profundidade,
  definidos pelo gradiente de pressão de poro e pelo gradiente de fratura,
  além da largura da janela disponível para operação.
+ Possui também métodos para verificar e classificar um peso de lama (
+\family typewriter
+verificarPesoLama
+\family default
+ e 
+\family typewriter
+classificarPesoLama
+\family default
+),
+ que não são utilizados no fluxo principal da versão 1.0.
 \end_layout
 
 \begin_layout Itemize
+
+\series bold
 Classe CalculadoraECD:
- representa o módulo responsável pelo cálculo da Equivalent Circulating Density e pela comparação do valor obtido com os limites da janela operacional.
+
+\series default
+ representa o módulo responsável pelo cálculo da 
+\emph on
+Equivalent Circulating Density
+\emph default
+ e pela comparação do valor obtido com os limites da janela operacional (
+\family typewriter
+avaliarJanela
+\family default
+).
 \end_layout
 
 \begin_layout Itemize
+
+\series bold
 Classe Resultados:
+
+\series default
  representa o conjunto de informações produzidas pela simulação,
- organizando as janelas operacionais calculadas,
- os resultados da análise de ECD e os dados destinados à apresentação e exportação.
+ organizando as janelas operacionais calculadas e os resultados da análise de ECD,
+ e é responsável pela exportação dos arquivos CSV e pela geração dos gráficos por meio do Gnuplot.
 \end_layout
 
 \begin_layout Section
-Diagrama de seqüência – eventos
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-Eventos
-\end_layout
-
-\end_inset
-
- e mensagens
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-Mensagens
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-Diagrama de sequência
-\end_layout
-
-\end_inset
-
-
+Diagrama de sequência —
+ eventos e mensagens
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:diagrama de sequência"
+name "sec:sequencia"
 
 \end_inset
 
@@ -463,18 +574,12 @@ name "subsec:diagrama de sequência"
 \end_layout
 
 \begin_layout Standard
-
-\shape italic
-\emph on
 Os diagramas de sequência são utilizados para representar a ordem temporal das interações entre os atores e os objetos envolvidos no funcionamento do sistema.
  Por meio deles é possível visualizar as mensagens trocadas entre os diferentes componentes,
  a sequência de execução das operações e o fluxo de controle associado às funcionalidades do software.
 \end_layout
 
 \begin_layout Standard
-
-\shape italic
-\emph on
 No Simulador de Janela Operacional de Perfuração,
  esses diagramas permitem representar de forma dinâmica como os dados do poço e os parâmetros da simulação são processados pelos diferentes modelos de cálculo até a obtenção da janela operacional,
  da análise de ECD e dos resultados finais.
@@ -485,13 +590,10 @@ No Simulador de Janela Operacional de Perfuração,
 \end_layout
 
 \begin_layout Subsection
-
-\shape italic
-\emph on
 Diagrama de sequência geral
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec: Diagrama de sequência geral"
+name "sec:seq_geral"
 
 \end_inset
 
@@ -499,9 +601,20 @@ name "subsec: Diagrama de sequência geral"
 \end_layout
 
 \begin_layout Standard
-O diagrama de sequência geral apresentado na Figura 3.2 representa o fluxo principal de utilização do Simulador de Janela Operacional de Perfuração.
+O diagrama de sequência geral apresentado na Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:seq_geral"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ representa o fluxo principal de utilização do Simulador de Janela Operacional de Perfuração por meio da interface gráfica.
  A interação é iniciada pelo usuário,
- que fornece os dados do poço e configura os parâmetros necessários à simulação.
+ que seleciona o arquivo com os dados do poço e configura os parâmetros necessários à simulação.
  O sistema então coordena a execução dos modelos petrofísico,
  de geopressões e de fratura,
  utilizando os resultados de cada etapa para determinar as janelas operacionais ao longo das camadas analisadas.
@@ -509,45 +622,18 @@ O diagrama de sequência geral apresentado na Figura 3.2 representa o fluxo prin
 
 \begin_layout Standard
 Após o processamento principal,
- as janelas calculadas são armazenadas e organizadas para consulta.
- O usuário poderá ainda realizar uma avaliação de ECD,
- comparando a densidade equivalente de circulação com os limites definidos pelos gradientes de pressão de poro e de fratura.
+ as janelas calculadas são armazenadas no objeto 
+\family typewriter
+Resultados
+\family default
+ e organizadas para consulta.
+ Em seguida é realizada a avaliação de ECD,
+ comparando a densidade equivalente de circulação com os limites definidos pelos gradientes de pressão de poro e de fratura da janela mais próxima da profundidade informada.
  Ao final,
- o sistema disponibiliza os resultados da simulação para análise e,
+ o sistema disponibiliza os resultados da simulação para análise,
+ gera os gráficos e,
  quando solicitado,
- para exportação.
-\end_layout
-
-\begin_layout Standard
-Veja o 
-\shape italic
-\emph on
-diagrama de seqüência na
-\shape default
-\emph default
- Figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:Diagrama-de-sequencia"
-nolink "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-[Aqui a ênfase é o entendimento da sequência com que as mensagens são trocadas,
- a ordem temporal.]
-\end_layout
-
-\end_inset
-
-
+ exporta os resultados.
 \end_layout
 
 \begin_layout Standard
@@ -561,9 +647,11 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/Diagrama de sequência geral.png
-	lyxscale 50
+	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/05_sequencia_geral.png
+	lyxscale 40
 	width 100text%
+	keepAspectRatio
+	special height=0.78\textheight
 
 \end_inset
 
@@ -574,10 +662,10 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de Sequência Geral.
+Diagrama de sequência geral.
 \begin_inset CommandInset label
 LatexCommand label
-name "cap:Diagrama-de-sequencia"
+name "fig:seq_geral"
 
 \end_inset
 
@@ -587,16 +675,6 @@ name "cap:Diagrama-de-sequencia"
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-deve mostrar uma sequência geral
 \end_layout
 
 \end_inset
@@ -605,13 +683,10 @@ deve mostrar uma sequência geral
 \end_layout
 
 \begin_layout Subsection
-
-\shape italic
-\emph on
 Diagrama de sequência específico
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec: Diagrama de sequência específico-1"
+name "sec:seq_especifico"
 
 \end_inset
 
@@ -619,18 +694,50 @@ name "subsec: Diagrama de sequência específico-1"
 \end_layout
 
 \begin_layout Standard
-O diagrama de sequência específico apresentado na Figura 3.3 detalha o processamento de uma camada do poço para determinação de sua janela operacional de perfuração.
- Inicialmente,
- o sistema obtém os dados da camada selecionada.
- O modelo petrofísico utiliza o perfil sônico e os parâmetros da simulação para calcular a porosidade e a densidade bulk.
+O diagrama de sequência específico apresentado na Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:seq_especifico"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ detalha o processamento executado pelo método 
+\family typewriter
+executarSimulacao()
+\family default
+ para a determinação das janelas operacionais.
+ Após a validação dos parâmetros,
+ cada modelo é criado e percorre todas as camadas do poço antes que o modelo seguinte seja executado.
+ O modelo petrofísico atribui porosidade e densidade bulk de acordo com o tipo da camada,
+ aplicando a equação de Wyllie às camadas de formação.
  Em seguida,
- o modelo de geopressões determina a tensão de sobrecarga,
- a tendência normal de compactação,
+ o modelo de geopressões acumula a tensão de sobrecarga do topo para a base e,
+ para cada camada com registro sônico,
+ determina a tendência normal,
+ a pressão normal,
  a pressão de poro e seu gradiente.
- O modelo de fratura utiliza os resultados calculados para determinar a tensão horizontal mínima e o gradiente de fratura.
+ O modelo de fratura utiliza esses resultados para determinar a tensão horizontal mínima e o gradiente de fratura.
  Finalmente,
- é criado um objeto da classe JanelaOperacional,
- contendo os limites inferior e superior e a largura disponível para operação.
+ para cada camada com 
+\begin_inset Formula $G_{f}>G_{p}$
+\end_inset
+
+,
+ é criado um objeto da classe 
+\family typewriter
+JanelaOperacional
+\family default
+,
+ contendo os limites inferior e superior e a largura disponível para operação,
+ que é armazenado em 
+\family typewriter
+Resultados
+\family default
+.
 \end_layout
 
 \begin_layout Standard
@@ -644,9 +751,11 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/Diagrama de sequência especifico.png
-	lyxscale 50
+	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/06_sequencia_especifica.png
+	lyxscale 40
 	width 100text%
+	keepAspectRatio
+	special height=0.8\textheight
 
 \end_inset
 
@@ -657,10 +766,11 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de Sequência Específico.
+Diagrama de sequência específico —
+ determinação das janelas operacionais.
 \begin_inset CommandInset label
 LatexCommand label
-name "cap:Diagrama-de-sequencia-1"
+name "fig:seq_especifico"
 
 \end_inset
 
@@ -670,35 +780,6 @@ name "cap:Diagrama-de-sequencia-1"
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-[deve mostrar uma sequência específica;
- NÃO É PARA REPETIR O GERAL COM 1-2 coisas diferentes!
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-é um novo diagrama;
- detalhando algo!
- ]
 \end_layout
 
 \end_inset
@@ -707,124 +788,59 @@ status open
 \end_layout
 
 \begin_layout Section
-Diagrama de comunicação
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-comunicação
-\end_layout
-
-\end_inset
-
- – colaboração
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-colaboração
-\end_layout
-
-\end_inset
-
-
+Diagrama de comunicação —
+ colaboração
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Diagrama-de-Comunicação"
+name "sec:comunicacao"
 
 \end_inset
 
 
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-Diagrama de colaboração
-\end_layout
-
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "par:Diagrama-de-colaboração:"
-
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Standard
-O diagrama de comunicação apresentado na Figura 3.4 representa a colaboração entre os principais objetos envolvidos na execução do Simulador de Janela Operacional de Perfuração.
+O diagrama de comunicação apresentado na Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:comunicacao"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ representa a colaboração entre os principais objetos envolvidos na execução do Simulador de Janela Operacional de Perfuração.
  O diagrama enfatiza as mensagens trocadas entre os objetos e utiliza numeração sequencial para indicar a ordem em que as principais operações são realizadas.
 \end_layout
 
 \begin_layout Standard
 A interação é iniciada pelo usuário,
- que solicita o carregamento dos dados do poço,
+ que solicita à janela principal o carregamento dos dados do poço,
  a configuração dos parâmetros e a execução da simulação.
- O objeto controlador SimuladorJanelaOperacional coordena a comunicação com os objetos responsáveis pelos dados do poço e pelos modelos petrofísico,
+ O objeto controlador 
+\family typewriter
+SimuladorJanelaOperacional
+\family default
+ coordena a comunicação com os objetos responsáveis pelos dados do poço e pelos modelos petrofísico,
  de geopressões e de fratura.
- Os resultados desses processamentos são utilizados para determinar a janela operacional de perfuração e,
- quando solicitado,
- realizar a análise de ECD.
+ Os resultados desses processamentos são utilizados para determinar a janela operacional de perfuração e realizar a análise de ECD.
  Por fim,
- o objeto Resultados organiza as informações produzidas,
- permitindo sua consulta e exportação.
+ o objeto 
+\family typewriter
+Resultados
+\family default
+ organiza as informações produzidas,
+ permitindo sua consulta,
+ a geração de gráficos e a exportação.
 \end_layout
 
 \begin_layout Standard
 Esse diagrama complementa os diagramas de sequência apresentados anteriormente,
  destacando de forma espacial as relações de colaboração e as mensagens que chegam e saem de cada objeto durante a execução das principais funcionalidades do sistema.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-No diagrama de comunicação o foco é a interação e a troca de mensagens e dados entre os objetos.
- 
-\end_layout
-
-\begin_layout Itemize
-[Pode ser a repetição de um diagrama de sequência;
- mas note que o formato do gráfico é diferente,
- aqui a ênfase é o entendimento das mensagens que chegam e saem de cada objeto.]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Veja na Figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Diagrama-de-Comunicação"
-nolink "false"
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-o diagrama de comunicação mostrando a sequência de blablabla.
- Observe que ....
-\end_layout
-
-\end_inset
-
-
+ Como o PlantUML não possui notação própria para diagramas de comunicação,
+ a notação UML foi reproduzida com objetos ligados por vínculos rotulados com mensagens numeradas.
 \end_layout
 
 \begin_layout Standard
@@ -838,8 +854,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeComunicação-colaboração.png
-	lyxscale 85
+	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/07_comunicacao.png
+	lyxscale 40
 	width 100text%
 
 \end_inset
@@ -851,10 +867,10 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de comunicação
+Diagrama de comunicação.
 \begin_inset CommandInset label
 LatexCommand label
-name "cap:Diagrama-de-comunicação"
+name "fig:comunicacao"
 
 \end_inset
 
@@ -872,34 +888,10 @@ name "cap:Diagrama-de-comunicação"
 \end_layout
 
 \begin_layout Section
-Diagrama de estado
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-estado
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index idx
-range none
-pageformat default
-status open
-
-\begin_layout Plain Layout
-Diagrama de estado
-\end_layout
-
-\end_inset
-
-
+Diagrama de máquina de estado
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:diagrama de estados"
+name "sec:estado"
 
 \end_inset
 
@@ -907,25 +899,83 @@ name "subsec:diagrama de estados"
 \end_layout
 
 \begin_layout Standard
-O diagrama de máquina de estados apresentado na Figura 3.5 representa as diferentes condições assumidas pelo objeto CalculadoraECD durante a avaliação da densidade equivalente de circulação.
+O diagrama de máquina de estados apresentado na Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:estado"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ representa as diferentes condições assumidas pelo objeto 
+\family typewriter
+CalculadoraECD
+\family default
+ durante a avaliação da densidade equivalente de circulação.
  Diferentemente dos diagramas de sequência e comunicação,
  o objetivo deste modelo não é apresentar a ordem completa de execução do sistema,
  mas representar as mudanças de estado de um objeto específico em função dos eventos e condições que ocorrem durante sua utilização.
+ Na implementação,
+ esses estados não são armazenados em um atributo:
+ eles correspondem às etapas lógicas do uso do objeto.
 \end_layout
 
 \begin_layout Standard
 Inicialmente,
- o objeto permanece no estado Aguardando parâmetros,
- até que sejam informados os valores necessários para a análise,
- como densidade da lama,
+ o objeto permanece no estado 
+\emph on
+Aguardando parâmetros
+\emph default
+,
+ até que sejam informados os valores necessários para a análise:
+ densidade da lama,
  perda de pressão por atrito e profundidade.
- Após a validação dessas informações,
- o objeto passa ao estado Pronto para cálculo.
+ Se os valores forem válidos (
+\begin_inset Formula $MW>0$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\Delta P_{f}\ge0$
+\end_inset
+
+ e 
+\begin_inset Formula $H>0$
+\end_inset
+
+),
+ o objeto passa ao estado 
+\emph on
+Pronto para cálculo
+\emph default
+;
+ caso contrário,
+ encontra-se no estado 
+\emph on
+Parâmetros inválidos
+\emph default
+,
+ e a chamada de 
+\family typewriter
+calcularECD()
+\family default
+ lança uma exceção (
+\family typewriter
+std::invalid_argument
+\family default
+).
 \end_layout
 
 \begin_layout Standard
 Com a solicitação do cálculo,
- o valor da ECD é determinado e o objeto passa ao estado ECD calculada.
+ o valor da ECD é determinado e o objeto passa ao estado 
+\emph on
+ECD calculada
+\emph default
+.
  Em seguida,
  o valor obtido é comparado aos limites da janela operacional,
  representados pelo gradiente de pressão de poro (
@@ -941,58 +991,39 @@ Com a solicitação do cálculo,
 
 \begin_layout Standard
 A partir dessa comparação,
- o objeto poderá assumir três estados distintos:
- Condição segura,
- quando a ECD permanece entre os limites da janela operacional;
- Risco de kick,
- quando a ECD se encontra abaixo do gradiente de pressão de poro;
- ou Risco de fratura/perdas,
- quando a ECD ultrapassa o gradiente de fratura.
- Após a apresentação da classificação,
- novos parâmetros poderão ser fornecidos para realização de uma nova avaliação.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Um diagrama de máquina de estado representa os diversos estados que o objeto assume e os eventos que ocorrem ao longo de sua vida ou mesmo ao longo de um processo (histórico do objeto).
- É usado para modelar aspectos dinâmicos do objeto.
-\end_layout
-
-\begin_layout Plain Layout
-Veja na Figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:Diagrama-de-maquina-de-estado"
-nolink "false"
-
-\end_inset
-
- o diagrama de máquina de estado para o objeto XXX.
- Observe que....
-\end_layout
-
-\begin_layout Itemize
-Lembre-se,
- são os estados de um objeto específico e não uma sequência de cálculo;
- as sequência já foram mostrados nos diagramas de sequência e comunicação!!
-\end_layout
-
-\begin_layout Itemize
-Vou repetir;
- Não faça o diagrama de máquina de estado como sendo uma repetição dos diagramas de sequência!
+ o objeto pode assumir três estados distintos:
  
-\end_layout
-
-\begin_layout Itemize
-Este diagrama trata dos estados de um objeto único/específico!
-\end_layout
-
+\emph on
+ECD dentro da janela
+\emph default
+,
+ quando 
+\begin_inset Formula $G_{p}<ECD<G_{f}$
 \end_inset
 
+;
+ 
+\emph on
+Risco de influxo/kick
+\emph default
+,
+ quando 
+\begin_inset Formula $ECD\le G_{p}$
+\end_inset
 
+;
+ ou 
+\emph on
+Risco de fratura/perdas
+\emph default
+,
+ quando 
+\begin_inset Formula $ECD\ge G_{f}$
+\end_inset
+
+.
+ Após a apresentação da classificação,
+ novos parâmetros podem ser fornecidos para realização de uma nova avaliação.
 \end_layout
 
 \begin_layout Standard
@@ -1006,9 +1037,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/Diagrama de Estado.png
-	lyxscale 50
-	width 100text%
+	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/08_estado_calculadora_ecd.png
+	lyxscale 40
+	width 85text%
 
 \end_inset
 
@@ -1019,10 +1050,11 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de máquina de estado
+Diagrama de máquina de estado —
+ CalculadoraECD.
 \begin_inset CommandInset label
 LatexCommand label
-name "cap:Diagrama-de-maquina-de-estado"
+name "fig:estado"
 
 \end_inset
 
@@ -1043,7 +1075,7 @@ name "cap:Diagrama-de-maquina-de-estado"
 Diagrama de atividades
 \begin_inset CommandInset label
 LatexCommand label
-name "sec: Diagrama de atividades"
+name "sec:atividades"
 
 \end_inset
 
@@ -1051,9 +1083,36 @@ name "sec: Diagrama de atividades"
 \end_layout
 
 \begin_layout Standard
-O diagrama de atividades apresentado na Figura 1.6 detalha a execução do método calcularECD() da classe CalculadoraECD.
+O diagrama de atividades apresentado na Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:atividades"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ detalha a execução do método 
+\family typewriter
+calcularECD()
+\family default
+ da classe 
+\family typewriter
+CalculadoraECD
+\family default
+.
  A atividade foi selecionada a partir do diagrama de estados apresentado anteriormente,
- no qual o cálculo da densidade equivalente de circulação provoca a transição do estado Pronto para cálculo para o estado ECD calculada.
+ no qual o cálculo da densidade equivalente de circulação provoca a transição do estado 
+\emph on
+Pronto para cálculo
+\emph default
+ para o estado 
+\emph on
+ECD calculada
+\emph default
+.
 \end_layout
 
 \begin_layout Standard
@@ -1061,101 +1120,73 @@ O processamento inicia-se com a obtenção dos parâmetros necessários ao cálc
  densidade da lama,
  perda de pressão por atrito e profundidade de análise.
  Após a validação dos dados,
- a profundidade é considerada na unidade requerida pela formulação e é calculada a contribuição da perda de pressão por atrito para a densidade equivalente.
+ a profundidade é convertida de metros para pés e é calculada a contribuição da perda de pressão por atrito para a densidade equivalente.
  Em seguida,
  essa contribuição é adicionada à densidade da lama,
  obtendo-se o valor final da ECD,
- que é armazenado no objeto e disponibilizado para as etapas posteriores de avaliação da janela operacional.
-\end_layout
-
-\begin_layout Standard
-A formulação utilizada é:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-ECD=MW+\frac{\Delta P_{f}}{0.052H}​​
-\]
-
+ que é retornado ao chamador.
+ O método não armazena o valor no objeto:
+ quem registra a ECD,
+ juntamente com 
+\begin_inset Formula $G_{p}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-em que:
-\end_layout
-
-\begin_layout Standard
-(
-\begin_inset Formula $MW$
-\end_inset
-
-) representa a densidade da lama,
+,
  
-\end_layout
-
-\begin_layout Standard
-(
-\begin_inset Formula $DeltaP_{f}$
+\begin_inset Formula $G_{f}$
 \end_inset
 
-) corresponde à perda de pressão por atrito e 
+ e a classificação,
+ é o objeto 
+\family typewriter
+Resultados
+\family default
+,
+ por meio de 
+\family typewriter
+definirResultadoECD()
+\family default
+.
+ Se a validação falhar,
+ é lançada a exceção 
+\family typewriter
+std::invalid_argument
+\family default
+.
 \end_layout
 
 \begin_layout Standard
-(
-\begin_inset Formula $H$
-\end_inset
-
-) representa a profundidade considerada no cálculo.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-.....
-\end_layout
-
-\begin_layout Plain Layout
-Veja na Figura 
+A formulação utilizada é a Equação 
 \begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:Diagrama-de-atividades"
+LatexCommand eqref
+reference "eq:ecd"
+plural "false"
+caps "false"
+noprefix "false"
 nolink "false"
 
 \end_inset
 
- o diagrama de atividades correspondente a uma atividade específica do diagrama de máguina de estado.
- Observe que....
-\end_layout
-
-\begin_layout Plain Layout
-...descrever em detalhes uma atividade específica..não pode ser a sequência de uso geral,
- trata-se de um caso específico,
- detalhado do diagrama de máquina de estado.
-\end_layout
-
-\begin_layout Itemize
-Lembrar que o diagrama de sequência é a representação de um método de cálculo específico.
- 
-\end_layout
-
-\begin_layout Itemize
-Não é para fazer o diagrama de atividades do método de gerenciamento!!!
-\end_layout
-
-\begin_layout Itemize
-Coloque aqui um diagrama de atividades que mostra contas/cálculos!
- 
-\end_layout
-
+,
+ em que 
+\begin_inset Formula $MW$
 \end_inset
 
+ representa a densidade da lama (lb/gal),
+ 
+\begin_inset Formula $\Delta P_{f}$
+\end_inset
 
+ corresponde à perda de pressão por atrito (psi) e 
+\begin_inset Formula $H$
+\end_inset
+
+ representa a profundidade considerada no cálculo,
+ em pés (
+\begin_inset Formula $H_{ft}=3{,}28084\,H_{m}$
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -1169,9 +1200,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/DiagramaDeAtividades.png
-	lyxscale 85
-	width 100text%
+	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/09_atividades_calcular_ecd.png
+	lyxscale 40
+	width 68text%
 
 \end_inset
 
@@ -1182,10 +1213,11 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Diagrama de atividades
+Diagrama de atividades —
+ CalculadoraECD::calcularECD().
 \begin_inset CommandInset label
 LatexCommand label
-name "cap:Diagrama-de-atividades"
+name "fig:atividades"
 
 \end_inset
 
@@ -1195,36 +1227,6 @@ name "cap:Diagrama-de-atividades"
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Description
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Nota:
- 
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Não perca de vista a visão do todo;
- do projeto de engenharia como um todo.
- Cada capítulo,
- cada seção,
- cada parágrafo deve se encaixar.
- Este é um diferencial fundamental do engenheiro em relação ao técnico,
- a capacidade de desenvolver projetos,
- de ver o todo e suas diferentes partes,
- de modelar processos/sistemas/produtos de engenharia.
 \end_layout
 
 \end_inset
