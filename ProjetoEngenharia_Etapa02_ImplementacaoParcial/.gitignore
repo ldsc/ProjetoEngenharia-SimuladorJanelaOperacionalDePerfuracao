@@ -1,7 +1,0 @@
-build/
-.vscode/
-*.exe
-*.o
-*.obj
-output/*.csv
-output/*.txt
