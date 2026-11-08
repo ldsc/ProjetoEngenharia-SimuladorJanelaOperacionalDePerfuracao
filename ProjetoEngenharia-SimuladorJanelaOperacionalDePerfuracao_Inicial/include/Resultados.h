@@ -134,6 +134,15 @@ public:
     ) const;
 
 
+    // ======================================================
+    // GRÁFICOS
+    // ======================================================
+
+    bool gerarGraficos(
+        const Poco& poco,
+        const ParametrosSimulacao& parametros,
+        const std::string& diretorioSaida
+    ) const;
 };
 
 
