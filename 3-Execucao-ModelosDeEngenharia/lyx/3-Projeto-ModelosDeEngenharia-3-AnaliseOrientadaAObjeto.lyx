@@ -111,10 +111,26 @@
 
 \begin_layout Chapter
 AOO —
- Análise Orientada a Objeto
+ Análise Orientada a Objeto 
 \begin_inset CommandInset label
 LatexCommand label
 name "cap:aoo"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+markboth{CAPÍTULO 3.
+ AOO}{}
+\end_layout
 
 \end_inset
 
@@ -277,10 +293,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/04a_classes_controle_dados.png
+	filename imagens/04a_classes_controle_dados.png
 	lyxscale 40
 	width 88text%
-	keepAspectRatio
 	special height=0.8\textheight
 
 \end_inset
@@ -325,10 +340,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/04b_classes_modelos_resultados.png
+	filename imagens/04b_classes_modelos_resultados.png
 	lyxscale 40
 	width 92text%
-	keepAspectRatio
 	special height=0.8\textheight
 
 \end_inset
@@ -380,34 +394,15 @@ Classe SimuladorJanelaOperacional:
 
 \series default
  representa o controlador principal do sistema,
- responsável por coordenar o carregamento dos dados (
-\family typewriter
-carregarDadosCSV
-\family default
-) e dos parâmetros (
-\family typewriter
-carregarParametrosCSV
-\family default
-),
+ responsável por coordenar o carregamento dos dados e dos parâmetros,
  a execução dos modelos de cálculo,
  a determinação da janela operacional,
  a análise de ECD e a exportação dos resultados.
+ Os métodos de carregamento utilizados são carregarDadosCSV() e carregarParametrosCSV().
  Contém,
  por composição,
- os objetos 
-\family typewriter
-Poco
-\family default
-,
- 
-\family typewriter
-ParametrosSimulacao
-\family default
- e 
-\family typewriter
-Resultados
-\family default
-.
+ os objetos Poco,
+ ParametrosSimulacao e Resultados.
 \end_layout
 
 \begin_layout Itemize
@@ -472,11 +467,7 @@ Classe ParametrosSimulacao:
  expoente de Eaton,
  coeficiente de Poisson,
  parâmetros da tendência normal e dados da análise de ECD.
- O método 
-\family typewriter
-validarParametros
-\family default
- verifica a consistência física dos valores.
+ O método validarParametros() verifica a consistência física dos valores.
 \end_layout
 
 \begin_layout Itemize
@@ -562,8 +553,7 @@ Classe Resultados:
 \end_layout
 
 \begin_layout Section
-Diagrama de sequência —
- eventos e mensagens
+Diagrama de sequência 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:sequencia"
@@ -647,10 +637,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/05_sequencia_geral.png
+	filename imagens/05_sequencia_geral.png
 	lyxscale 40
 	width 100text%
-	keepAspectRatio
 	special height=0.78\textheight
 
 \end_inset
@@ -751,10 +740,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/06_sequencia_especifica.png
+	filename imagens/06_sequencia_especifica.png
 	lyxscale 40
 	width 100text%
-	keepAspectRatio
 	special height=0.8\textheight
 
 \end_inset
@@ -788,8 +776,7 @@ name "fig:seq_especifico"
 \end_layout
 
 \begin_layout Section
-Diagrama de comunicação —
- colaboração
+Diagrama de comunicação 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:comunicacao"
@@ -819,19 +806,12 @@ nolink "false"
 A interação é iniciada pelo usuário,
  que solicita à janela principal o carregamento dos dados do poço,
  a configuração dos parâmetros e a execução da simulação.
- O objeto controlador 
-\family typewriter
-SimuladorJanelaOperacional
-\family default
- coordena a comunicação com os objetos responsáveis pelos dados do poço e pelos modelos petrofísico,
+ A coordenação dessas operações é realizada pela classe SimuladorJanelaOperacional.
+ Essa classe comunica-se com os objetos responsáveis pelos dados do poço e pelos modelos petrofísico,
  de geopressões e de fratura.
  Os resultados desses processamentos são utilizados para determinar a janela operacional de perfuração e realizar a análise de ECD.
  Por fim,
- o objeto 
-\family typewriter
-Resultados
-\family default
- organiza as informações produzidas,
+ o objeto Resultados organiza as informações produzidas,
  permitindo sua consulta,
  a geração de gráficos e a exportação.
 \end_layout
@@ -854,7 +834,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/07_comunicacao.png
+	filename imagens/07_comunicacao.png
 	lyxscale 40
 	width 100text%
 
@@ -888,7 +868,7 @@ name "fig:comunicacao"
 \end_layout
 
 \begin_layout Section
-Diagrama de máquina de estado
+Diagrama de estados 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:estado"
@@ -1037,7 +1017,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/08_estado_calculadora_ecd.png
+	filename imagens/08_estado_calculadora_ecd.png
 	lyxscale 40
 	width 85text%
 
@@ -1200,7 +1180,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/09_atividades_calcular_ecd.png
+	filename imagens/09_atividades_calcular_ecd.png
 	lyxscale 40
 	width 68text%
 

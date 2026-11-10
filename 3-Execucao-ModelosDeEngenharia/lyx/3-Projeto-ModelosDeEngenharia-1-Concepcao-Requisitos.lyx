@@ -310,7 +310,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/01_Visao_Geral_do_Funcionamento_do_Simulador.png
+	filename imagens/01_Visao_Geral_do_Funcionamento_do_Simulador.png
 	lyxscale 40
 	width 100text%
 
@@ -1667,7 +1667,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/02_CasoDeUsoGeral.png
+	filename imagens/02_CasoDeUsoGeral.png
 	lyxscale 40
 	width 62text%
 
@@ -1763,7 +1763,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/03_CasoDeUsoEspecifico.png
+	filename imagens/03_CasoDeUsoEspecifico.png
 	lyxscale 40
 	width 85text%
 

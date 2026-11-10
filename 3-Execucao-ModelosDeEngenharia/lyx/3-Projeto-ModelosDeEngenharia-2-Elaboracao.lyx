@@ -523,18 +523,7 @@ data/dados_poco.csv
 \end_inset
 
 camadas de formação com registro sônico,
- e é empregado para validar os resultados obtidos pela implementação em C++ (Capítulo 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:teste"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-).
+ e é empregado para validar os resultados obtidos pela implementação em C++ e pelo caso de referência adotado no projeto.
 \end_layout
 
 \begin_layout Standard
@@ -625,49 +614,8 @@ Unidades e convenção de profundidade.
  densidade da lama,
  ECD e gradientes em lb/gal e tempos de trânsito em µs/ft.
  Cada camada é definida pelo topo (base da camada anterior) e pela base (profundidade lida do arquivo).
- As grandezas das Equações 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:sobrecarga_disc"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- a 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:gf"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- são calculadas na 
-\series bold
-base
-\series default
- de cada camada,
- enquanto a janela operacional é associada à 
-\series bold
-profundidade média
-\series default
- da camada (Seção 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:janela"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-).
+ As principais grandezas de pressão e tensão apresentadas nas subseções seguintes são calculadas na base de cada camada,
+ enquanto a janela operacional é associada à profundidade média da camada.
 \end_layout
 
 \begin_layout Subsection
@@ -760,18 +708,7 @@ em que:
 
 \begin_layout Standard
 No programa,
- o valor obtido pela Equação 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:wyllie"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- é limitado ao intervalo 
+ o valor de porosidade calculado pela equação tempo-médio de Wyllie é limitado ao intervalo 
 \begin_inset Formula $[\phi_{min};\,\phi_{max}]$
 \end_inset
 
@@ -1535,18 +1472,7 @@ name "sec:janela"
 
 \begin_layout Standard
 A janela operacional é definida pelo intervalo existente entre o gradiente de pressão de poro e o gradiente de fratura.
- A condição básica de operação é a Equação 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:janela_mw"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
+ A condição básica de operação corresponde à manutenção do peso de lama entre os gradientes de pressão de poro e de fratura.
 \end_layout
 
 \begin_layout Standard
@@ -1715,18 +1641,7 @@ em que:
 
 \begin_layout Standard
 Para que a condição de circulação permaneça dentro da janela operacional,
- deve-se atender à Equação 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:janela_ecd"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
+ a ECD deve permanecer entre os gradientes de pressão de poro e de fratura.
  Assim,
  o simulador compara a ECD com os limites da janela mais próxima da profundidade informada (critério de menor diferença entre a profundidade informada e a profundidade média da camada) e classifica a condição operacional como:
  dentro da janela (
@@ -1944,31 +1859,9 @@ name "sec:diag_pacotes"
 \end_layout
 
 \begin_layout Standard
-O diagrama de pacotes apresentado na Figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:pacotes"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- representa os principais assuntos relacionados ao desenvolvimento do Simulador de Janela Operacional de Perfuração e as dependências existentes entre eles.
+O diagrama de pacotes apresentado nesta seção representa os principais assuntos relacionados ao desenvolvimento do Simulador de Janela Operacional de Perfuração e as dependências existentes entre eles.
  Dentro de cada pacote aparecem as classes que o implementam,
- detalhadas no Capítulo 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:aoo"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
+ detalhadas posteriormente na etapa de Análise Orientada a Objetos.
 \end_layout
 
 \begin_layout Standard
@@ -2000,23 +1893,8 @@ A organização parte dos dados do poço e dos parâmetros de entrada,
  do pacote Gradiente de Fratura.
  A janela calculada é utilizada posteriormente na avaliação da ECD,
  enquanto o pacote Resultados reúne e organiza as informações produzidas pelos diferentes módulos do sistema e exporta os dados por camada.
- A coordenação da execução fica a cargo da classe 
-\family typewriter
-SimuladorJanelaOperacional
-\family default
-,
- apresentada no Capítulo 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:aoo"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
+ A coordenação da execução fica a cargo da classe SimuladorJanelaOperacional,
+ detalhada posteriormente na modelagem orientada a objetos.
  Essa divisão permite visualizar o problema de engenharia de forma abrangente e estabelece uma base para a identificação das classes e componentes detalhados nas próximas etapas do projeto.
 \end_layout
 
@@ -2031,10 +1909,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/04_DiagramaPacotes.png
+	filename imagens/04_DiagramaPacotes.png
 	lyxscale 40
 	width 80text%
-	keepAspectRatio
 	special height=0.74\textheight
 
 \end_inset

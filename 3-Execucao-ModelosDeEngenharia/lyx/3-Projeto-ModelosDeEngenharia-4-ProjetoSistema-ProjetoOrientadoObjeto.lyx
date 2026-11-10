@@ -682,15 +682,7 @@ parâmetro desconhecido,
 
 \begin_layout Itemize
 parâmetros fisicamente inválidos,
- verificados pelo método 
-\family typewriter
-validarParametros()
-\family default
- da classe 
-\family typewriter
-ParametrosSimulacao
-\family default
-:
+ identificados durante a validação:
  densidades positivas,
  
 \begin_inset Formula $\Delta t_{f}>\Delta t_{ma}>0$
@@ -750,21 +742,8 @@ valores de ECD fora da janela operacional:
 \end_layout
 
 \begin_layout Standard
-Erros de leitura e de parâmetros são sinalizados por exceções C++ (
-\family typewriter
-std::runtime_error
-\family default
-,
- 
-\family typewriter
-std::invalid_argument
-\family default
- ou 
-\family typewriter
-std::logic_error
-\family default
-),
- apresentadas ao usuário em caixas de diálogo na interface gráfica ou como mensagem de erro no terminal.
+Erros de leitura e de parâmetros são sinalizados por exceções da linguagem C++,
+ apresentadas ao usuário em caixas de diálogo na interface gráfica ou como mensagens de erro no terminal.
  A validação ocorre antes do processamento,
  impedindo que valores inválidos se propaguem para as demais etapas.
 \end_layout
@@ -923,91 +902,29 @@ nolink "false"
 \end_layout
 
 \begin_layout Description
-Entrada
-\begin_inset space ~
-\end_inset
-
-e
-\begin_inset space ~
-\end_inset
-
-dados 
-\family typewriter
-Poco
-\family default
-,
- 
-\family typewriter
-Camada
-\family default
- e 
-\family typewriter
-ParametrosSimulacao
-\family default
-;
+Entrada e dados:
+ reúne as classes Poco,
+ Camada e ParametrosSimulacao.
 \end_layout
 
 \begin_layout Description
-Processamento 
-\family typewriter
-ModeloPetrofisico
-\family default
-,
- 
-\family typewriter
-ModeloGeopressoes
-\family default
-,
- 
-\family typewriter
-ModeloFratura
-\family default
-,
- 
-\family typewriter
-JanelaOperacional
-\family default
- e 
-\family typewriter
-CalculadoraECD
-\family default
-;
+Processamento:
+ reúne os modelos petrofísico,
+ de geopressões e de fratura,
+ além das classes responsáveis pela janela operacional e pelo cálculo de ECD.
 \end_layout
 
 \begin_layout Description
-Resultados
-\begin_inset space ~
-\end_inset
-
-e
-\begin_inset space ~
-\end_inset
-
-controle 
-\family typewriter
-SimuladorJanelaOperacional
-\family default
- e 
-\family typewriter
-Resultados
-\family default
-;
+Resultados e controle:
+ reúne as classes SimuladorJanelaOperacional e Resultados.
 \end_layout
 
 \begin_layout Description
-Interface 
-\family typewriter
-MainWindow
-\family default
- e os programas principais 
-\family typewriter
-main_gui.cpp
-\family default
- (interface gráfica) e 
-\family typewriter
-main.cpp
-\family default
- (linha de comando).
+Interface:
+ reúne a classe MainWindow e os programas principais main_gui.cpp,
+ responsável pela interface gráfica,
+ e main.cpp,
+ responsável pela execução em linha de comando.
 \end_layout
 
 \begin_layout Standard
@@ -1152,23 +1069,8 @@ pngcairo
 \end_layout
 
 \begin_layout Standard
-Não foi adotado um 
-\emph on
-framework
-\emph default
- de testes automatizados nesta versão;
- os testes foram realizados com o caso de referência (Capítulo 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:teste"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-).
+Não foi adotado um framework de testes automatizados nesta versão;
+ os testes foram realizados utilizando o caso de referência adotado durante o desenvolvimento.
 \end_layout
 
 \begin_layout Standard
@@ -1308,115 +1210,50 @@ Padrões gerais adotados no código.
 \end_layout
 
 \begin_layout Description
-Classes nomes iniciados por letra maiúscula e representativos do domínio (
-\family typewriter
-Poco
-\family default
-,
- 
-\family typewriter
-Camada
-\family default
-,
- 
-\family typewriter
-ModeloGeopressoes
-\family default
-,
- 
-\family typewriter
-CalculadoraECD
-\family default
-);
+Classes:
+ nomes iniciados por letra maiúscula e representativos do domínio,
+ como Poco,
+ Camada,
+ ModeloGeopressoes e CalculadoraECD.
 \end_layout
 
 \begin_layout Description
-Métodos
-\begin_inset space ~
-\end_inset
-
-e
-\begin_inset space ~
-\end_inset
-
-atributos padrão 
-\emph on
-camelCase
-\emph default
- (
-\family typewriter
-calcularPressaoPoro()
-\family default
-,
- 
-\family typewriter
-profundidadeMedia
-\family default
-,
- 
-\family typewriter
-coeficientePoisson
-\family default
-);
+Métodos e atributos:
+ utilização do padrão camelCase.
+ Exemplos:
+ calcularPressaoPoro(),
+ profundidadeMedia e coeficientePoisson.
 \end_layout
 
 \begin_layout Description
-Visibilidade atributos privados e métodos de operação públicos;
+Visibilidade:
+ atributos privados e métodos de operação públicos.
 \end_layout
 
 \begin_layout Description
-Tipos
-\begin_inset space ~
-\end_inset
-
-numéricos valores de engenharia com casas decimais representados pelo tipo 
-\family typewriter
-double
-\family default
-;
- valores ausentes representados por NaN;
+Tipos numéricos:
+ valores de engenharia com casas decimais são representados pelo tipo double.
+ Valores ausentes são representados por NaN.
 \end_layout
 
 \begin_layout Description
-Retornos métodos de cálculo retornam o tipo correspondente ao resultado;
- operações que apenas alteram o estado do objeto utilizam 
-\family typewriter
-void
-\family default
-;
- validações e operações de arquivo retornam 
-\family typewriter
-bool
-\family default
-;
+Retornos:
+ métodos de cálculo retornam o tipo correspondente ao resultado.
+ Operações que apenas alteram o estado do objeto utilizam void,
+ enquanto validações e operações de arquivo utilizam bool.
 \end_layout
 
 \begin_layout Description
-Documentação classes e métodos com comentários objetivos descrevendo responsabilidade,
+Documentação:
+ classes e métodos possuem comentários objetivos descrevendo responsabilidade,
  parâmetros,
- unidades utilizadas e valores retornados;
+ unidades utilizadas e valores retornados.
 \end_layout
 
 \begin_layout Description
-Unidades unidades explicitadas nos nomes das colunas dos arquivos (
-\family typewriter
-profundidade_m
-\family default
-,
- 
-\family typewriter
-delta_t_us_ft
-\family default
-,
- 
-\family typewriter
-gp_ppg
-\family default
-),
- nos rótulos da interface e na documentação,
- evitando ambiguidades entre profundidade,
- pressão,
- gradiente e densidade equivalente.
+Unidades:
+ as unidades são explicitadas nos nomes das colunas dos arquivos,
+ nos rótulos da interface e na documentação.
 \end_layout
 
 \begin_layout Section
@@ -1443,61 +1280,14 @@ O Projeto Orientado a Objetos do Simulador de Janela Operacional de Perfuração
 
 \begin_layout Standard
 A estrutura definida anteriormente foi preservada,
- mantendo as dez classes principais do núcleo de cálculo:
- 
-\family typewriter
-SimuladorJanelaOperacional
-\family default
-,
- 
-\family typewriter
-Poco
-\family default
-,
- 
-\family typewriter
-Camada
-\family default
-,
- 
-\family typewriter
-ParametrosSimulacao
-\family default
-,
- 
-\family typewriter
-ModeloPetrofisico
-\family default
-,
- 
-\family typewriter
-ModeloGeopressoes
-\family default
-,
- 
-\family typewriter
-ModeloFratura
-\family default
-,
- 
-\family typewriter
-JanelaOperacional
-\family default
-,
- 
-\family typewriter
-CalculadoraECD
-\family default
- e 
-\family typewriter
-Resultados
-\family default
-.
- O projeto acrescentou a classe de interface 
-\family typewriter
-MainWindow
-\family default
-,
+ mantendo as dez classes principais do núcleo de cálculo apresentadas na etapa de análise.
+ Essas classes representam os dados do poço,
+ os parâmetros de entrada,
+ os modelos petrofísicos e geomecânicos,
+ a janela operacional,
+ o cálculo de ECD,
+ os resultados e a coordenação da simulação.
+ O projeto acrescentou a classe de interface MainWindow,
  descrita adiante.
 \end_layout
 
@@ -1645,7 +1435,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/10_classes_projeto.png
+	filename imagens/10_classes_projeto.png
 	lyxscale 40
 	width 95text%
 
@@ -1871,74 +1661,15 @@ name "sec:poo_atributos"
 
 \begin_layout Standard
 Os atributos definidos durante a análise passam a possuir tipos concretos da linguagem C++.
- Grandezas numéricas utilizadas nos cálculos são representadas pelo tipo 
-\family typewriter
-double
-\family default
- (por exemplo,
- 
-\family typewriter
-profundidadeMedia
-\family default
-,
- 
-\family typewriter
-deltaT
-\family default
-,
- 
-\family typewriter
-porosidade
-\family default
-,
- 
-\family typewriter
-densidadeBulk
-\family default
-,
- 
-\family typewriter
-pressaoPoro
-\family default
-,
- 
-\family typewriter
-gradientePoro
-\family default
-,
- 
-\family typewriter
-gradienteFratura
-\family default
- e 
-\family typewriter
-ecdCalculada
-\family default
-,
- este último na classe 
-\family typewriter
-Resultados
-\family default
-).
- Valores inteiros utilizados para índices utilizam 
-\family typewriter
-int
-\family default
- ou 
-\family typewriter
-std::size_t
-\family default
-;
- informações textuais utilizam 
-\family typewriter
-std::string
-\family default
-;
- e coleções de objetos utilizam 
-\family typewriter
-std::vector
-\family default
-.
+ As grandezas numéricas utilizadas nos cálculos são representadas pelo tipo double,
+ incluindo profundidades,
+ tempo de trânsito,
+ porosidade,
+ densidade,
+ pressões e gradientes.
+ Valores inteiros utilizados para índices empregam int ou std::size_t;
+ informações textuais utilizam std::string;
+ e coleções de objetos utilizam std::vector.
  Os atributos permanecem privados,
  preservando o encapsulamento e impedindo alterações diretas indevidas no estado dos objetos.
 \end_layout
@@ -2013,73 +1744,76 @@ Métodos de controle e métodos de processamento.
 
 \series default
  Os métodos do projeto estão organizados conceitualmente em dois grupos.
- Os métodos de controle,
- responsáveis por coordenar o funcionamento do sistema,
- estão associados à classe 
-\family typewriter
-SimuladorJanelaOperacional
-\family default
-:
- 
-\family typewriter
-carregarDadosCSV()
-\family default
-,
- 
-\family typewriter
-carregarParametrosCSV()
-\family default
-,
- 
-\family typewriter
-executarSimulacao()
-\family default
-,
- 
-\family typewriter
-determinarJanelas()
-\family default
-,
- 
-\family typewriter
-avaliarECD()
-\family default
- e 
-\family typewriter
-exportarResultados()
-\family default
-.
- Já os métodos de processamento executam os cálculos de engenharia:
+ Os métodos de controle são responsáveis por coordenar o funcionamento do sistema e estão associados à classe SimuladorJanelaOperacional.
+ Entre eles estão carregarDadosCSV(),
+ carregarParametrosCSV(),
+ executarSimulacao(),
+ determinarJanelas(),
+ avaliarECD() e exportarResultados().
+\end_layout
+
+\begin_layout Standard
+Já os métodos de processamento executam os cálculos de engenharia e estão distribuídos entre as classes especializadas.
 \end_layout
 
 \begin_layout LyX-Code
 
 \size footnotesize
-calcularPorosidade()         calcularDensidadeBulk()
+calcularPorosidade()
 \end_layout
 
 \begin_layout LyX-Code
 
 \size footnotesize
-calcularSobrecarga()         calcularTendenciaNormal()
+calcularDensidadeBulk()
 \end_layout
 
 \begin_layout LyX-Code
 
 \size footnotesize
-calcularPressaoNormal()      calcularPressaoPoro()
+calcularSobrecarga()
 \end_layout
 
 \begin_layout LyX-Code
 
 \size footnotesize
-calcularGradientePoro()      calcularTensaoHorizontalMinima()
+calcularTendenciaNormal()
 \end_layout
 
 \begin_layout LyX-Code
 
 \size footnotesize
-calcularGradienteFratura()   calcularLargura()
+calcularPressaoNormal()
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+calcularPressaoPoro()
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+calcularGradientePoro()
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+calcularTensaoHorizontalMinima()
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+calcularGradienteFratura()
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+calcularLargura()
 \end_layout
 
 \begin_layout LyX-Code
@@ -2110,17 +1844,7 @@ ModeloGeopressoes
  pressão normal,
  pressão de poro e gradiente de poro.
  Da mesma maneira,
- o modelo de fratura é dividido entre 
-\family typewriter
-calcularTensaoHorizontalMinima()
-\family default
- e 
-\family typewriter
-calcularGradienteFratura()
-\family default
-.
- Essa organização facilita testes,
- manutenção e identificação de erros.
+ o modelo de fratura possui métodos separados para o cálculo da tensão horizontal mínima e do gradiente de fratura.
 \end_layout
 
 \begin_layout Standard
@@ -2315,15 +2039,7 @@ Poco
 \family default
 .
  Caso futuramente seja necessário localizar objetos utilizando identificadores textuais,
- poderá ser considerada a utilização de 
-\family typewriter
-std::map
-\family default
- ou 
-\family typewriter
-std::unordered_map
-\family default
-.
+ poderão ser avaliadas estruturas associativas da biblioteca padrão do C++.
 \end_layout
 
 \begin_layout Standard
@@ -2685,7 +2401,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/11_componentes.png
+	filename imagens/11_componentes.png
 	lyxscale 40
 	width 100text%
 
@@ -2803,7 +2519,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../../../../../Área de Trabalho/Relatorio_Janela_Operacional_v1/diagramas/12_implantacao.png
+	filename imagens/12_implantacao.png
 	lyxscale 40
 	width 100text%
 

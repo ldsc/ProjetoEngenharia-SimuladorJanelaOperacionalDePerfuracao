@@ -122,10 +122,26 @@
 \begin_body
 
 \begin_layout Chapter
-Lista das características / features
+Lista das características / features 
 \begin_inset CommandInset label
 LatexCommand label
 name "cap:features"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+markboth{CAPÍTULO 5.
+ FEATURES}{}
+\end_layout
 
 \end_inset
 
@@ -148,10 +164,26 @@ nolink "false"
 \end_layout
 
 \begin_layout Section
-Lista de características «features»
+Lista de características «features» 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:lista_features"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+markright{5.1.
+ CARACTERÍSTICAS}
+\end_layout
 
 \end_inset
 
@@ -163,27 +195,11 @@ Ao final das etapas de concepção,
  elaboração,
  análise e projeto,
  foram identificadas as características a serem implementadas no Simulador de Janela Operacional de Perfuração.
- As 
-\emph on
-features
-\emph default
- foram organizadas incrementalmente,
+ As features foram organizadas incrementalmente,
  de modo que cada ciclo acrescente uma nova responsabilidade ao sistema,
  associada à implementação e aos testes das classes previstas no projeto.
- Todas as características listadas foram implementadas na versão 1.0;
- os testes foram realizados pela execução do caso de referência (Capítulo 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cap:teste"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-),
- uma vez que a versão 1.0 não possui testes unitários automatizados.
+ Todas as características listadas foram implementadas na versão 1.0.
+ A validação foi realizada por meio da execução do caso de referência adotado durante o desenvolvimento.
 \end_layout
 
 \begin_layout Standard
